@@ -1,0 +1,258 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="PaginaMaster.master.cs" Inherits="CapaPresentacion.PaginaMaster" %>
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>CABAÑA LA JOTA</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta content="Admin Dashboard" name="description" />
+    <meta content="ThemeDesign" name="author" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <link rel="shortcut icon" href="assets/images/favicon.ico">
+
+    <!-- DataTables -->
+    <link href="assets/plugins/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/plugins/datatables/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/plugins/datatables/fixedHeader.bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/plugins/datatables/responsive.bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/plugins/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/plugins/datatables/scroller.bootstrap.min.css" rel="stylesheet" type="text/css" />
+
+    <link href="assets/toastr/toastr.min.css" rel="stylesheet" />
+    <link href="assets/plugins/bootstrap-sweetalert/sweet-alert.css" rel="stylesheet" type="text/css"/>
+    
+
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+
+    <link href="assets/css/icons.css" rel="stylesheet" type="text/css"/>
+    <link href="assets/css/style.css" rel="stylesheet" type="text/css"/>
+    <link href="assets/plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet"/>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+    <body class="fixed-left">
+
+        <!-- Begin page -->
+        <div id="wrapper">
+
+            <!-- Top Bar Start -->
+            <div class="topbar">
+                <!-- LOGO -->
+                <div class="topbar-left">
+                    <div class="text-center">
+                        <a href="Inicio.aspx" class="logo"><span>Web</span>Admin</a>
+                        <a href="Inicio.aspx" class="logo-sm"><span>W</span></a>
+                    </div>
+                </div>
+
+
+                <nav class="navbar navbar-default" role="navigation">
+                    <div class="container-fluid">
+                        <ul class="list-inline menu-left mb-0">
+                            <li class="float-left">
+                                <button class="button-menu-mobile open-left waves-light waves-effect">
+                                    <i class="mdi mdi-menu"></i>
+                                </button>
+                            </li>
+                            <li class="hide-phone app-search float-left">
+                                <div role="search" class="navbar-form">
+                                    <input type="text" placeholder="Buscar..." class="form-control search-bar">
+                                    <a href="#"><i class="fa fa-search"></i></a>
+                                </div>
+                            </li>
+                        </ul>
+
+                        <ul class="nav navbar-right float-right list-inline">
+                            <li class="d-none d-sm-block">
+                                <a href="#" id="btn-fullscreen" class="waves-effect waves-light notification-icon-box"><i class="mdi mdi-fullscreen"></i></a>
+                            </li>
+
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle profile waves-effect waves-light" data-toggle="dropdown" aria-expanded="true">
+                                    <img src="assets/images/users/avatar-1.jpg" alt="user-img" id="imgUsuario" class="rounded-circle">
+                                    <span class="profile-username">Usuario Activo
+                                        <br />
+                                        <small>Admin</small>
+                                        <!-- <strong id="nombreusuario"></strong> -->
+                                        <!-- <br /> -->
+                                        <!-- <small id="rolusuario"></small> -->
+                                    </span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#" class="dropdown-item">Perfil</a></li>
+                                    <li><a href="javascript:void(0)" class="dropdown-item"><span class="badge badge-success float-right">5</span> Settings </a></li>
+                                    <li><a href="javascript:void(0)" class="dropdown-item">Lock screen</a></li>
+                                    <li class="dropdown-divider"></li>
+                                    <li><a id="close" class="dropdown-item" style="cursor: pointer;">Salir</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+            <!-- Top Bar End  -->
+
+
+            <!-- ========== Left Sidebar Start ========== -->
+
+            <div class="left side-menu">
+                <div class="sidebar-inner slimscrollleft">
+
+                    <div class="user-details">
+                        <div class="text-center">
+                            <img src="assets/images/users/avatar-1.jpg" alt="" id="imageUser" class="rounded-circle">
+                        </div>
+                        <div class="user-info">
+                            <div class="dropdown">
+                                <a href="#" class="dropdown-toggle" id="rolnom" data-toggle="dropdown" aria-expanded="false">Kenny Rigdon</a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="javascript:void(0)" class="dropdown-item">Profile</a></li>
+                                    <li><a href="javascript:void(0)" class="dropdown-item"><span class="badge badge-success float-right">5</span> Settings </a></li>
+                                    <li><a href="javascript:void(0)" class="dropdown-item">Lock screen</a></li>
+                                    <li class="dropdown-divider"></li>
+                                    <li><a href="javascript:void(0)" class="dropdown-item">Logout</a></li>
+                                </ul>
+                            </div>
+
+                            <p class="text-muted m-0"><i class="far fa-dot-circle text-primary"></i>Online</p>
+                        </div>
+                    </div>
+                    <!--- Divider -->
+
+
+                    <div id="sidebar-menu">
+                        <ul>
+                            <li>
+                                <a href="Inicio.aspx" class="waves-effect"><i class="mdi mdi-home"></i><span>Inicio <span class="badge badge-primary float-right">1</span></span></a>
+                            </li>
+
+                            <li class="has_sub">
+                                <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-opacity"></i><span>Usuarios </span><span class="float-right"><i class="mdi mdi-plus"></i></span></a>
+                                <ul class="list-unstyled">
+                                    <li><a href="frmUsuarios.aspx">Usuarios</a></li>
+                                    <li><a href="#">Roles</a></li>
+                                    <li><a href="#">En desarrollo</a></li>
+                                    <li><a href="#">En desarrollo</a></li>
+                                </ul>
+                            </li>
+
+                            <li class="has_sub">
+                                <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-layers"></i><span>Consultas </span><span class="float-right"><i class="mdi mdi-plus"></i></span></a>
+                                <ul class="list-unstyled">
+                                    <li><a href="#">En desarrollo</a></li>
+                                    <li><a href="#">En desarrollo</a></li>
+                                    <li><a href="#">WYSIWYG Editor</a></li>
+                                    <li><a href="#">Multiple File Upload</a></li>
+                                </ul>
+                            </li>
+
+                            <li class="has_sub">
+                                <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-table"></i><span>Categorias </span><span class="float-right"><i class="mdi mdi-plus"></i></span></a>
+                                <ul class="list-unstyled">
+                                    <li><a href="#">Basic Tables</a></li>
+                                    <li><a href="#">Data Table</a></li>
+                                </ul>
+                            </li>
+
+                            <li>
+                                <a href="#" class="waves-effect"><i class="mdi mdi-calendar"></i><span>Reservas <span class="badge badge-primary float-right">NEW</span></span></a>
+                            </li>
+
+                        </ul>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <!-- end sidebarinner -->
+            </div>
+
+            <div class="content-page">
+                <!-- Start content -->
+                <div class="content">
+
+                    <div class="" id="ocultar">
+                        <div class="page-header-title">
+                            <h4 class="page-title">
+                                <asp:ContentPlaceHolder ID="titulo" runat="server">
+                                </asp:ContentPlaceHolder>
+
+                            </h4>
+                        </div>
+                    </div>
+
+                    <div class="page-content-wrapper ">
+
+                        <div class="container-fluid">
+                            <form id="form1" runat="server">
+                                <asp:ContentPlaceHolder ID="body" runat="server">
+                                </asp:ContentPlaceHolder>
+                            </form>
+                            <!-- end row -->
+
+                        </div>
+                        <!-- container -->
+
+                    </div>
+                    <!-- Page content Wrapper -->
+
+                </div>
+                <!-- content -->
+
+                <footer class="footer">
+                    © 2024 - 2025 Zero - All Rights Reserved.
+                </footer>
+
+            </div>
+            <!-- End Right content here -->
+
+        </div>
+        <!-- END wrapper -->
+
+
+        <!-- jQuery  -->
+        <script src="assets/js/jquery.min.js"></script>
+        <script src="assets/js/popper.min.js"></script>
+        <script src="assets/js/bootstrap.min.js"></script>
+        <script src="assets/js/modernizr.min.js"></script>
+        <script src="assets/js/detect.js"></script>
+        <script src="assets/js/fastclick.js"></script>
+        <script src="assets/js/jquery.slimscroll.js"></script>
+        <script src="assets/js/jquery.blockUI.js"></script>
+        <script src="assets/js/waves.js"></script>
+        <script src="assets/js/wow.min.js"></script>
+        <script src="assets/js/jquery.nicescroll.js"></script>
+        <script src="assets/js/jquery.scrollTo.min.js"></script>
+
+        <script src="assets/toastr/toastr.min.js"></script>
+        <script src="assets/plugins/bootstrap-sweetalert/sweet-alert.min.js"></script>
+
+        <!-- Required datatable js-->
+        <script src="assets/plugins/datatables/jquery.dataTables.min.js"></script>
+        <script src="assets/plugins/datatables/dataTables.bootstrap4.min.js"></script>
+        <!-- Buttons examples -->
+        <script src="assets/plugins/datatables/dataTables.buttons.min.js"></script>
+        <script src="assets/plugins/datatables/buttons.bootstrap4.min.js"></script>
+
+        <script src="assets/plugins/datatables/jszip.min.js"></script>
+        <script src="assets/plugins/datatables/pdfmake.min.js"></script>
+        <script src="assets/plugins/datatables/vfs_fonts.js"></script>
+        <script src="assets/plugins/datatables/buttons.html5.min.js"></script>
+        <script src="assets/plugins/datatables/buttons.print.min.js"></script>
+        <script src="assets/plugins/datatables/dataTables.fixedHeader.min.js"></script>
+        <script src="assets/plugins/datatables/dataTables.keyTable.min.js"></script>
+        <script src="assets/plugins/datatables/dataTables.scroller.min.js"></script>
+
+        <!-- Responsive examples -->
+        <script src="assets/plugins/datatables/dataTables.responsive.min.js"></script>
+        <script src="assets/plugins/datatables/responsive.bootstrap4.min.js"></script>
+
+        <!-- Datatable init js -->
+        <script src="assets/plugins/jquery-ui/jquery-ui.min.js"></script>
+
+        <script src="assets/js/app.js"></script>
+        <script src="assets/plugins/loadingoverlay/loadingoverlay.js"></script>
+        <asp:ContentPlaceHolder ID="footer" runat="server"></asp:ContentPlaceHolder>
+    </body>
+</html>
