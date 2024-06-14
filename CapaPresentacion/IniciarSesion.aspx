@@ -19,8 +19,8 @@
             <div class="login">
                 <div class="form">
                     <label for="chk" aria-hidden="true">CABAÑA LA JOTA</label>
-                    <input class="input" type="text" name="email" id="username" placeholder="Usuario" value="manuel@yopmail.com"/>
-                    <input class="input" type="password" name="pswd" id="password" placeholder="Contraseña" value="aedf44"/>
+                    <input class="input" type="text" name="email" id="username" placeholder="Usuario" value="susidelta1@gmail.com"/>
+                    <input class="input" type="password" name="pswd" id="password" placeholder="Contraseña" value="777edf"/>
                     <button type="button" id="btnIniciarSesion">Iniciar</button>
                 </div>
             </div>
@@ -44,5 +44,6 @@
     <script src="assets/plugins/loadingoverlay/loadingoverlay.js"></script>
     <link href="assets/plugins/bootstrap-sweetalert/sweet-alert.css" rel="stylesheet" type="text/css"/>
     <script src="assets/plugins/bootstrap-sweetalert/sweet-alert.min.js"></script>
+    <script src="js/IniciarSesion.js" type="text/javascript"></script>
 </body>
 </html>

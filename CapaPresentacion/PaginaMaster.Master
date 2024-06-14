@@ -43,8 +43,8 @@
                 <!-- LOGO -->
                 <div class="topbar-left">
                     <div class="text-center">
-                        <a href="Inicio.aspx" class="logo"><span>Web</span>Admin</a>
-                        <a href="Inicio.aspx" class="logo-sm"><span>W</span></a>
+                        <a href="Inicio.aspx" class="logo"><span>Cabaña</span> La J</a>
+                        <a href="Inicio.aspx" class="logo-sm"><span>J</span></a>
                     </div>
                 </div>
 
@@ -107,7 +107,7 @@
                         </div>
                         <div class="user-info">
                             <div class="dropdown">
-                                <a href="#" class="dropdown-toggle" id="rolnom" data-toggle="dropdown" aria-expanded="false">Kenny Rigdon</a>
+                                <a href="#" class="dropdown-toggle" id="rolnom" data-toggle="dropdown" aria-expanded="false">Usuario Logeado</a>
                                 <ul class="dropdown-menu">
                                     <li><a href="javascript:void(0)" class="dropdown-item">Profile</a></li>
                                     <li><a href="javascript:void(0)" class="dropdown-item"><span class="badge badge-success float-right">5</span> Settings </a></li>
@@ -117,7 +117,7 @@
                                 </ul>
                             </div>
 
-                            <p class="text-muted m-0"><i class="far fa-dot-circle text-primary"></i>Online</p>
+                            <p class="text-muted m-0"><i class="far fa-dot-circle text-primary"></i> Rol Usu</p>
                         </div>
                     </div>
                     <!--- Divider -->

@@ -102,6 +102,15 @@
                                     <p class="category-name">Platos Especiales</p>
                                     <div class="item-card">
                                         <div class="card-top">
+                                            <i class="fa fa-star rating">4.5</i>
+                                            <i class="far fa-heart"></i>
+                                        </div>
+                                        <img src="assets/images/pacu.jpg">
+                                        <p class="item-name">Pacu Asado</p>
+                                        <p class="item-price">Precio : Bs 30</p>
+                                    </div>
+                                    <div class="item-card">
+                                        <div class="card-top">
                                             <i class="fa fa-star rating">4.3</i>
                                             <i class="far fa-heart"></i>
                                         </div>

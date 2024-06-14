@@ -1,9 +1,9 @@
-﻿using System;
+﻿using CapaEntidad;
+using CapaNegocio;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
+using System.Web.Services;
 
 namespace CapaPresentacion
 {
@@ -13,5 +13,16 @@ namespace CapaPresentacion
         {
 
         }
+        [WebMethod]
+        public static int Iniciar(string Usuario, string Clave)
+        {
+            string ClaveEncri = Utilidadesj.getInstance().ConvertirSha256(Clave);
+
+            int IdUsuario = NUsuario.getInstance().LoginUsuarioA(Usuario, ClaveEncri);
+            Configuracion.oUsuario = new EUsuario() { IdUsuario = IdUsuario };
+            return IdUsuario;
+        }
+
+
     }
 }
