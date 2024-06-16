@@ -27,7 +27,9 @@ namespace CapaDatos
         public SqlConnection ConexionDB()
         {
             SqlConnection conexion = new SqlConnection();
-            conexion.ConnectionString = "Data Source=.;Initial Catalog=ResJota;Integrated Security=True";
+            //conexion.ConnectionString = "Data Source=.;Initial Catalog=ResJota;Integrated Security=True";
+            //conexion.ConnectionString = @"Data Source=SQL8002.site4now.net;Initial Catalog=db_aa7a3c_elzero2024;User Id=db_aa7a3c_elzero2024_admin;Password=Elzero2024@";
+            conexion.ConnectionString = @"Data Source=SQL8002.site4now.net;Initial Catalog=db_aa9f27_lajota;User Id=db_aa9f27_lajota_admin;Password=Elzero20242024@";
             return conexion;
         }
     }

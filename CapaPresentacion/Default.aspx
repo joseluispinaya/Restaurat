@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="IniciarSesion.aspx.cs" Inherits="CapaPresentacion.IniciarSesion" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="CapaPresentacion.Default" %>
 
 <!DOCTYPE html>
 
@@ -40,10 +40,9 @@
     
 </div>
     <script src="assets/js/jquery.min.js"></script>
-    <%--<script src="js/IniciarSesion.js" type="text/javascript"></script>--%>
+    <script src="js/Redire.js" type="text/javascript"></script>
     <script src="assets/plugins/loadingoverlay/loadingoverlay.js"></script>
     <link href="assets/plugins/bootstrap-sweetalert/sweet-alert.css" rel="stylesheet" type="text/css"/>
     <script src="assets/plugins/bootstrap-sweetalert/sweet-alert.min.js"></script>
-    <script src="js/IniciarSesion.js" type="text/javascript"></script>
 </body>
 </html>

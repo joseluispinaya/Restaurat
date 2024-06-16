@@ -352,16 +352,26 @@
     <Content Include="assets\style.css" />
     <Content Include="assets\toastr\toastr.min.css" />
     <Content Include="assets\toastr\toastr.min.js" />
+    <Content Include="Default.aspx" />
     <Content Include="frmUsuarios.aspx" />
     <Content Include="Imagenes\Sinfotop.png" />
     <Content Include="IniciarSesion.aspx" />
     <Content Include="Inicio.aspx" />
     <Content Include="js\frmUsuarios.js" />
     <Content Include="js\IniciarSesion.js" />
+    <Content Include="js\menuMasterr.js" />
+    <Content Include="js\Redire.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configuracion.cs" />
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
     <Compile Include="frmUsuarios.aspx.cs">
       <DependentUpon>frmUsuarios.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -489,6 +499,7 @@
     <Content Include="assets\scss\_responsive.scss" />
     <None Include="packages.config" />
     <Content Include="PaginaMaster.Master" />
+    <None Include="Properties\PublishProfiles\FTPProfile.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

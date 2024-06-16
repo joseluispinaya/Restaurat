@@ -253,6 +253,7 @@
 
         <script src="assets/js/app.js"></script>
         <script src="assets/plugins/loadingoverlay/loadingoverlay.js"></script>
+        <script src="js/menuMasterr.js" type="text/javascript"></script>
         <asp:ContentPlaceHolder ID="footer" runat="server"></asp:ContentPlaceHolder>
     </body>
 </html>
