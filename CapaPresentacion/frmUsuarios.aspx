@@ -6,6 +6,80 @@
             background-color: #28a745 !important;
             border-color: #28a745 !important;
         }
+        .custom-file {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+            height: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .custom-file-input {
+            position: absolute;
+            width: 100%;
+            height: 2.5rem;
+            margin: 0;
+            opacity: 0;
+            cursor: pointer;
+        }
+        
+        .custom-file-label {
+            position: absolute;
+            top: 0;
+            right: 0;
+            left: 0;
+            z-index: 1;
+            height: 2.5rem;
+            padding: .5rem .75rem;
+            font-weight: 400;
+            line-height: 1.5;
+            color: #495057;
+            background-color: #fff;
+            border: 1px solid #ced4da;
+            border-radius: .25rem;
+            cursor: pointer;
+        }
+        
+        .custom-file-label::after {
+            content: "Seleccione";
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 3;
+            display: block;
+            height: 2.5rem;
+            padding: .5rem .75rem;
+            line-height: 1.5;
+            color: #fff;
+            background-color: #6c757d;
+            border-left: inherit;
+            border-radius: 0 .25rem .25rem 0;
+        }
+        
+        .custom-file-input:lang(en) ~ .custom-file-label::after {
+            content: "Browse";
+        }
+        
+        .custom-file-input:focus ~ .custom-file-label {
+            border-color: #80bdff;
+            box-shadow: 0 0 0 .2rem rgba(0, 123, 255, .25);
+        }
+        
+        .custom-file-input:focus ~ .custom-file-label::after {
+            border-color: inherit;
+            box-shadow: none;
+        }
+        
+        .custom-file-input::file-selector-button {
+            border: none;
+            border-radius: 0;
+            margin: 0;
+            padding: 0;
+            width: 0;
+            height: 0;
+            overflow: hidden;
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="titulo" runat="server">
@@ -98,11 +172,18 @@
                             </div>
                         </div>
                         <div class="col-sm-6">
-                            
                             <div class="form-group">
                                 <p>Seleccione Foto</p>
-                                <input type="file" id="txtFoto" accept="image/*" class="filestyle" data-buttonbefore="true">
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="txtFotoS" accept="image/*">
+                                    <label class="custom-file-label" for="txtFotoS">Ningún archivo seleccionado</label>
+                                </div>
                             </div>
+                            <%--<div class="form-group">
+                                <p>Seleccione Foto</p>
+                                <input type="file" id="txtFotoSa" accept="image/*" class="filestyle" data-buttonbefore="true">
+                                <input class="form-control" type="file" id="txtFotoS" accept="image/*" />
+                            </div>--%>
                             <div class="form-row">
                                 <div class="form-group col-sm-12 text-center">
                                     <img id="imgUsuarioM" src="Imagenes/Sinfotop.png" alt="Foto usuario" style="height: 120px; max-width: 120px; border-radius: 50%;">

@@ -41,6 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="NCategoria.cs" />
+    <Compile Include="NProducto.cs" />
     <Compile Include="NTipos.cs" />
     <Compile Include="NUsuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

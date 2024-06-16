@@ -79,7 +79,7 @@ namespace CapaPresentacion
             try
             {
                 var from = "joseluisdelta1@gmail.com";
-                var name = "Soporte Sistemas";
+                var name = "Restaurant la J";
                 var smtps = "smtp.gmail.com";
                 var port = 587;
                 //var password = "xyipqkdicmyimzor";
@@ -95,7 +95,7 @@ namespace CapaPresentacion
                     "    <table style='width:100%'>" +
                     "        <tr>" +
                     "            <td align='center' colspan='2'>" +
-                    "                <h2 style='color:#004DAF'>Bienvenido</h2>" +
+                    "                <h2 style='color:#004DAF'>Bienvenido Restaurant la Jota</h2>" +
                     "            </td>" +
                     "        </tr>" +
                     "        <tr>" +

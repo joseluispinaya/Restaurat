@@ -349,14 +349,18 @@
     <Content Include="assets\plugins\summernote\summernote-bs4.min.js" />
     <Content Include="assets\plugins\timepicker\bootstrap-timepicker.js" />
     <Content Include="assets\plugins\timepicker\bootstrap-timepicker.min.css" />
+    <Content Include="assets\productes.css" />
     <Content Include="assets\style.css" />
     <Content Include="assets\toastr\toastr.min.css" />
     <Content Include="assets\toastr\toastr.min.js" />
     <Content Include="Default.aspx" />
+    <Content Include="frmProductos.aspx" />
     <Content Include="frmUsuarios.aspx" />
+    <Content Include="ImagenesPro\lock.png" />
     <Content Include="Imagenes\Sinfotop.png" />
     <Content Include="IniciarSesion.aspx" />
     <Content Include="Inicio.aspx" />
+    <Content Include="js\frmProductos.js" />
     <Content Include="js\frmUsuarios.js" />
     <Content Include="js\IniciarSesion.js" />
     <Content Include="js\menuMasterr.js" />
@@ -371,6 +375,13 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="frmProductos.aspx.cs">
+      <DependentUpon>frmProductos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="frmProductos.aspx.designer.cs">
+      <DependentUpon>frmProductos.aspx</DependentUpon>
     </Compile>
     <Compile Include="frmUsuarios.aspx.cs">
       <DependentUpon>frmUsuarios.aspx</DependentUpon>

@@ -42,6 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConexionBD.cs" />
+    <Compile Include="DCategoria.cs" />
+    <Compile Include="DProducto.cs" />
     <Compile Include="DTipos.cs" />
     <Compile Include="DUsuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

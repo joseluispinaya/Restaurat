@@ -1,15 +1,15 @@
 ﻿
-
 var table;
 
 const MODELO_BASE = {
-    IdUsuario: 0,
-    Nombres: "",
-    Apellidos: "",
-    Correo: "",
-    IdRol: 0,
-    Estado: true,
-    ImageFull: ""
+    IdProducto: 0,
+    Nombre: "",
+    Descripcion: "",
+    IdCategoria: 0,
+    PrecioUnidadVenta: 0.0, // Inicializado como float
+    //PrecioUnidadVenta: "",
+    Activo: true,
+    ImageFulP: ""
 }
 
 function ObtenerFecha() {
@@ -25,23 +25,23 @@ function ObtenerFecha() {
 $(document).ready(function () {
 
     $("#txtFechaa").val(ObtenerFecha());
-    dtUsuarios();
-    cargarRoles();
+    dtProduc();
+    cargarCatego();
 })
 
-function dtUsuarios() {
+function dtProduc() {
     // Verificar si el DataTable ya está inicializado
-    if ($.fn.DataTable.isDataTable("#tbUsuario")) {
+    if ($.fn.DataTable.isDataTable("#tbProduct")) {
         // Destruir el DataTable existente
-        $("#tbUsuario").DataTable().destroy();
+        $("#tbProduct").DataTable().destroy();
         // Limpiar el contenedor del DataTable
-        $('#tbUsuario tbody').empty();
+        $('#tbProduct tbody').empty();
     }
 
-    table = $("#tbUsuario").DataTable({
+    table = $("#tbProduct").DataTable({
         responsive: true,
         "ajax": {
-            "url": 'frmUsuarios.aspx/ObtenerUsuario',
+            "url": 'frmProductos.aspx/ObtenerProd',
             "type": "POST", // Cambiado a POST
             "contentType": "application/json; charset=utf-8",
             "dataType": "json",
@@ -58,18 +58,17 @@ function dtUsuarios() {
             }
         },
         "columns": [
-            { "data": "IdUsuario", "visible": false, "searchable": false },
+            { "data": "IdProducto", "visible": false, "searchable": false },
             {
-                "data": "ImageFull", render: function (data) {
+                "data": "ImageFulP", render: function (data) {
                     return `<img style="height:40px" src=${data} class="rounded mx-auto d-block"/>`
                 }
             },
-            { "data": "oRol.NomRol" },
-            { "data": "Nombres" },
-            { "data": "Apellidos" },
-            { "data": "Correo" },
+            { "data": "oCategoria.Descripcion" },
+            { "data": "Nombre" },
+            { "data": "PrecioUnidadVenta" },
             {
-                "data": "Estado", render: function (data) {
+                "data": "Activo", render: function (data) {
                     if (data == true)
                         return '<span class="badge badge-info">Activo</span>';
                     else
@@ -91,9 +90,9 @@ function dtUsuarios() {
                 text: 'Exportar Excel',
                 extend: 'excelHtml5',
                 title: '',
-                filename: 'Reporte Usuarios',
+                filename: 'Reporte Productos',
                 exportOptions: {
-                    columns: [2, 3, 4, 5, 6] // Ajusta según las columnas que desees exportar
+                    columns: [2, 3, 4, 5] // Ajusta según las columnas que desees exportar
                 }
             },
             'pageLength'
@@ -104,12 +103,12 @@ function dtUsuarios() {
     });
 }
 
-function cargarRoles() {
-    $("#cboRol").html("");
+function cargarCatego() {
+    $("#cboCatego").html("");
 
     $.ajax({
         type: "POST",
-        url: "frmUsuarios.aspx/ObtenerRol",
+        url: "frmProductos.aspx/ObtenerCatego",
         data: {},
         contentType: 'application/json; charset=utf-8',
         error: function (xhr, ajaxOptions, thrownError) {
@@ -119,7 +118,7 @@ function cargarRoles() {
             if (data.d.estado) {
                 $.each(data.d.objeto, function (i, row) {
                     if (row.Activo == true) {
-                        $("<option>").attr({ "value": row.Idrol }).text(row.NomRol).appendTo("#cboRol");
+                        $("<option>").attr({ "value": row.IdCategoria }).text(row.Descripcion).appendTo("#cboCatego");
                     }
 
                 })
@@ -129,13 +128,12 @@ function cargarRoles() {
     });
 }
 
-
 function mostrarImagenSeleccionada(input) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();
 
         reader.onload = function (e) {
-            $('#imgUsuarioM').attr('src', e.target.result);
+            $('#imgUsuarioP').attr('src', e.target.result);
         }
 
         reader.readAsDataURL(input.files[0]);
@@ -145,46 +143,45 @@ function mostrarImagenSeleccionada(input) {
         var nextSibling = $(input).next('.custom-file-label');
         nextSibling.text(fileName);
     } else {
-        $('#imgUsuarioM').attr('src', "Imagenes/Sinfotop.png");
+        $('#imgUsuarioP').attr('src', "Imagenes/Sinfotop.png");
 
         // Restablece el texto del label
         var nextSibling = $(input).next('.custom-file-label');
         nextSibling.text('Ningún archivo seleccionado');
     }
 
-    
+
 }
 
-$('#txtFotoS').change(function () {
+$('#txtFotoP').change(function () {
     mostrarImagenSeleccionada(this);
 });
-
 
 function mostrarModal(modelo, cboEstadoDeshabilitado = true) {
     // Verificar si modelo es null
     modelo = modelo ?? MODELO_BASE;
 
-    $("#txtIdUsuario").val(modelo.IdUsuario);
-    $("#txtNombres").val(modelo.Nombres);
-    $("#txtApellidos").val(modelo.Apellidos);
-    $("#txtCorreo").val(modelo.Correo);
-    $("#cboRol").val(modelo.IdRol == 0 ? $("#cboRol option:first").val() : modelo.IdRol);
-    $("#cboEstado").val(modelo.Estado == true ? 1 : 0);
-    $("#imgUsuarioM").attr("src", modelo.ImageFull == "" ? "Imagenes/Sinfotop.png" : modelo.ImageFull);
+    $("#txtIdProducto").val(modelo.IdProducto);
+    $("#txtNombrePr").val(modelo.Nombre);
+    $("#txtDescripcionPr").val(modelo.Descripcion);
+    $("#cboCatego").val(modelo.IdCategoria == 0 ? $("#cboCatego option:first").val() : modelo.IdCategoria);
+    $("#txtPrecioPr").val(modelo.PrecioUnidadVenta);
+    $("#cboEstadoPr").val(modelo.Activo == true ? 1 : 0);
+    $("#imgUsuarioP").attr("src", modelo.ImageFulP == "" ? "Imagenes/Sinfotop.png" : modelo.ImageFulP);
 
     // Configurar el estado de cboEstado según cboEstadoDeshabilitado jquery v 1.11.1
-    $("#cboEstado").prop("disabled", cboEstadoDeshabilitado);
+    $("#cboEstadoPr").prop("disabled", cboEstadoDeshabilitado);
 
     //$("#txtCorreo").prop("disabled", !cboEstadoDeshabilitado);
 
     // Limpiar el input file y restablecer el texto del label
-    $("#txtFotoS").val("");
+    $("#txtFotoP").val("");
     $(".custom-file-label").text('Ningún archivo seleccionado');
 
-    $("#modalrol").modal("show");
+    $("#modalrolp").modal("show");
 }
 
-$("#tbUsuario tbody").on("click", ".btn-editar", function (e) {
+$("#tbProduct tbody").on("click", ".btn-editar", function (e) {
     e.preventDefault();
     let filaSeleccionada;
 
@@ -198,15 +195,15 @@ $("#tbUsuario tbody").on("click", ".btn-editar", function (e) {
     mostrarModal(model, false);
 })
 
-$('#btnNuevoRol').on('click', function () {
+$('#btnNuevoProd').on('click', function () {
     mostrarModal(null, true);
-    //$("#modalrol").modal("show");
+    //$("#modalrolp").modal("show");
 })
 
 function sendDataToServer(request) {
     $.ajax({
         type: "POST",
-        url: "frmUsuarios.aspx/Guardar",
+        url: "frmProductos.aspx/Guardar",
         data: JSON.stringify(request),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -217,11 +214,11 @@ function sendDataToServer(request) {
         success: function (response) {
             $(".modal-content").LoadingOverlay("hide");
             if (response.d) {
-                dtUsuarios();
-                $('#modalrol').modal('hide');
-                swal("Mensaje", "Registro Exitoso credenciales enviado a su correo", "success");
+                dtProduc();
+                $('#modalrolp').modal('hide');
+                swal("Mensaje", "Registro Exitoso", "success");
             } else {
-                swal("Mensaje", "Error al registrar ingrese otro correo", "warning");
+                swal("Mensaje", "Error al registrar", "warning");
             }
         },
         error: function (xhr, ajaxOptions, thrownError) {
@@ -232,15 +229,16 @@ function sendDataToServer(request) {
 }
 
 function registerDataAjax() {
-    var fileInput = document.getElementById('txtFotoS');
+    var fileInput = document.getElementById('txtFotoP');
     var file = fileInput.files[0];
 
     const modelo = structuredClone(MODELO_BASE);
-    modelo["IdUsuario"] = parseInt($("#txtIdUsuario").val());
-    modelo["Nombres"] = $("#txtNombres").val();
-    modelo["Apellidos"] = $("#txtApellidos").val();
-    modelo["Correo"] = $("#txtCorreo").val();
-    modelo["IdRol"] = $("#cboRol").val();
+    modelo["IdProducto"] = parseInt($("#txtIdProducto").val());
+    modelo["Nombre"] = $("#txtNombrePr").val();
+    modelo["Descripcion"] = $("#txtDescripcionPr").val();
+    modelo["PrecioUnidadVenta"] = parseFloat($("#txtPrecioPr").val()); // Convertir a float
+    //modelo["PrecioUnidadVenta"] = $("#txtPrecioPr").val();
+    modelo["IdCategoria"] = $("#cboCatego").val();
 
     if (file) {
 
@@ -257,7 +255,7 @@ function registerDataAjax() {
             var bytes = new Uint8Array(arrayBuffer);
 
             var request = {
-                oUsuario: modelo,
+                oProducto: modelo,
                 imageBytes: Array.from(bytes)
             };
 
@@ -268,7 +266,7 @@ function registerDataAjax() {
     } else {
         // Si no se selecciona ningún archivo, envía un valor nulo o vacío para imageBytes
         var request = {
-            oUsuario: modelo,
+            oProducto: modelo,
             imageBytes: null // o cualquier otro valor que indique que no se envió ningún archivo
         };
 
@@ -276,7 +274,7 @@ function registerDataAjax() {
     }
 }
 
-$('#btnGuardarCambios').on('click', function () {
+$('#btnGuardarCambiosP').on('click', function () {
 
     const inputs = $("input.model").serializeArray();
     const inputs_sin_valor = inputs.filter((item) => item.value.trim() == "")
@@ -288,16 +286,8 @@ $('#btnGuardarCambios').on('click', function () {
         return;
     }
 
-    var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    var correo = $("#txtCorreo").val();
 
-    if (correo === "" || !emailRegex.test(correo)) {
-        swal("Mensaje", "Ingrese un correo válido", "warning");
-        return;
-    }
-
-
-    if (parseInt($("#txtIdUsuario").val()) == 0) {
+    if (parseInt($("#txtIdProducto").val()) == 0) {
         //swal("Mensaje", "Guardado.", "success")
         //registerDataAjax();
         registerDataAjax();
