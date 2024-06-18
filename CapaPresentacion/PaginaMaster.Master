@@ -152,7 +152,7 @@
                             <li class="has_sub">
                                 <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-table"></i><span>Categorias </span><span class="float-right"><i class="mdi mdi-plus"></i></span></a>
                                 <ul class="list-unstyled">
-                                    <li><a href="#">Basic Tables</a></li>
+                                    <li><a href="frmCategorias.aspx">Cliente Pedido</a></li>
                                     <li><a href="#">Data Table</a></li>
                                 </ul>
                             </li>

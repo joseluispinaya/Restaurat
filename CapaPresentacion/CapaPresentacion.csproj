@@ -354,12 +354,14 @@
     <Content Include="assets\toastr\toastr.min.css" />
     <Content Include="assets\toastr\toastr.min.js" />
     <Content Include="Default.aspx" />
+    <Content Include="frmCategorias.aspx" />
     <Content Include="frmProductos.aspx" />
     <Content Include="frmUsuarios.aspx" />
     <Content Include="ImagenesPro\lock.png" />
     <Content Include="Imagenes\Sinfotop.png" />
     <Content Include="IniciarSesion.aspx" />
     <Content Include="Inicio.aspx" />
+    <Content Include="js\frmCategorias.js" />
     <Content Include="js\frmProductos.js" />
     <Content Include="js\frmUsuarios.js" />
     <Content Include="js\IniciarSesion.js" />
@@ -375,6 +377,13 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="frmCategorias.aspx.cs">
+      <DependentUpon>frmCategorias.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="frmCategorias.aspx.designer.cs">
+      <DependentUpon>frmCategorias.aspx</DependentUpon>
     </Compile>
     <Compile Include="frmProductos.aspx.cs">
       <DependentUpon>frmProductos.aspx</DependentUpon>

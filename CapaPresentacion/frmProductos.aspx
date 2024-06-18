@@ -62,7 +62,7 @@
                                 </div>
                                 <div class="form-group col-sm-6">
                                     <label for="txtDescripcionPr">Descripcion</label>
-                                    <input type="email" class="form-control input-sm model" id="txtDescripcionPr" name="Descripcion">
+                                    <input type="text" class="form-control input-sm model" id="txtDescripcionPr" name="Descripcion">
                                 </div>
                             </div>
                             <div class="form-row">
