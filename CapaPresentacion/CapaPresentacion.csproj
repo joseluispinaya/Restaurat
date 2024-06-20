@@ -356,6 +356,7 @@
     <Content Include="Default.aspx" />
     <Content Include="frmCategorias.aspx" />
     <Content Include="frmProductos.aspx" />
+    <Content Include="frmReservas.aspx" />
     <Content Include="frmUsuarios.aspx" />
     <Content Include="ImagenesPro\lock.png" />
     <Content Include="Imagenes\Sinfotop.png" />
@@ -363,6 +364,7 @@
     <Content Include="Inicio.aspx" />
     <Content Include="js\frmCategorias.js" />
     <Content Include="js\frmProductos.js" />
+    <Content Include="js\frmReservas.js" />
     <Content Include="js\frmUsuarios.js" />
     <Content Include="js\IniciarSesion.js" />
     <Content Include="js\menuMasterr.js" />
@@ -391,6 +393,13 @@
     </Compile>
     <Compile Include="frmProductos.aspx.designer.cs">
       <DependentUpon>frmProductos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="frmReservas.aspx.cs">
+      <DependentUpon>frmReservas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="frmReservas.aspx.designer.cs">
+      <DependentUpon>frmReservas.aspx</DependentUpon>
     </Compile>
     <Compile Include="frmUsuarios.aspx.cs">
       <DependentUpon>frmUsuarios.aspx</DependentUpon>
@@ -517,6 +526,9 @@
     <Content Include="assets\scss\_menu.scss" />
     <Content Include="assets\scss\_pages.scss" />
     <Content Include="assets\scss\_responsive.scss" />
+    <Content Include="assets\fuenz\robotocondensed-light-webfont.ttf" />
+    <Content Include="assets\fuenz\robotocondensed-light-webfont.woff" />
+    <Content Include="assets\fuenz\robotocondensed-light-webfont.woff2" />
     <None Include="packages.config" />
     <Content Include="PaginaMaster.Master" />
     <None Include="Properties\PublishProfiles\FTPProfile.pubxml" />
