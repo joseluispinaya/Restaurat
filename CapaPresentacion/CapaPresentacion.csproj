@@ -355,6 +355,10 @@
     <Content Include="assets\sweetalert\sweetalert.js" />
     <Content Include="assets\toastr\toastr.min.css" />
     <Content Include="assets\toastr\toastr.min.js" />
+    <Content Include="ClienteH\Home.aspx" />
+    <Content Include="ClienteH\js\Home.js" />
+    <Content Include="ClienteH\js\Login.js" />
+    <Content Include="ClienteH\Login.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="frmCategorias.aspx" />
     <Content Include="frmProductos.aspx" />
@@ -374,6 +378,27 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ClienteH\Home.aspx.cs">
+      <DependentUpon>Home.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ClienteH\Home.aspx.designer.cs">
+      <DependentUpon>Home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ClienteH\Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ClienteH\Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ClienteH\PaginaHome.Master.cs">
+      <DependentUpon>PaginaHome.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ClienteH\PaginaHome.Master.designer.cs">
+      <DependentUpon>PaginaHome.Master</DependentUpon>
+    </Compile>
     <Compile Include="Configuracion.cs" />
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
@@ -531,6 +556,7 @@
     <Content Include="assets\fuenz\robotocondensed-light-webfont.ttf" />
     <Content Include="assets\fuenz\robotocondensed-light-webfont.woff" />
     <Content Include="assets\fuenz\robotocondensed-light-webfont.woff2" />
+    <Content Include="ClienteH\PaginaHome.Master" />
     <None Include="packages.config" />
     <Content Include="PaginaMaster.Master" />
     <None Include="Properties\PublishProfiles\FTPProfile.pubxml" />
@@ -551,6 +577,7 @@
       <Name>CapaNegocio</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

@@ -143,7 +143,7 @@
                                 </div>
                                 <div class="form-group col-sm-6">
                                     <label for="txtApellidos">Apellidos</label>
-                                    <input type="email" class="form-control input-sm model" id="txtApellidos" name="Apellidos">
+                                    <input type="text" class="form-control input-sm model" id="txtApellidos" name="Apellidos">
                                 </div>
                             </div>
                             <div class="form-row">
