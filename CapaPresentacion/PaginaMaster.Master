@@ -22,7 +22,8 @@
     <link href="assets/plugins/datatables/scroller.bootstrap.min.css" rel="stylesheet" type="text/css" />
 
     <link href="assets/toastr/toastr.min.css" rel="stylesheet" />
-    <link href="assets/plugins/bootstrap-sweetalert/sweet-alert.css" rel="stylesheet" type="text/css"/>
+    <%--<link href="assets/plugins/bootstrap-sweetalert/sweet-alert.css" rel="stylesheet" type="text/css"/>--%>
+    <link href="assets/sweetalert/sweetalert.css" rel="stylesheet" type="text/css"/>
     
 
     <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
@@ -233,7 +234,8 @@
         <script src="assets/js/jquery.scrollTo.min.js"></script>
 
         <script src="assets/toastr/toastr.min.js"></script>
-        <script src="assets/plugins/bootstrap-sweetalert/sweet-alert.min.js"></script>
+        <%--<script src="assets/plugins/bootstrap-sweetalert/sweet-alert.min.js"></script>--%>
+        <script src="assets/sweetalert/sweetalert.js"></script>
 
         <!-- Required datatable js-->
         <script src="assets/plugins/datatables/jquery.dataTables.min.js"></script>

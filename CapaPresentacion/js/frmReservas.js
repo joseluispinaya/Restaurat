@@ -43,13 +43,13 @@ $('#btnEjemplo').on('click', function () {
     $('#mostrarproductoss').show();
 })
 
-// Función para agregar un producto al carrito
-function agregarAlCarrito(idProducto, nombre, precio, imagen) {
-    // Lógica para agregar el producto al carrito
-    console.log(`Producto con ID ${nombre} agregado al carrito.`);
-}
 
 let ProductosParaReserva = [];
+
+function actualizarCantidadCarrito() {
+    const cantidad = ProductosParaReserva.length;
+    $('#vercarrit').html(`<i class="fas fa-cart-plus"></i> ${cantidad} Item${cantidad !== 1 ? 's' : ''}`);
+}
 
 // Delegar el evento click a los iconos de carrito de compras
 $(document).on('click', '.fa-shopping-cart', function (e) {
@@ -64,7 +64,7 @@ $(document).on('click', '.fa-shopping-cart', function (e) {
     const descripcion = $link.data('descripcion');
 
 
-    let producto_encontrado = ProductosParaReserva.filter(p => p.IdProducto == idProducto)
+    let producto_encontrado = ProductosParaReserva.filter(p => p.idProductoa == idProducto)
     if (producto_encontrado.length > 0) {
         //swal("Mensaje", "El producto ya esta en carrito", "warning");
         toastr.warning("", "El producto ya fue agregado")
@@ -102,7 +102,9 @@ $(document).on('click', '.fa-shopping-cart', function (e) {
         }
 
         ProductosParaReserva.push(producto)
-        console.log(ProductosParaReserva);
+        actualizarCantidadCarrito();
+        mostrarProductos_Precio();
+        //console.log(ProductosParaReserva);
         swal.close();
     }
     )
@@ -116,6 +118,45 @@ $(document).on('click', '.fa-shopping-cart', function (e) {
     //agregarAlCarrito(idProducto, nombreProducto, precioProducto, imagenProducto);
     //agregarAlCarrito(idProducto);
 });
+
+function mostrarProductos_Precio() {
+    let total = 0;
+    let subtotal = 0;
+    let porcentaje = 0.18;
+
+    $("#tbReservasa tbody").html("");
+
+    ProductosParaReserva.forEach((item) => {
+
+        total = total + parseFloat(item.totala)
+
+        $("#tbReservasa tbody").append(
+            $("<tr>").append(
+                $("<td>").append(
+                    $("<button>").addClass("btn btn-danger btn-eliminar btn-sm").append(
+                        $("<i>").addClass("fas fa-trash-alt")
+                    ).data("idProductoa", item.idProductoa)
+                ),
+                $("<td>").text(item.nombreProductoa),
+                $("<td>").text(item.cantidada),
+                $("<td>").text(item.precioProductoa),
+                $("<td>").text(item.totala)
+            )
+        )
+    })
+    subtotal = total / (1 + porcentaje);
+    $("#txtSubTotal").val(subtotal.toFixed(2));
+    $("#txtTotal").val(total.toFixed(2));
+}
+
+$(document).on('click', 'button.btn-eliminar', function () {
+    const _idProducto = $(this).data("idProductoa")
+    ProductosParaReserva = ProductosParaReserva.filter(p => p.idProductoa != _idProducto);
+
+    mostrarProductos_Precio();
+    actualizarCantidadCarrito();
+});
+
 
 // Asignar el evento change al select
 $("#cboCategor").change(cargarProductosPorCatego);
@@ -211,3 +252,55 @@ function cargarProductosPorCatego() {
         }
     });
 }
+
+
+function registerConIdClienteVenta() {
+
+    var totallprodu = 0;
+    var est = "Activo";
+    var DETALLE = "";
+    var VENTA = "";
+    var DETALLE_VENTA = "";
+    var DATOS_VENTA = "";
+
+    ProductosParaReserva.forEach((item) => {
+
+        totallprodu = totallprodu + parseInt(item.cantidada)
+
+        DATOS_VENTA = DATOS_VENTA + "<DATOS>" +
+            "<IdReserva>0</IdReserva>" +
+            "<IdProducto>" + item.idProductoa + "</IdProducto>" +
+            "<Cantidad>" + item.cantidada + "</Cantidad>" +
+            "<PrecioUnidad>" + item.precioProductoa + "</PrecioUnidad>" +
+            "<ImporteTotal>" + item.totala + "</ImporteTotal>" +
+            "</DATOS>"
+    })
+
+    VENTA = "<VENTA>" +
+        "<IdCliente>" + $("#txtIdclientev").val() + "</IdCliente>" +
+        "<CantidadProducto>" + ProductosParaReserva.length + "</CantidadProducto>" +
+        "<CantidadTotal>" + totallprodu + "</CantidadTotal>" +
+        "<TotalCosto>" + $("#txtTotal").val() + "</TotalCosto>" +
+        "<Comentario>" + $("#txtcomentario").val() + "</Comentario>" +
+        "<Estado>" + est + "</Estado>" +
+        "<FechaSolicitado>" + $("#txtDocumentoCliente").val() + "</FechaSolicitado>" +
+        "</VENTA>";
+
+    DETALLE_VENTA = "<DETALLE_VENTA>" + DATOS_VENTA + "</DETALLE_VENTA>";
+    DETALLE = "<DETALLE>" + VENTA + DETALLE_VENTA + "</DETALLE>"
+
+    var request = { xml: DETALLE };
+
+    console.log(request);
+
+}
+
+
+$('#btnTerminarVentar').on('click', function () {
+    if (ProductosParaReserva.length < 1) {
+        swal("Mensaje", "Debe registrar minimo un producto en la reserva", "warning");
+        return;
+    }
+
+    registerConIdClienteVenta();
+})

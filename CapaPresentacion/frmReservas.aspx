@@ -95,6 +95,9 @@
             margin: 5px 0;
             justify-content: center;
         }
+        /*table.dataTable.compact thead th, table.dataTable.compact thead td {
+            padding: 2px 5px !important;
+        }*/
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="titulo" runat="server">
@@ -184,7 +187,7 @@
                             <div class="row">
                                 <div class="col-sm-12">
 
-                                    <table id="tbReservasa" class="table table-striped table-bordered nowrap" cellspacing="0" width="100%">
+                                    <table id="tbReservasa" class="table table-striped table-bordered nowrap table-sm" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
                                                 <th></th>
