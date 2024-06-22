@@ -28,7 +28,7 @@
                     </div>
                 </div>
                 <div>
-                    <a class="waves-effect" href="#">Reenviar correro de activación de cuenta</a>
+                    <a class="waves-effect" href="frmRegistro.aspx">Crear una cuenta</a>
                 <p><a class="waves-effect" href="#">¿Has olvidado tu contraseña?</a></p>
                 </div>
             </div>

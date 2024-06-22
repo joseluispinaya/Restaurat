@@ -30,6 +30,7 @@ function ObtenerFecha() {
 }
 
 $(document).ready(function () {
+    //verificarSesion();
     $('#mostrarcarrito').hide();
     $("#txtFechaRese").datepicker();
     $("#txtFechaRese").val(ObtenerFecha());
@@ -37,6 +38,7 @@ $(document).ready(function () {
     cargarCatego();
     cargarProductosPorCatego();
 })
+
 
 function cargarCatego() {
     $("#cboCategorcl").html("");
@@ -82,14 +84,6 @@ function actualizarCantidadCarrito() {
     $('#vercarrt').html(`<i class="fas fa-cart-plus"></i> ${cantidad} Item${cantidad !== 1 ? 's' : ''}`);
 }
 
-
-function verificarSesion() {
-    var usuario = sessionStorage.getItem('usuario');
-    if (!usuario) {
-        // Si no hay sesión, redirigir al usuario a la página de login
-        window.location.href = 'Login.aspx';
-    }
-}
 
 // Delegar el evento click a los iconos de carrito de compras
 $(document).on('click', '.fa-shopping-cart', function (e) {

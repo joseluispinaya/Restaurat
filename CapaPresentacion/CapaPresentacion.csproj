@@ -355,9 +355,11 @@
     <Content Include="assets\sweetalert\sweetalert.js" />
     <Content Include="assets\toastr\toastr.min.css" />
     <Content Include="assets\toastr\toastr.min.js" />
+    <Content Include="ClienteH\frmRegistro.aspx" />
     <Content Include="ClienteH\Home.aspx" />
     <Content Include="ClienteH\js\Home.js" />
     <Content Include="ClienteH\js\Login.js" />
+    <Content Include="ClienteH\js\menuMaster.js" />
     <Content Include="ClienteH\Login.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="frmCategorias.aspx" />
@@ -378,6 +380,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ClienteH\frmRegistro.aspx.cs">
+      <DependentUpon>frmRegistro.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ClienteH\frmRegistro.aspx.designer.cs">
+      <DependentUpon>frmRegistro.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ClienteH\Home.aspx.cs">
       <DependentUpon>Home.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

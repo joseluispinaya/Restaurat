@@ -62,24 +62,43 @@
                             <li class="d-none d-sm-block">
                                 <a href="#" id="btn-fullscreen" class="waves-effect waves-light notification-icon-box"><i class="mdi mdi-fullscreen"></i></a>
                             </li>
-
-                            <li class="dropdown">
+                            <li class="dropdown" id="sinsesion">
                                 <a href="#" class="dropdown-toggle profile waves-effect waves-light" data-toggle="dropdown" aria-expanded="true">
-                                    <img src="../assets/images/users/avatar-1.jpg" alt="user-img" id="imgUsuarioCli" class="rounded-circle">
-                                    <span class="profile-username">Usuario Activo
-                                        <br />
-                                        <small>Admin</small>
+                                    <img src="../assets/images/users/avatar-1.jpg" alt="user-img" id="imgUsuarioClisin" class="rounded-circle">
+                                    <span class="profile-username">Sin sesion
+                <br />
+                                        <small>Sin sesion</small>
                                         <!-- <strong id="nombreusuario"></strong> -->
                                         <!-- <br /> -->
                                         <!-- <small id="rolusuario"></small> -->
                                     </span>
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="Login.aspx" class="dropdown-item">Login</a></li>
+                                    <li><a href="Login.aspx" class="dropdown-item">Iniciar sesion</a></li>
                                     <li><a href="javascript:void(0)" class="dropdown-item"><span class="badge badge-success float-right">5</span> Settings </a></li>
                                     <li><a href="javascript:void(0)" class="dropdown-item">Lock screen</a></li>
                                     <li class="dropdown-divider"></li>
+                                    <%--<li><a id="closeclisin" class="dropdown-item" style="cursor: pointer;">Salir</a></li>--%>
+                                </ul>
+                            </li>
+                            <li class="dropdown" id="consesion">
+                                <a href="#" class="dropdown-toggle profile waves-effect waves-light" data-toggle="dropdown" aria-expanded="true">
+                                    <img src="../assets/images/users/avatar-1.jpg" alt="user-img" id="imgUsuarioCli" class="rounded-circle">
+                                    <span class="profile-username">Usuario Activo
+                <br />
+                                        <small id="nammmel">Admin</small>
+                                        <!-- <strong id="nombreusuario"></strong> -->
+                                        <!-- <br /> -->
+                                        <!-- <small id="rolusuario"></small> -->
+                                    </span>
+                                </a>
+                                <ul class="dropdown-menu">
                                     <li><a id="closecli" class="dropdown-item" style="cursor: pointer;">Salir</a></li>
+                                    <%--<li><a href="Login.aspx" class="dropdown-item">Login</a></li>--%>
+                                    <li><a href="javascript:void(0)" class="dropdown-item"><span class="badge badge-success float-right">5</span> Settings </a></li>
+                                    <li><a href="javascript:void(0)" class="dropdown-item">Lock screen</a></li>
+                                    <li class="dropdown-divider"></li>
+                                    
                                 </ul>
                             </li>
                         </ul>
@@ -205,6 +224,7 @@
 
     <script src="../assets/js/app.js"></script>
     <script src="../assets/plugins/loadingoverlay/loadingoverlay.js"></script>
+    <script src="js/menuMaster.js" type="text/javascript"></script>
     <asp:ContentPlaceHolder ID="footer" runat="server"></asp:ContentPlaceHolder>
     </body>
 </html>

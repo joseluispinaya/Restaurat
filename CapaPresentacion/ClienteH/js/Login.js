@@ -1,4 +1,8 @@
 ﻿
+//$(document).ready(function () {
+//    verificarSesion();
+//});
+
 $('#btnIniciarSesiC').on('click', function () {
 
     if ($("#txtuser").val().trim() == "") {
@@ -28,6 +32,7 @@ function loginUsuarioLoad() {
             if (response.d.estado) {
                 // Convertir el objeto a una cadena JSON y guardarlo en sessionStorage
                 sessionStorage.setItem('usuario', JSON.stringify(response.d.objeto));
+                //verificarSesion();
                 // Redirigir al usuario
                 window.location.href = 'Home.aspx';
             } else {
