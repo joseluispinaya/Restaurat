@@ -30,7 +30,7 @@ function ObtenerFecha() {
 }
 
 $(document).ready(function () {
-    //verificarSesion();
+    oBtenerDetalleCliente();
     $('#mostrarcarrito').hide();
     $("#txtFechaRese").datepicker();
     $("#txtFechaRese").val(ObtenerFecha());
@@ -39,6 +39,18 @@ $(document).ready(function () {
     cargarProductosPorCatego();
 })
 
+
+function oBtenerDetalleCliente() {
+    var usuario = sessionStorage.getItem('usuario');
+    if (usuario) {
+        var usuarioObj = JSON.parse(usuario);
+        $('#txtIdclientev').val(usuarioObj.IdCliente);
+        $('#txtNombreCliente').val(usuarioObj.Nombre);
+        $('#txtDocumentoCliente').val(usuarioObj.NumeroDocumento);
+    }
+}
+
+let ProductosParaReserva = [];
 
 function cargarCatego() {
     $("#cboCategorcl").html("");
@@ -68,6 +80,12 @@ function cargarCatego() {
 
 $(document).on('click', '#vercarrt', function (e) {
     e.preventDefault();
+
+    if (ProductosParaReserva.length < 1) {
+        swal("Mensaje", "No tiene Productos agregados", "warning");
+        return;
+    }
+
     $('#mostrarproductoss').hide();
     $('#mostrarcarrito').show();
 });
@@ -77,7 +95,7 @@ $('#btnEjemplo').on('click', function () {
     $('#mostrarproductoss').show();
 })
 
-let ProductosParaReserva = [];
+//era aqui variable array
 
 function actualizarCantidadCarrito() {
     const cantidad = ProductosParaReserva.length;
@@ -287,53 +305,180 @@ function cargarProductosPorCatego() {
     });
 }
 
-function registerConIdClienteVenta() {
+function registerConIdClienteReserva() {
 
     var totallprodu = 0;
-    var est = "Activo";
+    var est = "Confirmado";
     var DETALLE = "";
-    var VENTA = "";
-    var DETALLE_VENTA = "";
-    var DATOS_VENTA = "";
+    var RESERVA = "";
+    var DETALLE_RESERVA = "";
+    var DATOS_RESERVA = "";
 
     ProductosParaReserva.forEach((item) => {
 
         totallprodu = totallprodu + parseInt(item.cantidada)
 
-        DATOS_VENTA = DATOS_VENTA + "<DATOS>" +
+        DATOS_RESERVA = DATOS_RESERVA + "<DATOS>" +
             "<IdReserva>0</IdReserva>" +
             "<IdProducto>" + item.idProductoa + "</IdProducto>" +
             "<Cantidad>" + item.cantidada + "</Cantidad>" +
             "<PrecioUnidad>" + item.precioProductoa + "</PrecioUnidad>" +
             "<ImporteTotal>" + item.totala + "</ImporteTotal>" +
             "</DATOS>"
-    })
+    });
 
-    VENTA = "<VENTA>" +
+    // Obtener la fecha y formatearla en YYYY-MM-DDTHH:MM:SS
+    var fechaRese = $("#txtFechaRese").val();
+    var fechaParts = fechaRese.split('/');
+    var formattedDate = fechaParts[2] + '-' + (fechaParts[1].length < 2 ? '0' : '') + fechaParts[1] + '-' + (fechaParts[0].length < 2 ? '0' : '') + fechaParts[0] + 'T00:00:00';
+
+
+    RESERVA = "<RESERVA>" +
         "<IdCliente>" + $("#txtIdclientev").val() + "</IdCliente>" +
         "<CantidadProducto>" + ProductosParaReserva.length + "</CantidadProducto>" +
         "<CantidadTotal>" + totallprodu + "</CantidadTotal>" +
         "<TotalCosto>" + $("#txtTotal").val() + "</TotalCosto>" +
         "<Comentario>" + $("#txtcomentario").val() + "</Comentario>" +
         "<Estado>" + est + "</Estado>" +
-        "<FechaSolicitado>" + $("#txtFechaRese").val() + "</FechaSolicitado>" +
-        "</VENTA>";
+        "<FechaSolicitado>" + formattedDate + "</FechaSolicitado>" +
+        "</RESERVA>";
 
-    DETALLE_VENTA = "<DETALLE_VENTA>" + DATOS_VENTA + "</DETALLE_VENTA>";
-    DETALLE = "<DETALLE>" + VENTA + DETALLE_VENTA + "</DETALLE>"
+    DETALLE_RESERVA = "<DETALLE_RESERVA>" + DATOS_RESERVA + "</DETALLE_RESERVA>";
+    DETALLE = "<DETALLE>" + RESERVA + DETALLE_RESERVA + "</DETALLE>"
 
     var request = { xml: DETALLE };
 
-    console.log(request);
+    //console.log(request);
+
+    $.ajax({
+        type: "POST",
+        url: "frmCrearReserva.aspx/GuardarReservaIdCliente",
+        data: JSON.stringify(request),
+        dataType: "json",
+        contentType: 'application/json; charset=utf-8',
+        error: function (xhr, ajaxOptions, thrownError) {
+            console.log(xhr.status + " \n" + xhr.responseText, "\n" + thrownError);
+        },
+        success: function (response) {
+            if (response.d.Estado) {
+                // Reseteo de campos y tabla después de un éxito
+                $("#txttotal").val("0");
+                $("#tbReservasa tbody").html("");
+
+                var url = 'docComprobante.aspx?id=' + response.d.Valor;
+                window.open(url, '', 'height=600,width=800,scrollbars=0,location=1,toolbar=0');
+            } else {
+                swal("Mensaje", response.d.Mensaje, "error");
+            }
+        }
+    });
 
 }
 
 
-$('#btnTerminarVentar').on('click', function () {
+$('#btnTerminarReserv').on('click', function () {
+
     if (ProductosParaReserva.length < 1) {
         swal("Mensaje", "Debe registrar minimo un producto en la reserva", "warning");
         return;
     }
 
-    registerConIdClienteVenta();
+    var fechaReseStra = $("#txtFechaRese").val().trim();
+
+    var fechaResePartsa = fechaReseStra.split('/');
+    var fechaResea = new Date(fechaResePartsa[2], fechaResePartsa[1] - 1, fechaResePartsa[0]);
+
+
+    var fechaActual = new Date();
+    fechaActual.setHours(0, 0, 0, 0);  // Establecer la hora en 00:00:00
+
+
+    if (fechaResea <= fechaActual) {
+        swal("Mensaje", "Debe ingresar una fecha mayor a la actual", "warning");
+        return;
+    }
+
+    // Validar que la fecha de reserva no sea un lunes
+    if (fechaResea.getDay() === 1) {
+        swal("Mensaje", "El restaurante no está abierto los lunes. Por favor, seleccione otro día.", "warning");
+        return;
+    }
+
+    $("#btnTerminarReserv").LoadingOverlay("show");
+
+
+    var totallprodu = 0;
+    var est = "Confirmado";
+    var DETALLE = "";
+    var RESERVA = "";
+    var DETALLE_RESERVA = "";
+    var DATOS_RESERVA = "";
+
+    ProductosParaReserva.forEach((item) => {
+
+        totallprodu = totallprodu + parseInt(item.cantidada)
+
+        DATOS_RESERVA = DATOS_RESERVA + "<DATOS>" +
+            "<IdReserva>0</IdReserva>" +
+            "<IdProducto>" + item.idProductoa + "</IdProducto>" +
+            "<Cantidad>" + item.cantidada + "</Cantidad>" +
+            "<PrecioUnidad>" + item.precioProductoa + "</PrecioUnidad>" +
+            "<ImporteTotal>" + item.totala + "</ImporteTotal>" +
+            "</DATOS>"
+    });
+
+    // Obtener la fecha y formatearla en YYYY-MM-DDTHH:MM:SS
+    var fechaRese = $("#txtFechaRese").val();
+    var fechaParts = fechaRese.split('/');
+    var formattedDate = fechaParts[2] + '-' + (fechaParts[1].length < 2 ? '0' : '') + fechaParts[1] + '-' + (fechaParts[0].length < 2 ? '0' : '') + fechaParts[0] + 'T00:00:00';
+
+
+    RESERVA = "<RESERVA>" +
+        "<IdCliente>" + $("#txtIdclientev").val() + "</IdCliente>" +
+        "<CantidadProducto>" + ProductosParaReserva.length + "</CantidadProducto>" +
+        "<CantidadTotal>" + totallprodu + "</CantidadTotal>" +
+        "<TotalCosto>" + $("#txtTotal").val() + "</TotalCosto>" +
+        "<Comentario>" + $("#txtcomentario").val() + "</Comentario>" +
+        "<Estado>" + est + "</Estado>" +
+        "<FechaSolicitado>" + formattedDate + "</FechaSolicitado>" +
+        "</RESERVA>";
+
+    DETALLE_RESERVA = "<DETALLE_RESERVA>" + DATOS_RESERVA + "</DETALLE_RESERVA>";
+    DETALLE = "<DETALLE>" + RESERVA + DETALLE_RESERVA + "</DETALLE>"
+
+    var request = { xml: DETALLE };
+
+    //console.log(request);
+
+    $.ajax({
+        type: "POST",
+        url: "Home.aspx/GuardarReservaIdCliente",
+        data: JSON.stringify(request),
+        dataType: "json",
+        contentType: 'application/json; charset=utf-8',
+        error: function (xhr, ajaxOptions, thrownError) {
+            $("#btnTerminarReserv").LoadingOverlay("hide");
+            console.log(xhr.status + " \n" + xhr.responseText, "\n" + thrownError);
+        },
+        success: function (response) {
+            $("#btnTerminarReserv").LoadingOverlay("hide");
+            if (response.d.Estado) {
+                // Reseteo de campos y tabla después de un éxito
+                ProductosParaReserva = [];
+                mostrarProductos_Precio();
+                actualizarCantidadCarrito();
+                $("#txtcomentario").val("");
+
+                swal("Mensaje", response.d.Valor, "success");
+
+                //var url = 'docComprobante.aspx?id=' + response.d.Valor;
+                //window.open(url, '', 'height=600,width=800,scrollbars=0,location=1,toolbar=0');
+            } else {
+                swal("Mensaje", response.d.Mensaje, "error");
+            }
+        }
+    });
+
+
+    //registerConIdClienteReserva();
 })

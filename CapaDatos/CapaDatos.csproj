@@ -45,6 +45,7 @@
     <Compile Include="DCategoria.cs" />
     <Compile Include="DCliente.cs" />
     <Compile Include="DProducto.cs" />
+    <Compile Include="DReserva.cs" />
     <Compile Include="DTipos.cs" />
     <Compile Include="DUsuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

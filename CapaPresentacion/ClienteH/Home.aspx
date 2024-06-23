@@ -1,5 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/ClienteH/PaginaHome.Master" AutoEventWireup="true" CodeBehind="Home.aspx.cs" Inherits="CapaPresentacion.ClienteH.Home" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <link href="../assets/jquery-ui-1.12.1/jquery-ui.css" rel="stylesheet"/>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Aclonica&display=swap');
@@ -236,7 +237,7 @@
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-sm-12">
-                                    <textarea class="form-control" rows="3" id="txtcomentario"></textarea>
+                                    <textarea class="form-control" rows="3" id="txtcomentario" placeholder="Igresar algun comentario o detalle"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -249,7 +250,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="form-group mb-0">
-                                <button type="button" id="btnTerminarVentar" class="btn btn-success btn-sm btn-block">Terminar Venta</button>
+                                <button type="button" id="btnTerminarReserv" class="btn btn-success btn-sm btn-block">Terminar Reserva</button>
                             </div>
                         </div>
                     </div>
@@ -259,5 +260,6 @@
     </div>
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="footer" runat="server">
+    <script src="../assets/jquery-ui-1.12.1/jquery-ui.js"></script>
     <script src="js/Home.js" type="text/javascript"></script>
 </asp:Content>
