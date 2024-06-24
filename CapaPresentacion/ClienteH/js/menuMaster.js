@@ -37,8 +37,6 @@ function oBtenerDetalleUsuario() {
     if (usuario) {
         var usuarioObj = JSON.parse(usuario);
         $('#nammmel').text(usuarioObj.Nombre);
-        //$('#nombreusuario').text(usuario);
-        console.log("Detalles del usuario:", usuarioObj);
-        // Otros detalles del usuario pueden ser obtenidos y mostrados aquí
+        //console.log("Detalles del usuario:", usuarioObj);
     }
 }

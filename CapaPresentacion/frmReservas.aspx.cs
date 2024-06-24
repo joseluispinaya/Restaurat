@@ -1,9 +1,11 @@
-﻿using System;
+﻿using CapaEntidad;
+using CapaNegocio;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
+using System.Web.Services;
 
 namespace CapaPresentacion
 {
@@ -12,6 +14,21 @@ namespace CapaPresentacion
         protected void Page_Load(object sender, EventArgs e)
         {
 
+        }
+        [WebMethod]
+        public static Respuesta<List<EReserva>> Obtener()
+        {
+            List<EReserva> Lista = NReserva.getInstance().ObtenerListaReserva();
+            //Lista = NUsuario.getInstance().ObtenerUsuarios();
+
+            if (Lista != null)
+            {
+                return new Respuesta<List<EReserva>>() { estado = true, objeto = Lista };
+            }
+            else
+            {
+                return new Respuesta<List<EReserva>>() { estado = false, objeto = null };
+            }
         }
     }
 }

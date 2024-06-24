@@ -67,6 +67,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="assets\calen\es.js" />
+    <Content Include="assets\calen\fullcalendar.min.css" />
+    <Content Include="assets\calen\fullcalendar.min.js" />
+    <Content Include="assets\calen\jquery.min.js" />
+    <Content Include="assets\calen\moment.min.js" />
     <Content Include="assets\css\bootstrap.min.css" />
     <Content Include="assets\css\elements.css" />
     <Content Include="assets\css\icons.css" />

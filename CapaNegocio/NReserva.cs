@@ -27,5 +27,19 @@ namespace CapaNegocio
         {
             return DReserva.getInstance().RegistrarReservaNuevoIdclie(Detalle);
         }
+
+        public EReserva ObtenerDetalleReserva(int IdReserva)
+        {
+            return DReserva.getInstance().ObtenerDetalleReserva(IdReserva);
+        }
+
+        public EReserva ObtenerDetalleReservaIA(int IdReserva)
+        {
+            return DReserva.getInstance().ObtenerDetalleReservaIA(IdReserva);
+        }
+        public List<EReserva> ObtenerListaReserva()
+        {
+            return DReserva.getInstance().ObtenerListaReserva();
+        }
     }
 }

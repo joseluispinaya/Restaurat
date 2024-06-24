@@ -30,7 +30,8 @@
 
     <link href="assets/css/icons.css" rel="stylesheet" type="text/css"/>
     <link href="assets/css/style.css" rel="stylesheet" type="text/css"/>
-    <link href="assets/plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet"/>
+    <link href="assets/jquery-ui-1.12.1/jquery-ui.css" rel="stylesheet"/>
+    <%--<link href="assets/plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet"/>--%>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
@@ -258,7 +259,8 @@
         <script src="assets/plugins/datatables/responsive.bootstrap4.min.js"></script>
 
         <!-- Datatable init js -->
-        <script src="assets/plugins/jquery-ui/jquery-ui.min.js"></script>
+        <%--<script src="assets/plugins/jquery-ui/jquery-ui.min.js"></script>--%>
+        <script src="assets/jquery-ui-1.12.1/jquery-ui.js"></script>
 
         <script src="assets/js/app.js"></script>
         <script src="assets/plugins/loadingoverlay/loadingoverlay.js"></script>

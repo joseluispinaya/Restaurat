@@ -43,7 +43,9 @@
   <ItemGroup>
     <Compile Include="ECategoria.cs" />
     <Compile Include="ECliente.cs" />
+    <Compile Include="EDetalleReserva.cs" />
     <Compile Include="EProducto.cs" />
+    <Compile Include="EReserva.cs" />
     <Compile Include="ERol.cs" />
     <Compile Include="EUsuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

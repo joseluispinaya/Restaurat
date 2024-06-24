@@ -31,6 +31,9 @@ function ObtenerFecha() {
 
 $(document).ready(function () {
     oBtenerDetalleCliente();
+
+    //detalleReserva();
+
     $('#mostrarcarrito').hide();
     $("#txtFechaRese").datepicker();
     $("#txtFechaRese").val(ObtenerFecha());
@@ -38,6 +41,33 @@ $(document).ready(function () {
     cargarCatego();
     cargarProductosPorCatego();
 })
+
+function detalleReserva() {
+
+    var idRes = 1;
+
+    var request = {
+        IdReserva: idRes
+    };
+
+    $.ajax({
+        type: "POST",
+        url: "Home.aspx/DetalleReservaIA",
+        data: JSON.stringify(request),
+        dataType: "json",
+        contentType: 'application/json; charset=utf-8',
+        error: function (xhr, ajaxOptions, thrownError) {
+            console.log(xhr.status + " \n" + xhr.responseText, "\n" + thrownError);
+        },
+        success: function (data) {
+            if (data.d.estado) {
+                console.log(data.d.objeto);
+            } else {
+                swal("Mensaje", data.d.valor, "success");
+            }
+        }
+    });
+}
 
 
 function oBtenerDetalleCliente() {
