@@ -373,6 +373,9 @@
     <Content Include="assets\plugins\timepicker\bootstrap-timepicker.js" />
     <Content Include="assets\plugins\timepicker\bootstrap-timepicker.min.css" />
     <Content Include="assets\productes.css" />
+    <Content Include="assets\select2\es.min.js" />
+    <Content Include="assets\select2\select2.min.css" />
+    <Content Include="assets\select2\select2.min.js" />
     <Content Include="assets\style.css" />
     <Content Include="assets\sweetalert\sweetalert.css" />
     <Content Include="assets\sweetalert\sweetalert.js" />
@@ -389,6 +392,7 @@
     <Content Include="frmProductos.aspx" />
     <Content Include="frmReservas.aspx" />
     <Content Include="frmUsuarios.aspx" />
+    <Content Include="frmVentaReserva.aspx" />
     <Content Include="ImagenesPro\lock.png" />
     <Content Include="Imagenes\Sinfotop.png" />
     <Content Include="IniciarSesion.aspx" />
@@ -397,6 +401,7 @@
     <Content Include="js\frmProductos.js" />
     <Content Include="js\frmReservas.js" />
     <Content Include="js\frmUsuarios.js" />
+    <Content Include="js\frmVentaReserva.js" />
     <Content Include="js\IniciarSesion.js" />
     <Content Include="js\menuMasterr.js" />
     <Content Include="js\Redire.js" />
@@ -466,6 +471,13 @@
     </Compile>
     <Compile Include="frmUsuarios.aspx.designer.cs">
       <DependentUpon>frmUsuarios.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="frmVentaReserva.aspx.cs">
+      <DependentUpon>frmVentaReserva.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="frmVentaReserva.aspx.designer.cs">
+      <DependentUpon>frmVentaReserva.aspx</DependentUpon>
     </Compile>
     <Compile Include="IniciarSesion.aspx.cs">
       <DependentUpon>IniciarSesion.aspx</DependentUpon>

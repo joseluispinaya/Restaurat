@@ -22,5 +22,9 @@ namespace CapaEntidad
         public bool Activo { get; set; }
         public ECliente oCliente { get; set; }
         public List<EDetalleReserva> oListaDetalleReserva { get; set; }
+
+        public string Color => Estado == "Confirmado"
+            ? "#8BC34A"
+            : "#009688";
     }
 }

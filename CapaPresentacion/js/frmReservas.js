@@ -40,6 +40,8 @@ $(document).ready(function () {
     //});
 })
 
+let DetalleParaReserva = [];
+
 function cargarReser() {
 
     $.ajax({
@@ -59,23 +61,30 @@ function cargarReser() {
                     events.push({
                         id: row.IdReserva,
                         title: 'Reserva ' + row.IdReserva + ' - ' + row.oCliente.Nombre,
-                        start: row.FechaReserva,    // Ahora FechaReserva debería estar en formato ISO 8601
-                        descripcion: row.Comentario  // Puedes agregar más campos si lo deseas
+                        start: row.FechaReserva,
+                        descripcion: row.Comentario,
+                        color: row.Color
                     });
                 });
 
-                $('#calendar').fullCalendar('destroy'); // Destruye cualquier calendario existente
+                $('#calendar').fullCalendar('destroy');
                 $('#calendar').fullCalendar({
                     header: {
                         left: 'prev,next today',
                         center: 'title',
                         right: 'month, basicWeek, basicDay'
                     },
+                    /*navLinks: true,*/
+                    /*selectable: true,*/
+                    editable: true,
                     events: events,
                     eventClick: function (calEvent, jsEvent, view) {
-                        $("#txtNombresc").val(calEvent.title);
-                        $("#txtApellidosc").val(calEvent.descripcion);
-                        $("#modalrol").modal("show");
+                        //$("#txtNombreClienteat").val(calEvent.title);
+                        //$("#txtDocumentoClienteat").val(calEvent.descripcion);
+                        //$("#txtcelu").val(calEvent.id);
+                        //$("#modalrol").modal("show");
+
+                        detalleReserva(calEvent.id);
                     }
                     //eventRender: function (event, element) {
                     //    element.attr('title', event.descripcion);
@@ -83,6 +92,68 @@ function cargarReser() {
                 });
             }
 
+        }
+    });
+}
+
+function detalleReserva($idRes) {
+
+
+    var request = {
+        IdReserva: $idRes
+    };
+
+    $.ajax({
+        type: "POST",
+        url: "frmReservas.aspx/DetalleReservaCale",
+        data: JSON.stringify(request),
+        dataType: "json",
+        contentType: 'application/json; charset=utf-8',
+        error: function (xhr, ajaxOptions, thrownError) {
+            console.log(xhr.status + " \n" + xhr.responseText, "\n" + thrownError);
+        },
+        success: function (data) {
+            if (data.d.estado) {
+
+                $("#txtNombreClienteat").val(data.d.objeto.oCliente.Nombre);
+                $("#txtDocumentoClienteat").val(data.d.objeto.oCliente.NumeroDocumento);
+                $("#txtcelu").val(data.d.objeto.oCliente.Telefono);
+
+                $("#tbReservasaat tbody").html("");
+
+                DetalleParaReserva = data.d.objeto.oListaDetalleReserva;
+                DetalleParaReserva.forEach((item) => {
+
+                    $("#tbReservasaat tbody").append(
+                        $("<tr>").append(
+                            $("<td>").text(`${item.NombreProducto} ${item.Cantidad}`),
+                            $("<td>").text(item.PrecioUnidad),
+                            $("<td>").text(item.ImporteTotal)
+                        )
+                    );
+                });
+
+                $("#txtregistro").val(data.d.objeto.FechaRegistro);
+                $("#txtFechaReseat").val(data.d.objeto.FechaReserva);
+                $("#txtTotalat").val(data.d.objeto.TotalCosto);
+                $("#txtcomentarioat").val(data.d.objeto.Comentario);
+
+                //DetalleParaReserva.forEach((item) => {
+
+                //    $("#tbReservasaat tbody").append(
+                //        $("<tr>").append(
+                //            $("<td>").text(`${item.NombreProducto} ${item.Cantidad}`),
+                //            $("<td>").text(item.PrecioUnidad),
+                //            $("<td>").text(item.ImporteTotal)
+                //        )
+                //    )
+                //})
+
+
+                $("#modalrol").modal("show");
+            } else {
+                swal("Mensaje", data.d.valor, "success");
+            }
         }
     });
 }

@@ -167,7 +167,10 @@
                             </li>
 
                             <li>
-                                <a href="frmReservas.aspx" class="waves-effect"><i class="mdi mdi-calendar"></i><span>Reservas <span class="badge badge-primary float-right">NEW</span></span></a>
+                                <a href="frmReservas.aspx" class="waves-effect"><i class="mdi mdi-calendar"></i><span> Reservas <span class="badge badge-primary float-right">NEW</span></span></a>
+                            </li>
+                            <li>
+                                <a href="frmVentaReserva.aspx" class="waves-effect"><i class="mdi mdi-calendar"></i><span> Venta <span class="badge badge-primary float-right">NEW</span></span></a>
                             </li>
 
                         </ul>

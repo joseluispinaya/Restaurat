@@ -30,5 +30,27 @@ namespace CapaPresentacion
                 return new Respuesta<List<EReserva>>() { estado = false, objeto = null };
             }
         }
+
+        [WebMethod]
+        public static Respuesta<EReserva> DetalleReservaCale(int IdReserva)
+        {
+            try
+            {
+                EReserva oReserva = NReserva.getInstance().ObtenerDetalleReservaIA(IdReserva);
+                if (oReserva != null)
+                {
+                    return new Respuesta<EReserva>() { estado = true, objeto = oReserva };
+                }
+                else
+                {
+                    return new Respuesta<EReserva>() { estado = false, objeto = null, valor = "Error al registrar la reserva" };
+                }
+            }
+            catch (Exception ex)
+            {
+                // Manejo de excepciones
+                return new Respuesta<EReserva>() { estado = false, objeto = null, valor = ex.Message };
+            }
+        }
     }
 }

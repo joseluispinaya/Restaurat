@@ -24,67 +24,100 @@
         </div>
     </div>
 
-        <div class="modal fade bs-example-modal-lg" id="modalrol" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal fade bs-example-modal-lg" id="modalrol" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title m-0" id="myLargeModalLabel">Usuarios</h4>
+                    <h4 class="modal-title m-0" id="myLargeModalLabel">Informacion de Reserva</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 </div>
                 <div class="modal-body">
-                    <input id="txtIdUsuarioc" class="model" name="IdUsuario" value="0" type="hidden" />
                     <div class="row">
-                        <div class="col-sm-6">
-                            <div class="form-row">
-                                <div class="form-group col-sm-6">
-                                    <label for="txtNombre">Nombre</label>
-                                    <input type="text" class="form-control input-sm model" id="txtNombresc" name="Nombres">
-                                </div>
-                                <div class="form-group col-sm-6">
-                                    <label for="txtApellidos">Apellidos</label>
-                                    <input type="text" class="form-control input-sm model" id="txtApellidosc" name="Apellidos">
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col-sm-6">
-                                    <label for="cboEstado">Estado</label>
-                                    <select class="form-control form-control-sm" id="cboEstadoc">
-                                        <option value="1">Activo</option>
-                                        <option value="0">No Activo</option>
-                                    </select>
-                                </div>
-                                <div class="form-group col-sm-6">
-                                    <label for="txtOcupacion">Fecha Actual</label>
-                                    <input type="text" class="form-control input-sm" id="txtFechaac" readonly name="ocupacion" />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <p>Seleccione Foto</p>
-                                <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="txtFotoSc" accept="image/*">
-                                    <label class="custom-file-label" for="txtFotoS">Ningún archivo seleccionado</label>
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col-sm-12 text-center">
-                                    <img id="imgUsuarioMc" src="Imagenes/Sinfotop.png" alt="Foto usuario" style="height: 120px; max-width: 120px; border-radius: 50%;">
-                                </div>
-                            </div>
-                        </div>
+                        <div class="col-sm-8">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="card">
+                                        <div class="card-header bg-primary">
+                                            <h3 class="card-title m-0"><i class="fas fa-user-friends"></i> Detalle Reserva</h3>
+                                        </div>
+                                        <div class="card-body">
+                                            <input id="txtIdclienteAte" class="model" name="IdClientev" value="0" type="hidden" />
+                                            <div class="form-row">
+                                                <div class="form-group col-sm-5">
+                                                    <input type="text" class="form-control input-sm" disabled id="txtNombreClienteat">
+                                                </div>
+                                                <div class="form-group col-sm-4">
+                                                    <input type="text" class="form-control input-sm" disabled id="txtDocumentoClienteat">
+                                                </div>
+                                                <div class="form-group col-sm-3">
+                                                    <input type="text" class="form-control input-sm" disabled id="txtcelu">
+                                                </div>
+                                            </div>
 
+                                            <h4 class="m-t-0 m-b-10">Detalle Productos</h4>
+
+                                            <div class="row">
+                                                <div class="col-sm-12">
+
+                                                    <table id="tbReservasaat" class="table table-striped table-bordered nowrap table-sm" cellspacing="0" width="100%">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Producto Cantidad</th>
+                                                                <th>Precio</th>
+                                                                <th>Total</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="card">
+                                        <div class="card-header bg-primary">
+                                            <h3 class="card-title m-0"><i class="fas fa-user-friends"></i> Detalle Total</h3>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="input-group m-b-15">
+                                                <span class="input-group-addon">Registro:</span>
+                                                <input type="text" class="form-control" id="txtregistro" disabled>
+                                            </div>
+                                            <div class="input-group m-b-15">
+                                                <span class="input-group-addon">Para:</span>
+                                                <input type="text" class="form-control" id="txtFechaReseat" disabled>
+                                            </div>
+                                            <div class="input-group m-b-15">
+                                                <span class="input-group-addon">Total Bs.</span>
+                                                <input type="text" class="form-control" id="txtTotalat" disabled>
+                                            </div>
+                                            
+                                            <div class="form-row">
+                                                <div class="form-group col-sm-12">
+                                                    <textarea class="form-control" rows="2" disabled id="txtcomentarioat"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Cerrar</button>
-                    <button id="btnGuardarCambiosc" type="button" class="btn btn-sm btn-primary">Guardar Cambios</button>
+                    <button id="btnGuardarCambiosat" type="button" class="btn btn-sm btn-primary">Generar atencion</button>
                 </div>
             </div>
-            <!-- /.modal-content -->
         </div>
-        <!-- /.modal-dialog -->
     </div>
 
 </asp:Content>

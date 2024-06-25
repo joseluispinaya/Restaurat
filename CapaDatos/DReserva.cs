@@ -181,6 +181,7 @@ namespace CapaDatos
                                     {
                                         rptDetalleVenta.oCliente = new ECliente
                                         {
+                                            IdCliente = int.Parse(detalleClienteElement.Element("IdCliente").Value),
                                             Nombre = detalleClienteElement.Element("Nombre").Value,
                                             Direccion = detalleClienteElement.Element("Direccion").Value,
                                             NumeroDocumento = detalleClienteElement.Element("NumeroDocumento").Value,
