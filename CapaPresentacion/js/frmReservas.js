@@ -79,11 +79,11 @@ function cargarReser() {
                     editable: true,
                     events: events,
                     eventClick: function (calEvent, jsEvent, view) {
-                        //$("#txtNombreClienteat").val(calEvent.title);
                         //$("#txtDocumentoClienteat").val(calEvent.descripcion);
                         //$("#txtcelu").val(calEvent.id);
                         //$("#modalrol").modal("show");
 
+                        $("#txtIdReserrr").val("0");
                         detalleReserva(calEvent.id);
                     }
                     //eventRender: function (event, element) {
@@ -115,6 +115,8 @@ function detalleReserva($idRes) {
         success: function (data) {
             if (data.d.estado) {
 
+                $("#txtIdReserrr").val($idRes);
+
                 $("#txtNombreClienteat").val(data.d.objeto.oCliente.Nombre);
                 $("#txtDocumentoClienteat").val(data.d.objeto.oCliente.NumeroDocumento);
                 $("#txtcelu").val(data.d.objeto.oCliente.Telefono);
@@ -138,17 +140,7 @@ function detalleReserva($idRes) {
                 $("#txtTotalat").val(data.d.objeto.TotalCosto);
                 $("#txtcomentarioat").val(data.d.objeto.Comentario);
 
-                //DetalleParaReserva.forEach((item) => {
-
-                //    $("#tbReservasaat tbody").append(
-                //        $("<tr>").append(
-                //            $("<td>").text(`${item.NombreProducto} ${item.Cantidad}`),
-                //            $("<td>").text(item.PrecioUnidad),
-                //            $("<td>").text(item.ImporteTotal)
-                //        )
-                //    )
-                //})
-
+                //var idresevi = parseInt($("#txtIdReserrr").val());
 
                 $("#modalrol").modal("show");
             } else {
@@ -157,6 +149,17 @@ function detalleReserva($idRes) {
         }
     });
 }
+
+
+$('#btnGuardarCambiosat').on('click', function () {
+
+    //var idresevi = parseInt($("#txtIdReserrr").val());
+    var idreser = $("#txtIdReserrr").val();
+    //var url = 'frmVentaReserva.aspx?id=' + encodeURIComponent(idreser);
+    var url = 'frmVentaReserva.aspx?id=' + idreser;
+
+    window.location.href = url;
+})
 
 function cargarCatego() {
     $("#cboCategor").html("");

@@ -117,6 +117,7 @@
     <Content Include="assets\images\Chicken-Biryani-hyd.jpg" />
     <Content Include="assets\images\favicon.ico" />
     <Content Include="assets\images\Isuces.jpg" />
+    <Content Include="assets\images\logoap.png" />
     <Content Include="assets\images\logore.jpeg" />
     <Content Include="assets\images\logo_sm.png" />
     <Content Include="assets\images\logo_white_2.png" />
@@ -389,6 +390,7 @@
     <Content Include="ClienteH\Login.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="frmCategorias.aspx" />
+    <Content Include="frmDocVenta.aspx" />
     <Content Include="frmProductos.aspx" />
     <Content Include="frmReservas.aspx" />
     <Content Include="frmUsuarios.aspx" />
@@ -450,6 +452,13 @@
     </Compile>
     <Compile Include="frmCategorias.aspx.designer.cs">
       <DependentUpon>frmCategorias.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="frmDocVenta.aspx.cs">
+      <DependentUpon>frmDocVenta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="frmDocVenta.aspx.designer.cs">
+      <DependentUpon>frmDocVenta.aspx</DependentUpon>
     </Compile>
     <Compile Include="frmProductos.aspx.cs">
       <DependentUpon>frmProductos.aspx</DependentUpon>

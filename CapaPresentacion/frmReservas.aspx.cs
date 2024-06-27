@@ -43,7 +43,7 @@ namespace CapaPresentacion
                 }
                 else
                 {
-                    return new Respuesta<EReserva>() { estado = false, objeto = null, valor = "Error al registrar la reserva" };
+                    return new Respuesta<EReserva>() { estado = false, objeto = null, valor = "No se pudo encontrar la reserva" };
                 }
             }
             catch (Exception ex)

@@ -5,6 +5,9 @@
         .select2 {
             width: 100% !important;
         }
+        .input-reducido {
+            width: 60px; /* Ajusta el valor según tus necesidades */
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="titulo" runat="server">
@@ -85,6 +88,10 @@
                         </div>
                         <div class="card-body">
                             <div class="input-group m-b-15">
+                                <span class="input-group-addon">Fecha:</span>
+                                <input type="text" class="form-control" id="txtFechaRese" disabled>
+                            </div>
+                            <div class="input-group m-b-15">
                                 <span class="input-group-addon">Sub Total Bs.</span>
                                 <input type="text" class="form-control" id="txtSubTotal" disabled>
                             </div>
@@ -92,10 +99,7 @@
                                 <span class="input-group-addon">Total Bs.</span>
                                 <input type="text" class="form-control" id="txtTotal" disabled>
                             </div>
-                            <div class="input-group m-b-15">
-                                <span class="input-group-addon">Fecha:</span>
-                                <input type="text" class="form-control" id="txtFechaRese" disabled>
-                            </div>
+                            
                         </div>
                     </div>
                 </div>

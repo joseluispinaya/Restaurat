@@ -42,6 +42,7 @@
                                         </div>
                                         <div class="card-body">
                                             <input id="txtIdclienteAte" class="model" name="IdClientev" value="0" type="hidden" />
+                                            <input id="txtIdReserrr" class="model" name="IdRserv" value="0" type="hidden" />
                                             <div class="form-row">
                                                 <div class="form-group col-sm-5">
                                                     <input type="text" class="form-control input-sm" disabled id="txtNombreClienteat">

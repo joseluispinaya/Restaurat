@@ -69,6 +69,7 @@ namespace CapaDatos
             return respuesta;
         }
 
+        // no se esta usando
         public EReserva ObtenerDetalleReserva(int IdReserva)
         {
             EReserva rptDetalleVenta = new EReserva();

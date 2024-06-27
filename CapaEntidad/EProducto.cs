@@ -19,6 +19,9 @@ namespace CapaEntidad
         public ECategoria oCategoria { get; set; }
         public bool Activo { get; set; }
 
+        // variable axiliar
+        //public float Totalcar { get; set; }
+
         public string ImageFulP => string.IsNullOrEmpty(Imagen)
             ? $"/Imagenes/Sinfotop.png"
             : Imagen;
