@@ -390,6 +390,7 @@
     <Content Include="ClienteH\Login.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="frmCategorias.aspx" />
+    <Content Include="frmConsultaVenta.aspx" />
     <Content Include="frmDocVenta.aspx" />
     <Content Include="frmProductos.aspx" />
     <Content Include="frmReservas.aspx" />
@@ -400,6 +401,7 @@
     <Content Include="IniciarSesion.aspx" />
     <Content Include="Inicio.aspx" />
     <Content Include="js\frmCategorias.js" />
+    <Content Include="js\frmConsultaVenta.js" />
     <Content Include="js\frmProductos.js" />
     <Content Include="js\frmReservas.js" />
     <Content Include="js\frmUsuarios.js" />
@@ -452,6 +454,13 @@
     </Compile>
     <Compile Include="frmCategorias.aspx.designer.cs">
       <DependentUpon>frmCategorias.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="frmConsultaVenta.aspx.cs">
+      <DependentUpon>frmConsultaVenta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="frmConsultaVenta.aspx.designer.cs">
+      <DependentUpon>frmConsultaVenta.aspx</DependentUpon>
     </Compile>
     <Compile Include="frmDocVenta.aspx.cs">
       <DependentUpon>frmDocVenta.aspx</DependentUpon>

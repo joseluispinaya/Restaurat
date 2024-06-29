@@ -26,6 +26,9 @@
             margin-bottom: 20px; /* Add some space between the two containers */
             box-sizing: border-box;
         }
+        .sin-margin-bottom {
+            margin-bottom: 0;
+        }
     </style>
 </head>
 <body>
@@ -44,25 +47,21 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="invoice-title">
-                                    <h4 class="float-right">BOLETA #12345</h4>
+                                    <h4 class="float-right" id="tipodoc">BOLETA #12345</h4>
                                     <h3 class="m-t-0">RESTAURANT LA J</h3>
                                 </div>
                                 <hr>
                                 <div class="row">
                                     <div class="col-5">
                                         <address>
-                                            <strong>Nombre:</strong>
-                                            <label id="lblnombrepcd">JOSE LUIS</label><br>
-                                            <strong>Apellido:</strong>
-                                            <label id="lblapellido">PINAYA</label><br>
+                                            <strong>Cliente:</strong>
+                                            <label id="lblnombre" class="sin-margin-bottom">JOSE LUIS</label><br>
                                             <strong>NRO CI:</strong>
-                                            <label id="lblnroci"></label><br>
-                                            <strong>Asociacion:</strong>
-                                            <label id="lblasociacion"></label><br>
-                                            <strong>Tipo Disca:</strong>
-                                            <label id="lbltipodis"></label><br>
-                                            <strong>Porcentaje:</strong>
-                                            <label id="lblporcentaje"></label>
+                                            <label id="lblnroci" class="sin-margin-bottom"></label><br>
+                                            <strong>Celular:</strong>
+                                            <label id="lblcelu" class="sin-margin-bottom"></label><br>
+                                            <strong>Direccion:</strong>
+                                            <label id="lbldire" class="sin-margin-bottom"></label>
                                         </address>
                                     </div>
                                     <div class="col-7">
@@ -77,56 +76,13 @@
                                             <table id="tbDetalles" class="table">
                                                 <thead>
                                                     <tr>
-                                                        <td><strong>Item</strong></td>
-                                                        <td class="text-center"><strong>Price</strong></td>
-                                                        <td class="text-center"><strong>Quantity</strong>
-                                                        </td>
-                                                        <td class="text-right"><strong>Totals</strong></td>
+                                                        <th>Producto</th>
+                                                        <th>Cantidad</th>
+                                                        <th>Precio</th>
+                                                        <th>Total</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <!-- foreach ($order->lineItems as $line) or some such thing here -->
-                                                    <tr>
-                                                        <td>BS-200</td>
-                                                        <td class="text-center">$10.99</td>
-                                                        <td class="text-center">1</td>
-                                                        <td class="text-right">$10.99</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>BS-400</td>
-                                                        <td class="text-center">$20.00</td>
-                                                        <td class="text-center">3</td>
-                                                        <td class="text-right">$60.00</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>BS-1000</td>
-                                                        <td class="text-center">$600.00</td>
-                                                        <td class="text-center">1</td>
-                                                        <td class="text-right">$600.00</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="thick-line"></td>
-                                                        <td class="thick-line"></td>
-                                                        <td class="thick-line text-center">
-                                                            <strong>Subtotal</strong></td>
-                                                        <td class="thick-line text-right">$670.99</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="no-line"></td>
-                                                        <td class="no-line"></td>
-                                                        <td class="no-line text-center">
-                                                            <strong>Shipping</strong></td>
-                                                        <td class="no-line text-right">$15</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="no-line"></td>
-                                                        <td class="no-line"></td>
-                                                        <td class="no-line text-center">
-                                                            <strong>Total</strong></td>
-                                                        <td class="no-line text-right">
-                                                            <h4 class="m-0">$685.99</h4>
-                                                        </td>
-                                                    </tr>
                                                 </tbody>
                                             </table>
                                         </div>
@@ -170,5 +126,87 @@
     <script src="assets/js/jquery.scrollTo.min.js"></script>
 
     <script src="assets/js/app.js"></script>
+
+    <script type="text/javascript" language="javascript">
+
+        $(document).ready(function () {
+
+            const queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
+            const IdVenta = urlParams.get('id')
+
+            CargarDatos(IdVenta);
+        });
+
+        function CargarDatos($IdVenta) {
+
+            $('#tbDetalles tbody').html('');
+
+            var request = {
+                IdVenta: $IdVenta
+            };
+
+            $.ajax({
+                type: "POST",
+                url: "frmVentaReserva.aspx/DetalleVenta",
+                data: JSON.stringify(request),
+                contentType: 'application/json; charset=utf-8',
+                error: function (xhr, ajaxOptions, thrownError) {
+                    console.log(xhr.status + " \n" + xhr.responseText, "\n" + thrownError);
+                },
+                success: function (response) {
+                    if (response.d.estado) {
+                        $("#tipodoc").text(response.d.objeto.TipoDocumento + " - " + response.d.objeto.Codigo);
+                        $("#lblnombre").text(response.d.objeto.oCliente.Nombre);
+
+
+                        $("#lblnroci").text(response.d.objeto.oCliente.NumeroDocumento);
+                        $("#lblcelu").text(response.d.objeto.oCliente.Telefono);
+                        $("#lbldire").text(response.d.objeto.oCliente.Direccion);
+
+                        $("#tbDetalles tbody").html("");
+
+                        $.each(response.d.objeto.oListaDetalleVenta, function (i, row) {
+                            $("<tr>").append(
+                                $("<td>").text(row.NombreProducto),
+                                $("<td>").text(row.Cantidad),
+                                $("<td>").text(row.PrecioUnidad),
+                                $("<td>").text(row.ImporteTotal)
+
+                            ).appendTo("#tbDetalles tbody");
+
+                        })
+                    }
+                }
+            });
+
+        }
+
+        function imprSelec(nombre) {
+            var printContents = document.getElementById(nombre).innerHTML;
+            var originalContents = document.body.innerHTML;
+
+            document.body.innerHTML = printContents;
+            window.print();
+            document.body.innerHTML = originalContents;
+        }
+        function hide() {
+            document.getElementById('Imprimir').style.visibility = "hidden";
+        }
+
+        window.addEventListener('beforeunload', function (e) {
+            // Mensaje de confirmación
+            var confirmationMessage = '¿Seguro que quieres salir?';
+            (e || window.event).returnValue = confirmationMessage; // Gecko + IE
+            return confirmationMessage; // Gecko + Webkit, Safari, Chrome etc.
+        });
+
+        window.addEventListener('unload', function (e) {
+            // Redirigir a frmReservas.aspx cuando el popup se cierre
+            setTimeout(function () {
+                window.close();
+            }, 3000);
+        });
+    </script>
 </body>
 </html>

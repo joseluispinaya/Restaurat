@@ -167,12 +167,18 @@
                             </li>
 
                             <li>
-                                <a href="frmReservas.aspx" class="waves-effect"><i class="mdi mdi-calendar"></i><span> Reservas <span class="badge badge-primary float-right">NEW</span></span></a>
+                                <a href="frmReservas.aspx" class="waves-effect"><i class="mdi mdi-calendar"></i><span> Reservas <span class="badge badge-primary float-right">VER</span></span></a>
                             </li>
-                            <li>
+                            <%--<li>
                                 <a href="frmVentaReserva.aspx" class="waves-effect"><i class="mdi mdi-calendar"></i><span> Venta <span class="badge badge-primary float-right">NEW</span></span></a>
+                            </li>--%>
+                            <li class="has_sub">
+                                <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-table"></i><span>Ventas </span><span class="float-right"><i class="mdi mdi-plus"></i></span></a>
+                                <ul class="list-unstyled">
+                                    <li><a href="#">Nueva Venta</a></li>
+                                    <li><a href="frmConsultaVenta.aspx">Consultar</a></li>
+                                </ul>
                             </li>
-
                         </ul>
                     </div>
                     <div class="clearfix"></div>

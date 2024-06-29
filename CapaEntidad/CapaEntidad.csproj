@@ -44,10 +44,12 @@
     <Compile Include="ECategoria.cs" />
     <Compile Include="ECliente.cs" />
     <Compile Include="EDetalleReserva.cs" />
+    <Compile Include="EDetalleVenta.cs" />
     <Compile Include="EProducto.cs" />
     <Compile Include="EReserva.cs" />
     <Compile Include="ERol.cs" />
     <Compile Include="EUsuario.cs" />
+    <Compile Include="EVenta.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Respuesta.cs" />
     <Compile Include="RespuestaZ.cs" />

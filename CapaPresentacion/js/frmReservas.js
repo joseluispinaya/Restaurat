@@ -2,45 +2,10 @@
 $(document).ready(function () {
     cargarReser();
 
-    //$('#calendar').fullCalendar({
-    //    header: {
-    //        left: 'prev,next today',
-    //        center: 'title',
-    //        right: 'month, basicWeek, basicDay'
-    //    },
-    //    dayClick: function (date, jsEvent, view) {
-
-    //        alert("Valor es: " + date.format());
-    //        $("#modalrol").modal("show");
-    //    },
-    //    events: [
-    //        {
-    //            title: 'Reserva 1',
-    //            descripcion: "Dessssssss",
-    //            start: '2024-06-08'
-    //        },
-    //        {
-    //            title: 'Long Event',
-    //            descripcion: "Deeeeeeeeessss",
-    //            start: '2024-06-12'
-    //        },
-    //        {
-    //            id: 999,
-    //            title: 'Repeating Event',
-    //            descripcion: "Desssstrtrtrts",
-    //            start: '2024-06-18',
-    //            end: '2024-06-22'
-    //        }
-    //    ],
-    //    eventClick: function (calEvent, jsEvent, view) {
-    //        $("#txtNombresc").val(calEvent.title);
-    //        $("#txtApellidosc").val(calEvent.descripcion);
-    //        $("#modalrol").modal("show");
-    //    }
-    //});
 })
 
 let DetalleParaReserva = [];
+let estadoRese = false;
 
 function cargarReser() {
 
@@ -63,6 +28,7 @@ function cargarReser() {
                         title: 'Reserva ' + row.IdReserva + ' - ' + row.oCliente.Nombre,
                         start: row.FechaReserva,
                         descripcion: row.Comentario,
+                        activo: row.Activo,
                         color: row.Color
                     });
                 });
@@ -84,6 +50,8 @@ function cargarReser() {
                         //$("#modalrol").modal("show");
 
                         $("#txtIdReserrr").val("0");
+                        estadoRese = calEvent.activo;
+                        //console.log(calEvent.activo);
                         detalleReserva(calEvent.id);
                     }
                     //eventRender: function (event, element) {
@@ -141,6 +109,14 @@ function detalleReserva($idRes) {
                 $("#txtcomentarioat").val(data.d.objeto.Comentario);
 
                 //var idresevi = parseInt($("#txtIdReserrr").val());
+                // Validar estadoRese y habilitar o deshabilitar el botón
+                if (estadoRese) {
+                    $("#btnGuardarCambiosat").show();
+                    //$("#btnGuardarCambiosat").removeAttr("disabled");
+                } else {
+                    $("#btnGuardarCambiosat").hide();
+                    //$("#btnGuardarCambiosat").attr("disabled", "disabled");
+                }
 
                 $("#modalrol").modal("show");
             } else {

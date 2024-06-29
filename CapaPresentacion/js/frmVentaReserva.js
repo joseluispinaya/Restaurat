@@ -103,7 +103,7 @@ function obtenerDetallep($idReserva) {
         },
         success: function (data) {
             if (data.d.estado) {
-
+                $("#txtIdReserrv").val($idReserva);
                 $("#txtIdclienteAte").val(data.d.objeto.oCliente.IdCliente);
                 $("#txtNombreClienteat").val(data.d.objeto.oCliente.Nombre);
                 $("#txtDocumentoClienteat").val(data.d.objeto.oCliente.NumeroDocumento);
@@ -266,6 +266,8 @@ $(document).on('click', 'button.btn-eliminar', function () {
     mosProd_Precio();
 });
 
+
+
 $('#btnTerminarvent').on('click', function () {
 
     if (ProductosParaVenta.length < 1) {
@@ -273,5 +275,92 @@ $('#btnTerminarvent').on('click', function () {
         return;
     }
 
-    //$("#btnTerminarvent").LoadingOverlay("show");
+    if (parseInt($("#txtIdclienteAte").val()) == 0) {
+        swal("Mensaje", "No puede registrar sin Cliente Retorne a reservas", "warning");
+        return;
+    }
+
+    $("#btnTerminarvent").LoadingOverlay("show");
+
+    var totallprodu = 0;
+    var est = "Boleta";
+    var DETALLE = "";
+    var VENTA = "";
+    var DETALLE_VENTA = "";
+    var DATOS_VENTA = "";
+
+    ProductosParaVenta.forEach((item) => {
+
+        totallprodu = totallprodu + parseInt(item.Cantidad)
+
+        DATOS_VENTA = DATOS_VENTA + "<DATOS>" +
+            "<IdVenta>0</IdVenta>" +
+            "<IdProducto>" + item.IdProducto + "</IdProducto>" +
+            "<Cantidad>" + item.Cantidad + "</Cantidad>" +
+            "<PrecioUnidad>" + item.PrecioUnidad + "</PrecioUnidad>" +
+            "<ImporteTotal>" + item.ImporteTotal + "</ImporteTotal>" +
+            "</DATOS>"
+    });
+
+    VENTA = "<VENTA>" +
+        "<IdReserva>" + $("#txtIdReserrv").val() + "</IdReserva>" +
+        "<IdCliente>" + $("#txtIdclienteAte").val() + "</IdCliente>" +
+        "<TipoDocumento>" + est + "</TipoDocumento>" +
+        "<CantidadProducto>" + ProductosParaVenta.length + "</CantidadProducto>" +
+        "<CantidadTotal>" + totallprodu + "</CantidadTotal>" +
+        "<TotalCosto>" + $("#txtTotal").val() + "</TotalCosto>" +
+        "</VENTA>";
+
+    DETALLE_VENTA = "<DETALLE_VENTA>" + DATOS_VENTA + "</DETALLE_VENTA>";
+    DETALLE = "<DETALLE>" + VENTA + DETALLE_VENTA + "</DETALLE>"
+
+    var request = { xml: DETALLE };
+
+    $.ajax({
+        type: "POST",
+        url: "frmVentaReserva.aspx/GuardarVentaIdCliente",
+        data: JSON.stringify(request),
+        dataType: "json",
+        contentType: 'application/json; charset=utf-8',
+        error: function (xhr, ajaxOptions, thrownError) {
+            $("#btnTerminarvent").LoadingOverlay("hide");
+            console.log(xhr.status + " \n" + xhr.responseText, "\n" + thrownError);
+        },
+        success: function (response) {
+            $("#btnTerminarvent").LoadingOverlay("hide");
+            if (response.d.Estado) {
+                // Reseteo de campos y tabla después de un éxito
+                ProductosParaVenta = [];
+                mosProd_Precio();
+                $("#txtIdReserrv").val("0");
+                $("#txtIdclienteAte").val("0");
+                $("#txtNombreClienteat").val("");
+                $("#txtDocumentoClienteat").val("");
+                $("#txtcelu").val("");
+
+                //swal("Mensaje", response.d.Valor, "success");
+
+                var url = 'frmDocVenta.aspx?id=' + response.d.Valor;
+
+                $("#overlay").LoadingOverlay("show");
+                var popup = window.open(url, '', 'height=600,width=800,scrollbars=0,location=1,toolbar=0');
+
+                var timer = setInterval(function () {
+                    if (popup.closed) {
+                        clearInterval(timer);
+                        $("#overlay").LoadingOverlay("hide");
+                        // Redirigir a frmReservas.aspx cuando el popup se cierre
+                        window.location.href = 'frmReservas.aspx';
+                    }
+                }, 500);
+
+
+                //window.open(url, '', 'height=600,width=800,scrollbars=0,location=1,toolbar=0');
+            } else {
+                swal("Mensaje", response.d.Mensaje, "error");
+            }
+        }
+    });
+
+    //window.open('frmDocVenta.aspx', '', 'height=600,width=800,scrollbars=0,location=1,toolbar=0');
 })

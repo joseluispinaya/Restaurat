@@ -14,7 +14,7 @@
     Panel Registro Venta
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="body" runat="server">
-    <div class="row">
+    <div class="row" id="overlay">
         <div class="col-sm-8">
             <div class="row">
                 <div class="col-sm-12">
@@ -23,6 +23,7 @@
                             <h3 class="card-title m-0"><i class="fas fa-user"></i> Detalle Cliente</h3>
                         </div>
                         <div class="card-body">
+                            <input id="txtIdReserrv" class="model" name="IdReser" value="0" type="hidden" />
                             <input id="txtIdclienteAte" class="model" name="IdClientev" value="0" type="hidden" />
                             <div class="form-row">
                                 <div class="form-group col-sm-5">
