@@ -246,7 +246,7 @@ namespace CapaDatos
                                     VFechaReserva = Convert.ToDateTime(dr["FechaSolicitado"].ToString()),
                                     FechaRegistro = Convert.ToDateTime(dr["FechaRegistro"].ToString()).ToString("dd/MM/yyyy"),
                                     VFechaRegistro = Convert.ToDateTime(dr["FechaRegistro"].ToString()),
-                                    oCliente = new ECliente() { NumeroDocumento = dr["NumeroDocumento"].ToString(), Nombre = dr["Nombre"].ToString() },
+                                    oCliente = new ECliente() { IdCliente = Convert.ToInt32(dr["IdCliente"]), NumeroDocumento = dr["NumeroDocumento"].ToString(), Nombre = dr["Nombre"].ToString() },
                                     CantidadTotal = Convert.ToInt32(dr["CantidadTotal"]),
                                     TotalCosto = float.Parse(dr["TotalCosto"].ToString()),
                                     Comentario = dr["Comentario"].ToString(),

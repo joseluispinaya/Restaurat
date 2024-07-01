@@ -5,19 +5,19 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>CABAÑA LA JOTA</title>
+    <title>RESTAURANTE LA J</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta content="Admin Dashboard" name="description" />
     <meta content="ThemeDesign" name="author" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <link rel="shortcut icon" href="../assets/images/favicon.ico">
 
-    <%--<link href="../assets/plugins/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+    <link href="../assets/plugins/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
     <link href="../assets/plugins/datatables/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
     <link href="../assets/plugins/datatables/fixedHeader.bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="../assets/plugins/datatables/responsive.bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="../assets/plugins/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
-    <link href="../assets/plugins/datatables/scroller.bootstrap.min.css" rel="stylesheet" type="text/css" />--%>
+    <link href="../assets/plugins/datatables/scroller.bootstrap.min.css" rel="stylesheet" type="text/css" />
 
     <link href="../assets/toastr/toastr.min.css" rel="stylesheet" />
     <link href="../assets/sweetalert/sweetalert.css" rel="stylesheet" type="text/css"/>
@@ -75,9 +75,11 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li><a href="Login.aspx" class="dropdown-item">Iniciar sesion</a></li>
+                                    <li class="dropdown-divider"></li>
+                                    <li><a href="../IniciarSesion.aspx" class="dropdown-item">Administrativo</a></li>
                                     <li><a href="javascript:void(0)" class="dropdown-item"><span class="badge badge-success float-right">5</span> Settings </a></li>
                                     <li><a href="javascript:void(0)" class="dropdown-item">Lock screen</a></li>
-                                    <li class="dropdown-divider"></li>
+                                    
                                     <%--<li><a id="closeclisin" class="dropdown-item" style="cursor: pointer;">Salir</a></li>--%>
                                 </ul>
                             </li>
@@ -95,9 +97,8 @@
                                 <ul class="dropdown-menu">
                                     <li><a id="closecli" class="dropdown-item" style="cursor: pointer;">Salir</a></li>
                                     <%--<li><a href="Login.aspx" class="dropdown-item">Login</a></li>--%>
-                                    <li><a href="javascript:void(0)" class="dropdown-item"><span class="badge badge-success float-right">5</span> Settings </a></li>
-                                    <li><a href="javascript:void(0)" class="dropdown-item">Lock screen</a></li>
                                     <li class="dropdown-divider"></li>
+                                    <li><a href="javascript:void(0)" class="dropdown-item">Perfil</a></li>
                                     
                                 </ul>
                             </li>
@@ -119,17 +120,16 @@
                         </div>
                         <div class="user-info">
                             <div class="dropdown">
-                                <a href="#" class="dropdown-toggle" id="rolnomcli" data-toggle="dropdown" aria-expanded="false">Usuario Logeado</a>
+                                <a href="#" class="dropdown-toggle" id="rolnomclir" data-toggle="dropdown" aria-expanded="false">Usuario</a>
                                 <ul class="dropdown-menu">
                                     <li><a href="javascript:void(0)" class="dropdown-item">Profile</a></li>
                                     <li><a href="javascript:void(0)" class="dropdown-item"><span class="badge badge-success float-right">5</span> Settings </a></li>
-                                    <li><a href="javascript:void(0)" class="dropdown-item">Lock screen</a></li>
                                     <li class="dropdown-divider"></li>
                                     <li><a href="javascript:void(0)" class="dropdown-item">Salir</a></li>
                                 </ul>
                             </div>
 
-                            <p class="text-muted m-0"><i class="far fa-dot-circle text-primary"></i> Rol Usu</p>
+                            <p class="text-muted m-0"><i class="far fa-dot-circle text-primary"></i> Cliente</p>
                         </div>
                     </div>
                     <!--- Divider -->
@@ -140,8 +140,8 @@
                             <li>
                                 <a href="Home.aspx" class="waves-effect"><i class="mdi mdi-home"></i><span> Inicio <span class="badge badge-primary float-right">1</span></span></a>
                             </li>
-                            <li>
-                                <a href="#" class="waves-effect"><i class="mdi mdi-calendar"></i><span> Reservas <span class="badge badge-primary float-right">NEW</span></span></a>
+                            <li id="mirese">
+                                <a href="frmMisReservas.aspx" class="waves-effect"><i class="mdi mdi-calendar"></i><span> Mis Reservas</span></a>
                             </li>
 
                             <li class="has_sub">
@@ -221,6 +221,26 @@
     <script src="../assets/sweetalert/sweetalert.js"></script>
 
     <%--<script src="../assets/plugins/jquery-ui/jquery-ui.min.js"></script>--%>
+
+    <!-- Required datatable js-->
+    <script src="../assets/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="../assets/plugins/datatables/dataTables.bootstrap4.min.js"></script>
+    <!-- Buttons examples -->
+    <script src="../assets/plugins/datatables/dataTables.buttons.min.js"></script>
+    <script src="../assets/plugins/datatables/buttons.bootstrap4.min.js"></script>
+
+    <script src="../assets/plugins/datatables/jszip.min.js"></script>
+    <script src="../assets/plugins/datatables/pdfmake.min.js"></script>
+    <script src="../assets/plugins/datatables/vfs_fonts.js"></script>
+    <script src="../assets/plugins/datatables/buttons.html5.min.js"></script>
+    <script src="../assets/plugins/datatables/buttons.print.min.js"></script>
+    <script src="../assets/plugins/datatables/dataTables.fixedHeader.min.js"></script>
+    <script src="../assets/plugins/datatables/dataTables.keyTable.min.js"></script>
+    <script src="../assets/plugins/datatables/dataTables.scroller.min.js"></script>
+
+    <!-- Responsive examples -->
+    <script src="../assets/plugins/datatables/dataTables.responsive.min.js"></script>
+    <script src="../assets/plugins/datatables/responsive.bootstrap4.min.js"></script>
 
     <script src="../assets/js/app.js"></script>
     <script src="../assets/plugins/loadingoverlay/loadingoverlay.js"></script>

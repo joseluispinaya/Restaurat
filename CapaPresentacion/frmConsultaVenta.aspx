@@ -43,10 +43,10 @@
                                     <tr>
                                         <th>Id</th>
                                         <th>Tipo Documento</th>
-                                        <th>Codigo Documento</th>
-                                        <th>Fecha Creacion</th>
-                                        <th>Documento Cliente</th>
-                                        <th>Nombre Cliente</th>
+                                        <th>Codigo Venta</th>
+                                        <th>Fecha</th>
+                                        <th>Nro CI Cliente</th>
+                                        <th>Cliente</th>
                                         <th>Total Venta</th>
                                         <th>Acciones</th>
                                     </tr>

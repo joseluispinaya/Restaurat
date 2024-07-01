@@ -117,6 +117,7 @@
     <Content Include="assets\images\Chicken-Biryani-hyd.jpg" />
     <Content Include="assets\images\favicon.ico" />
     <Content Include="assets\images\Isuces.jpg" />
+    <Content Include="assets\images\Laj.png" />
     <Content Include="assets\images\logoap.png" />
     <Content Include="assets\images\logore.jpeg" />
     <Content Include="assets\images\logo_sm.png" />
@@ -382,8 +383,12 @@
     <Content Include="assets\sweetalert\sweetalert.js" />
     <Content Include="assets\toastr\toastr.min.css" />
     <Content Include="assets\toastr\toastr.min.js" />
+    <Content Include="ClienteH\frmDetallesR.aspx" />
+    <Content Include="ClienteH\frmMisReservas.aspx" />
     <Content Include="ClienteH\frmRegistro.aspx" />
     <Content Include="ClienteH\Home.aspx" />
+    <Content Include="ClienteH\js\frmDetallesR.js" />
+    <Content Include="ClienteH\js\frmMisReservas.js" />
     <Content Include="ClienteH\js\Home.js" />
     <Content Include="ClienteH\js\Login.js" />
     <Content Include="ClienteH\js\menuMaster.js" />
@@ -402,6 +407,7 @@
     <Content Include="Inicio.aspx" />
     <Content Include="js\frmCategorias.js" />
     <Content Include="js\frmConsultaVenta.js" />
+    <Content Include="js\frmDocVenta.js" />
     <Content Include="js\frmProductos.js" />
     <Content Include="js\frmReservas.js" />
     <Content Include="js\frmUsuarios.js" />
@@ -412,6 +418,20 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ClienteH\frmDetallesR.aspx.cs">
+      <DependentUpon>frmDetallesR.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ClienteH\frmDetallesR.aspx.designer.cs">
+      <DependentUpon>frmDetallesR.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ClienteH\frmMisReservas.aspx.cs">
+      <DependentUpon>frmMisReservas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ClienteH\frmMisReservas.aspx.designer.cs">
+      <DependentUpon>frmMisReservas.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ClienteH\frmRegistro.aspx.cs">
       <DependentUpon>frmRegistro.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

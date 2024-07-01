@@ -5,7 +5,7 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>RESTAURANT J</title>
+    <title>RESTAURANTE J</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta content="Admin Dashboard" name="description" />
     <meta content="ThemeDesign" name="author" />
@@ -22,9 +22,12 @@
             max-width: 900px;
             margin: 0 auto;
             /*border: 1px solid #000;*/
-            padding: 20px;
-            margin-bottom: 20px; /* Add some space between the two containers */
+            padding: 10px;
+            margin-bottom: 10px; /* Add some space between the two containers */
             box-sizing: border-box;
+        }
+        .header img {
+            width: 100%;
         }
         .sin-margin-bottom {
             margin-bottom: 0;
@@ -34,82 +37,123 @@
 <body>
     <div style="font-size: 11px; text-align: right;">
         <center>
-            <button type="button" id="Imprimir" class="btn btn-success" onclick="javascript:imprSelec('wrapper')"><i class="fa fa-print"></i> IMPRIMIR</button>
+            <button type="button" id="Imprimir" class="btn btn-success" onclick="javascript:imprSelec('wrapper')"><i class="fa fa-print"></i>IMPRIMIR</button>
         </center>
         <br />
     </div>
     <div id="wrapper">
-        <div class="containera">
+        <div class="containera" id="seleccion">
             <div class="row">
-            <div class="col-lg-12">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="invoice-title">
-                                    <h4 class="float-right" id="tipodoc">BOLETA #12345</h4>
-                                    <h3 class="m-t-0">RESTAURANT LA J</h3>
-                                </div>
-                                <hr>
-                                <div class="row">
-                                    <div class="col-5">
-                                        <address>
-                                            <strong>Cliente:</strong>
-                                            <label id="lblnombre" class="sin-margin-bottom">JOSE LUIS</label><br>
-                                            <strong>NRO CI:</strong>
-                                            <label id="lblnroci" class="sin-margin-bottom"></label><br>
-                                            <strong>Celular:</strong>
-                                            <label id="lblcelu" class="sin-margin-bottom"></label><br>
-                                            <strong>Direccion:</strong>
-                                            <label id="lbldire" class="sin-margin-bottom"></label>
-                                        </address>
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="invoice-title">
+                                        <h4 class="float-right" id="tipodoc">BOLETA #12345</h4>
+                                        <h3 class="m-t-0">RESTAURANTE LA J</h3>
                                     </div>
-                                    <div class="col-7">
-                                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h5 class="card-title text-dark m-0"><strong>Order summary</strong></h5>
+                                    <%--<hr>--%>
+                                    <div class="header">
+                                        <img id="logouma" src="assets/images/Laj.png" alt="Header Image" />
                                     </div>
-                                    <div class="card-body">
-                                        <div class="table-responsive">
-                                            <table id="tbDetalles" class="table">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Producto</th>
-                                                        <th>Cantidad</th>
-                                                        <th>Precio</th>
-                                                        <th>Total</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                </tbody>
-                                            </table>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <address>
+                                                <strong>Cliente.......:</strong>
+                                                <label id="lblnombre" class="sin-margin-bottom">JOSE LUIS</label><br>
+                                                <strong>NRO CI........:</strong>
+                                                <label id="lblnroci" class="sin-margin-bottom"></label>
+                                                <br>
+                                                <strong>Celular........:</strong>
+                                                <label id="lblcelu" class="sin-margin-bottom"></label>
+                                                <br>
+                                                <strong>Direccion....:</strong>
+                                                <label id="lbldire" class="sin-margin-bottom"></label>
+                                            </address>
+                                            <strong>Detalle Total:</strong><br>
+                                            <strong>Cantidad......:</strong>
+                                            <label id="lblcanti" class="sin-margin-bottom"></label>
+                                            <br>
+                                            <strong>Total Bs/......: </strong>
+                                            <label id="lbltotall" class="sin-margin-bottom"></label>
+                                        </div>
+                                        <div class="col-7">
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <h4>DETALLE VENTA</h4>
+                                                    <div class="table-responsive">
+                                                                <table id="tbDetalles" class="table">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>Producto</th>
+                                                                            <th>Cantidad</th>
+                                                                            <th>Precio</th>
+                                                                            <th>Total</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                    <%--<div class="card">
+                                                        <div class="card-header">
+                                                            <h5 class="card-title text-dark m-0"><strong>Detalle de Venta</strong></h5>
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <div class="table-responsive">
+                                                                <table id="tbDetalles" class="table">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>Producto</th>
+                                                                            <th>Cantidad</th>
+                                                                            <th>Precio</th>
+                                                                            <th>Total</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                            <h4>hola</h4>
+                                                        </div>
+                                                    </div>--%>
+
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <table class="table">
+                                                        <tr>
+                                                            <td style="width:80px" class="thick-line"></td>
+                                                            <td style="width:50px" class="thick-line"></td>
+                                                            <td class="thick-line text-right"><strong>Total Pagado: </strong></td>
+                                                            <td class="thick-line text-right"><span id="fpagado"></span></td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
-                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
 
-                        
-                        <!-- end row -->
+
+                            <!-- end row -->
+                        </div>
+                        <!-- panel body -->
                     </div>
-                    <!-- panel body -->
+                    <!-- end panel -->
+
                 </div>
-                <!-- end panel -->
+                <!-- end col -->
 
             </div>
-            <!-- end col -->
-
-        </div>
         </div>
 
-        
+        <div class="containera" id="seleccion2">
+        </div>
     </div>
 
     <script src="assets/js/jquery.min.js"></script>
@@ -127,7 +171,9 @@
 
     <script src="assets/js/app.js"></script>
 
-    <script type="text/javascript" language="javascript">
+    <script src="js/frmDocVenta.js" type="text/javascript"></script>
+
+    <%--<script type="text/javascript" language="javascript">
 
         $(document).ready(function () {
 
@@ -207,6 +253,6 @@
                 window.close();
             }, 3000);
         });
-    </script>
+    </script>--%>
 </body>
 </html>

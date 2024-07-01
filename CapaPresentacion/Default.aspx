@@ -22,6 +22,7 @@
                     <input class="input" type="text" name="email" id="username" placeholder="Usuario" />
                     <input class="input" type="password" name="pswd" id="password" placeholder="Contraseña" />
                     <button type="button" id="btnIniciarSesion">Iniciar</button>
+                    <%--<a href="ClienteH/Home.aspx"></a>--%>
                 </div>
             </div>
     

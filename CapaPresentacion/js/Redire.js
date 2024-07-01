@@ -9,5 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 function redirigirDefault() {
 
-    window.location.href = 'IniciarSesion.aspx';
+    //window.location.href = 'IniciarSesion.aspx';
+    window.location.href = 'ClienteH/Home.aspx';
+    //<a href="ClienteH/Home.aspx"></a>
 }
