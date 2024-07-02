@@ -50,7 +50,15 @@ function CargarDatos($idClie) {
             { "data": "FechaRegistro" },
             { "data": "Codigo" },
             { "data": "Comentario" },
-            { "data": "Estado" },
+            {
+                "data": "Estado",
+                "render": function (data) {
+                    if (data == "Confirmado")
+                        return '<span class="badge badge-info">' + data + '</span>';
+                    else
+                        return '<span class="badge badge-danger">' + data + '</span>';
+                }
+            },
             { "data": "CantidadTotal" },
             { "data": "TotalCosto" },
             {

@@ -87,6 +87,8 @@ function CargarDatos($IdReserva) {
 
 $('#btnCancelar').on('click', function () {
 
+    var request = { IdReserva: parseInt($("#txtIdReserrvd").val()) };
+
     var idrrrt = $("#txtIdReserrvd").val();
     swal({
         title: "Mensaje de Confirmacion",
@@ -101,7 +103,46 @@ $('#btnCancelar').on('click', function () {
     },
         function (respuesta) {
             if (respuesta) {
-                swal("Listo!", "El usuario fue cancelada.", "success")
+                $(".showSweetAlert").LoadingOverlay("show");
+
+                $.ajax({
+                    type: "POST",
+                    url: "frmDetallesR.aspx/CancelarReserva",
+                    data: JSON.stringify(request),
+                    dataType: "json",
+                    contentType: 'application/json; charset=utf-8',
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        $(".showSweetAlert").LoadingOverlay("hide");
+                        console.log(xhr.status + " \n" + xhr.responseText, "\n" + thrownError);
+                    },
+                    success: function (response) {
+                        $(".showSweetAlert").LoadingOverlay("hide");
+                        if (response.d.Estado) {
+                            //swal("Mensaje", response.d.Mensage, response.d.Valor);
+                            $("#txtIdReserrvd").val("0");
+                            swal({
+                                title: "Mensaje",
+                                text: response.d.Mensage,
+                                timer: 2000,
+                                showConfirmButton: false
+                            });
+
+                            setTimeout(function () {
+                                //$(".showSweetAlert").LoadingOverlay("hide");
+                                window.location.href = 'frmMisReservas.aspx';
+                                //swal("Listo!", "El usuario fue cancelada.", "success");
+                            }, 2000);
+
+                            
+                        } else {
+                            swal("Mensaje", response.d.Mensage, response.d.Valor);
+                            //swal("oops!", "No se puede eliminar el usuario por relacion con otros Registros", "warning")
+                        }
+                    }
+                });
+
+                
+
             }
         }
     )

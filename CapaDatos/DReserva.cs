@@ -266,5 +266,44 @@ namespace CapaDatos
 
             return rptListaUsuario;
         }
+
+        public bool CancelarReserva(int idReserva)
+        {
+            bool respuesta = false;
+
+            try
+            {
+                using (SqlConnection con = ConexionBD.getInstance().ConexionDB())
+                {
+                    using (SqlCommand cmd = new SqlCommand("usp_CancelarReserva", con))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        // Agregar parámetros
+                        cmd.Parameters.AddWithValue("@IdReserva", idReserva);
+                        SqlParameter outputParam = new SqlParameter("@Resultado", SqlDbType.Bit)
+                        {
+                            Direction = ParameterDirection.Output
+                        };
+                        cmd.Parameters.Add(outputParam);
+
+                        // Abrir la conexión y ejecutar el comando
+                        con.Open();
+                        cmd.ExecuteNonQuery();
+
+                        // Obtener el valor del parámetro de salida
+                        respuesta = Convert.ToBoolean(outputParam.Value);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Captura de excepciones y re-lanzamiento con mensaje personalizado
+                throw new Exception("Error al cancelar la reserva. Intente más tarde.", ex);
+            }
+
+            return respuesta;
+        }
+
     }
 }

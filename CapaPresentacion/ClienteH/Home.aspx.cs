@@ -20,6 +20,9 @@ namespace CapaPresentacion.ClienteH
         {
             try
             {
+                //K3DK5CEC3Y4QGTCUHYG7A7EH
+                //BDV3AVCGH3F8N8P5GTQXXJ2A
+                //+12512202351
                 int respuesta = NReserva.getInstance().RegistrarReservaNuevoIdclie(xml);
                 if (respuesta != 0)
                 {

@@ -41,5 +41,9 @@ namespace CapaNegocio
         {
             return DReserva.getInstance().ObtenerListaReserva();
         }
+        public bool CancelarReserva(int idReserva)
+        {
+            return DReserva.getInstance().CancelarReserva(idReserva);
+        }
     }
 }

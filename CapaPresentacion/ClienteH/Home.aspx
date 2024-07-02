@@ -178,7 +178,7 @@
                                     <input type="text" class="form-control input-sm" disabled id="txtNombreCliente">
                                 </div>
                                 <div class="form-group col-sm-6">
-                                    <input type="text" class="form-control input-sm" id="txtDocumentoCliente" placeholder="numero documento">
+                                    <input type="text" class="form-control input-sm" disabled id="txtDocumentoCliente">
                                 </div>
                             </div>
                         </div>
