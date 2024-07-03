@@ -175,7 +175,7 @@
                             <li class="has_sub">
                                 <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-table"></i><span>Ventas </span><span class="float-right"><i class="mdi mdi-plus"></i></span></a>
                                 <ul class="list-unstyled">
-                                    <li><a href="#">Nueva Venta</a></li>
+                                    <li><a href="frmVentaCaja.aspx">Nueva Venta</a></li>
                                     <li><a href="frmConsultaVenta.aspx">Consultar</a></li>
                                 </ul>
                             </li>

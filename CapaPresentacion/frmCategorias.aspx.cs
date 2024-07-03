@@ -42,7 +42,6 @@ namespace CapaPresentacion
         public static Respuesta<List<EProducto>> ObtenerProduc()
         {
             List<EProducto> Lista = NProducto.getInstance().ObtenerProductos();
-            //Lista = NUsuario.getInstance().ObtenerUsuarios();
 
             if (Lista != null)
             {

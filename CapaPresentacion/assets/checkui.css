@@ -1,0 +1,86 @@
+﻿.switch {
+    position: relative;
+    width: 200px;
+    height: 50px;
+    border-radius: 25px;
+}
+
+    .switch input {
+        /*-webkit-appearance: none;*/
+        appearance: none;
+        width: 200px !important;
+        height: 50px !important;
+        border-radius: 25px;
+        background: #1E1E1E;
+        outline: none;
+    }
+
+        .switch input::before,
+        .switch input::after {
+            z-index: 2 !important;
+            position: absolute !important;
+            top: 56% !important;
+            transform: translateY(-50%) !important;
+            font-weight: bolder;
+        }
+
+        .switch input::before {
+            content: "ON";
+            left: 20px;
+        }
+
+        .switch input::after {
+            content: "OFF";
+            right: 20px;
+        }
+
+        .switch input:checked {
+            background: #ff9800;
+        }
+
+    .switch label {
+        z-index: 1;
+        position: absolute;
+        top: 10px;
+        bottom: 4px;
+        border-radius: 25px;
+    }
+
+    .switch input {
+        transition: 0.25s;
+    }
+
+        .switch input:checked::after,
+        .switch input:checked::before {
+            color: #fff;
+            transition: color 0.5s;
+        }
+
+        .switch input:checked + label {
+            left: 10px;
+            right: 100px;
+            background: #1E1E1E;
+            transition: left 0.5s, right 0.4s 0.2s;
+        }
+
+        .switch input:not(:checked) {
+            background: #1E1E1E;
+            transition: background 0.4s;
+        }
+
+            .switch input:not(:checked)::before {
+                color: #ffff;
+                transition: color 0.5s;
+            }
+
+            .switch input:not(:checked)::after {
+                color: #1E1E1E;
+                transition: color 0.5s 0.2s;
+            }
+
+            .switch input:not(:checked) + label {
+                left: 100px;
+                right: 10px;
+                background: #ff9800;
+                transition: left 0.4s 0.2s, right 0.5s, background 0.35s;
+            }

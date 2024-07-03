@@ -27,5 +27,14 @@ namespace CapaNegocio
         {
             return DCliente.getInstance().Login(user, pass);
         }
+
+        public List<ECliente> ObtenerClien()
+        {
+            return DCliente.getInstance().ObtenerClien();
+        }
+        public List<ECliente> ObtenerClienFil(string buscar)
+        {
+            return DCliente.getInstance().ObtenerClienFil(buscar);
+        }
     }
 }

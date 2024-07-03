@@ -75,5 +75,90 @@ namespace CapaDatos
 
             return obj;
         }
+
+        public List<ECliente> ObtenerClien()
+        {
+            List<ECliente> rptListaUsuario = new List<ECliente>();
+
+            try
+            {
+                using (SqlConnection con = ConexionBD.getInstance().ConexionDB())
+                {
+                    using (SqlCommand comando = new SqlCommand("usp_ObtenerCLIENTE", con))
+                    {
+                        comando.CommandType = CommandType.StoredProcedure;
+                        con.Open();
+
+                        using (SqlDataReader dr = comando.ExecuteReader())
+                        {
+                            while (dr.Read())
+                            {
+                                rptListaUsuario.Add(new ECliente()
+                                {
+                                    IdCliente = Convert.ToInt32(dr["IdCliente"]),
+                                    NumeroDocumento = dr["NumeroDocumento"].ToString(),
+                                    Nombre = dr["Nombre"].ToString(),
+                                    Direccion = dr["Direccion"].ToString(),
+                                    Telefono = dr["Telefono"].ToString(),
+                                    Clave = dr["Clave"].ToString(),
+                                    IdRol = Convert.ToInt32(dr["IdRol"]),
+                                    Activo = Convert.ToBoolean(dr["Activo"])
+                                });
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                //throw ex;
+                throw new Exception("Error al obtener los Cliente", ex);
+            }
+
+            return rptListaUsuario;
+        }
+
+        public List<ECliente> ObtenerClienFil(string buscar)
+        {
+            List<ECliente> rptListaUsuario = new List<ECliente>();
+
+            try
+            {
+                using (SqlConnection con = ConexionBD.getInstance().ConexionDB())
+                {
+                    using (SqlCommand comando = new SqlCommand("usp_ObtenerCLIENTEFiltro", con))
+                    {
+                        comando.Parameters.AddWithValue("@Nrodocu", buscar);
+                        comando.CommandType = CommandType.StoredProcedure;
+                        con.Open();
+
+                        using (SqlDataReader dr = comando.ExecuteReader())
+                        {
+                            while (dr.Read())
+                            {
+                                rptListaUsuario.Add(new ECliente()
+                                {
+                                    IdCliente = Convert.ToInt32(dr["IdCliente"]),
+                                    NumeroDocumento = dr["NumeroDocumento"].ToString(),
+                                    Nombre = dr["Nombre"].ToString(),
+                                    Direccion = dr["Direccion"].ToString(),
+                                    Telefono = dr["Telefono"].ToString(),
+                                    Clave = dr["Clave"].ToString(),
+                                    IdRol = Convert.ToInt32(dr["IdRol"]),
+                                    Activo = Convert.ToBoolean(dr["Activo"])
+                                });
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                //throw ex;
+                throw new Exception("Error al obtener los Cliente", ex);
+            }
+
+            return rptListaUsuario;
+        }
     }
 }

@@ -72,6 +72,7 @@
     <Content Include="assets\calen\fullcalendar.min.js" />
     <Content Include="assets\calen\jquery.min.js" />
     <Content Include="assets\calen\moment.min.js" />
+    <Content Include="assets\checkui.css" />
     <Content Include="assets\css\bootstrap.min.css" />
     <Content Include="assets\css\elements.css" />
     <Content Include="assets\css\icons.css" />
@@ -400,6 +401,7 @@
     <Content Include="frmProductos.aspx" />
     <Content Include="frmReservas.aspx" />
     <Content Include="frmUsuarios.aspx" />
+    <Content Include="frmVentaCaja.aspx" />
     <Content Include="frmVentaReserva.aspx" />
     <Content Include="ImagenesPro\lock.png" />
     <Content Include="Imagenes\Sinfotop.png" />
@@ -411,6 +413,7 @@
     <Content Include="js\frmProductos.js" />
     <Content Include="js\frmReservas.js" />
     <Content Include="js\frmUsuarios.js" />
+    <Content Include="js\frmVentaCaja.js" />
     <Content Include="js\frmVentaReserva.js" />
     <Content Include="js\IniciarSesion.js" />
     <Content Include="js\menuMasterr.js" />
@@ -509,6 +512,13 @@
     </Compile>
     <Compile Include="frmUsuarios.aspx.designer.cs">
       <DependentUpon>frmUsuarios.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="frmVentaCaja.aspx.cs">
+      <DependentUpon>frmVentaCaja.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="frmVentaCaja.aspx.designer.cs">
+      <DependentUpon>frmVentaCaja.aspx</DependentUpon>
     </Compile>
     <Compile Include="frmVentaReserva.aspx.cs">
       <DependentUpon>frmVentaReserva.aspx</DependentUpon>
