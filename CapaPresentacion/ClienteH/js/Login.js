@@ -36,7 +36,7 @@ function loginUsuarioLoad() {
                 // Redirigir al usuario
                 window.location.href = 'Home.aspx';
             } else {
-                swal("oops!", "No se encontro el usuario", "warning")
+                swal("oops!", "No se encontro el Cliente", "warning")
             }
         }
     });

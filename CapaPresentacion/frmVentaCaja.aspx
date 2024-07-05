@@ -34,7 +34,7 @@
                 left: 0;
                 right: 0;
                 bottom: 0;
-                background-color: #1E1E1E;
+                background-color: #3292e0; /* NEGRO 1E1E1E */
                 transition: .4s;
                 border-radius: 25px;
             }
@@ -46,18 +46,18 @@
                     width: 60px;
                     left: 5px;
                     bottom: 4px;
-                    background-color: #ff9800;
+                    background-color: #ff9800; /* AMARILLO */
                     transition: .4s;
                     border-radius: 20px;
                 }
 
             .switch input:checked + label {
-                background-color: #ff9800;
+                background-color: #ff9800; /* AMARILLO */
             }
 
                 .switch input:checked + label::before {
                     transform: translateX(130px);
-                    background-color: #1E1E1E;
+                    background-color: #3292e0; /* negro */
                 }
 
             .switch input:checked::before,
@@ -83,7 +83,7 @@
             .switch input::after {
                 content: "SI";
                 right: 20px;
-                color: #1E1E1E;
+                color: #3292e0;  /* negro */
             }
 
             .switch input:checked::before {

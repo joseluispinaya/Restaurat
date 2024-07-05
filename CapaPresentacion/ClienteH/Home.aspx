@@ -165,7 +165,7 @@
                                     </div>
                                     <div class="col-sm-6 text-left">
                                         <button type="button" id="btnEjemplo" class="btn btn-sm btn-success">
-                                            <i class="fas fa-user-plus"></i> Ver Productos
+                                            <i class="fas fa-tags"></i> Ver Productos
                                         </button>
                                     </div>
                                 </div>
@@ -175,10 +175,16 @@
                             <input id="txtIdclientev" class="model" name="IdClientev" value="0" type="hidden" />
                             <div class="form-row">
                                 <div class="form-group col-sm-6">
+                                    <label for="txtNombreCliente">Nombre</label>
                                     <input type="text" class="form-control input-sm" disabled id="txtNombreCliente">
                                 </div>
-                                <div class="form-group col-sm-6">
+                                <div class="form-group col-sm-3">
+                                    <label for="txtDocumentoCliente">Nro CI</label>
                                     <input type="text" class="form-control input-sm" disabled id="txtDocumentoCliente">
+                                </div>
+                                <div class="form-group col-sm-3">
+                                    <label for="txtcelu">Nro Celular</label>
+                                    <input type="text" class="form-control input-sm" disabled id="txtcelu">
                                 </div>
                             </div>
                         </div>
@@ -189,7 +195,7 @@
                 <div class="col-sm-12">
                     <div class="card">
                         <div class="card-header bg-primary">
-                            <h3 class="card-title m-0"><i class="fas fa-user-friends"></i> Detalle Productos</h3>
+                            <h3 class="card-title m-0"><i class="fas fa-tags"></i> Detalle Productos</h3>
                         </div>
                         <div class="card-body">
                             <div class="row">
@@ -220,7 +226,7 @@
                 <div class="col-sm-12">
                     <div class="card">
                         <div class="card-header bg-primary">
-                            <h3 class="card-title m-0"><i class="fas fa-user-friends"></i> Detalle Reserva</h3>
+                            <h3 class="card-title m-0"><i class="fas fa-money-bill-alt"></i> Detalle Reserva</h3>
                         </div>
                         <div class="card-body">
                             <div class="input-group m-b-15">
@@ -232,7 +238,7 @@
                                 <input type="text" class="form-control" id="txtTotal" disabled>
                             </div>
                             <div class="input-group m-b-15">
-                                <span class="input-group-addon">Select. Fecha</span>
+                                <span class="input-group-addon">Fecha Reserva</span>
                                 <input type="text" class="form-control" id="txtFechaRese">
                             </div>
                             <div class="form-row">

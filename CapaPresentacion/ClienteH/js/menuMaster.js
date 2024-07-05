@@ -20,7 +20,7 @@ function verificarSesion() {
     var usuario = sessionStorage.getItem('usuario');
     if (!usuario) {
         // Si no hay sesión, mostrar el elemento de inicio de sesión y ocultar el menú del usuario con sesión
-        console.log("No hay sesión. Mostrar sinsesion y ocultar consesion.");
+        //console.log("No hay sesión. Mostrar sinsesion y ocultar consesion.");
 
         $('#mirese').hide();
 
@@ -28,7 +28,7 @@ function verificarSesion() {
         $('#consesion').hide();
     } else {
         // Si hay sesión, ocultar el elemento de inicio de sesión y mostrar el menú del usuario con sesión
-        console.log("Hay sesión. Mostrar consesion y ocultar sinsesion.");
+        //console.log("Hay sesión. Mostrar consesion y ocultar sinsesion.");
 
         $('#mirese').show();
 

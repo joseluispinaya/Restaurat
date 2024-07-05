@@ -34,6 +34,7 @@ namespace CapaPresentacion.ClienteH
             }
         }
 
+        //sin usar
         [WebMethod]
         public static int Iniciar(string Usuario, string Clave)
         {

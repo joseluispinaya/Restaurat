@@ -357,7 +357,7 @@ $('#btnTerminarvent').on('click', function () {
 
                 //window.open(url, '', 'height=600,width=800,scrollbars=0,location=1,toolbar=0');
             } else {
-                swal("Mensaje", response.d.Mensaje, "error");
+                swal("Mensaje", response.d.Mensage, "error");
             }
         }
     });

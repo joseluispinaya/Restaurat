@@ -255,6 +255,216 @@ $(document).on('click', 'button.btn-eliminar', function () {
     mosProdr_Precio();
 });
 
+
+
+$("#switcher").change(function () {
+    // Verificar si el checkbox está marcado
+    if ($(this).is(":checked")) {
+        //swal("Con Cliente", "Se Registro de manera correcta con Id", "warning")
+        $("#cboBuscarCliente").prop("disabled", true);
+
+        $("#txtIdclienteAtec").val("0");
+        $("#txtDocumentoClienteat").val("");
+        $("#txtNombreClienteat").val("");
+        $("#txtcelu").val("");
+        $("#txtdirecc").val("");
+
+    } else {
+        //swal("Sin ID Cliente", "Se Registro de manera correcta sin Id", "success")
+        $("#cboBuscarCliente").prop("disabled", false);
+
+        $("#txtIdclienteAtec").val("0");
+        $("#txtDocumentoClienteat").val("");
+        $("#txtNombreClienteat").val("");
+        $("#txtcelu").val("");
+        $("#txtdirecc").val("");
+
+    }
+});
+
+function registerDataGuardarVentaNue() {
+
+    //VALIDACIONES DE CLIENTE
+    if ($("#txtDocumentoClienteat").val().trim() == "" || $("#txtNombreClienteat").val().trim() == "") {
+        swal("Mensaje", "Complete los datos del cliente", "warning");
+        return;
+    }
+    var nrocidoc = $("#txtDocumentoClienteat").val().trim();
+
+    $("#btnTermiCaja").LoadingOverlay("show");
+
+    var totallprodu = 0;
+    var est = "Boleta";
+
+    var DETALLE = "";
+    var VENTA = "";
+    var DETALLE_CLIENTE = "";
+    var DETALLE_VENTA = "";
+    var DATOS_VENTA = "";
+
+    ProductosParaVentaC.forEach((item) => {
+
+        totallprodu = totallprodu + parseInt(item.Cantidad)
+
+        DATOS_VENTA = DATOS_VENTA + "<DATOS>" +
+            "<IdVenta>0</IdVenta>" +
+            "<IdProducto>" + item.IdProducto + "</IdProducto>" +
+            "<Cantidad>" + item.Cantidad + "</Cantidad>" +
+            "<PrecioUnidad>" + item.PrecioUnidad + "</PrecioUnidad>" +
+            "<ImporteTotal>" + item.ImporteTotal + "</ImporteTotal>" +
+            "</DATOS>"
+    });
+
+    VENTA = "<VENTA>" +
+        "<IdCliente>0</IdCliente>" +
+        "<TipoDocumento>" + est + "</TipoDocumento>" +
+        "<CantidadProducto>" + ProductosParaVentaC.length + "</CantidadProducto>" +
+        "<CantidadTotal>" + totallprodu + "</CantidadTotal>" +
+        "<TotalCosto>" + $("#txtTotal").val() + "</TotalCosto>" +
+        "</VENTA>";
+
+    DETALLE_CLIENTE = "<DETALLE_CLIENTE><DATOS>" +
+        "<NumeroDocumento>" + nrocidoc + "</NumeroDocumento>" +
+        "<Nombre>" + $("#txtNombreClienteat").val() + "</Nombre>" +
+        "<Direccion>" + $("#txtdirecc").val() + "</Direccion>" +
+        "<Telefono>" + $("#txtcelu").val() + "</Telefono>" +
+        "<Clave>" + nrocidoc + "</Clave>" +
+        "</DATOS></DETALLE_CLIENTE>";
+
+    DETALLE_VENTA = "<DETALLE_VENTA>" + DATOS_VENTA + "</DETALLE_VENTA>";
+
+    DETALLE = "<DETALLE>" + VENTA + DETALLE_CLIENTE + DETALLE_VENTA + "</DETALLE>"
+
+    var request = { xml: DETALLE };
+
+    $.ajax({
+        type: "POST",
+        url: "frmVentaCaja.aspx/GuardarVenta",
+        data: JSON.stringify(request),
+        dataType: "json",
+        contentType: 'application/json; charset=utf-8',
+        error: function (xhr, ajaxOptions, thrownError) {
+            $("#btnTermiCaja").LoadingOverlay("hide");
+            console.log(xhr.status + " \n" + xhr.responseText, "\n" + thrownError);
+        },
+        success: function (response) {
+            $("#btnTermiCaja").LoadingOverlay("hide");
+            if (response.d.Estado) {
+                // Reseteo de campos y tabla después de un éxito
+                ProductosParaVentaC = [];
+                mosProdr_Precio();
+
+                $("#txtIdclienteAtec").val("0");
+                $("#txtDocumentoClienteat").val("");
+                $("#txtNombreClienteat").val("");
+                $("#txtcelu").val("");
+                $("#txtdirecc").val("");
+
+                //swal("Mensaje", response.d.Valor, "success");
+
+                var url = 'frmDocVenta.aspx?id=' + response.d.Valor;
+
+                $("#overlayc").LoadingOverlay("show");
+                var popup = window.open(url, '', 'height=600,width=800,scrollbars=0,location=1,toolbar=0');
+
+                var timer = setInterval(function () {
+                    if (popup.closed) {
+                        clearInterval(timer);
+                        $("#overlayc").LoadingOverlay("hide");
+                        //window.location.reload();
+                    }
+                }, 500);
+
+            } else {
+                swal("Mensaje", response.d.Mensage, "error");
+            }
+        }
+    });
+}
+
+function dataGuardarVentaCliente() {
+
+
+    $("#btnTermiCaja").LoadingOverlay("show");
+
+    var totallprodu = 0;
+    var est = "Boleta";
+
+    var DETALLE = "";
+    var VENTA = "";
+    var DETALLE_VENTA = "";
+    var DATOS_VENTA = "";
+
+    ProductosParaVentaC.forEach((item) => {
+
+        totallprodu = totallprodu + parseInt(item.Cantidad)
+
+        DATOS_VENTA = DATOS_VENTA + "<DATOS>" +
+            "<IdVenta>0</IdVenta>" +
+            "<IdProducto>" + item.IdProducto + "</IdProducto>" +
+            "<Cantidad>" + item.Cantidad + "</Cantidad>" +
+            "<PrecioUnidad>" + item.PrecioUnidad + "</PrecioUnidad>" +
+            "<ImporteTotal>" + item.ImporteTotal + "</ImporteTotal>" +
+            "</DATOS>"
+    });
+
+    VENTA = "<VENTA>" +
+        "<IdCliente>" + $("#txtIdclienteAtec").val() + "</IdCliente>" +
+        "<TipoDocumento>" + est + "</TipoDocumento>" +
+        "<CantidadProducto>" + ProductosParaVentaC.length + "</CantidadProducto>" +
+        "<CantidadTotal>" + totallprodu + "</CantidadTotal>" +
+        "<TotalCosto>" + $("#txtTotal").val() + "</TotalCosto>" +
+        "</VENTA>";
+
+    DETALLE_VENTA = "<DETALLE_VENTA>" + DATOS_VENTA + "</DETALLE_VENTA>";
+    DETALLE = "<DETALLE>" + VENTA + DETALLE_VENTA + "</DETALLE>"
+
+    var request = { xml: DETALLE };
+
+    $.ajax({
+        type: "POST",
+        url: "frmVentaCaja.aspx/GuardarVentaIdCliente",
+        data: JSON.stringify(request),
+        dataType: "json",
+        contentType: 'application/json; charset=utf-8',
+        error: function (xhr, ajaxOptions, thrownError) {
+            $("#btnTermiCaja").LoadingOverlay("hide");
+            console.log(xhr.status + " \n" + xhr.responseText, "\n" + thrownError);
+        },
+        success: function (response) {
+            $("#btnTermiCaja").LoadingOverlay("hide");
+            if (response.d.Estado) {
+                // Reseteo de campos y tabla después de un éxito
+                ProductosParaVentaC = [];
+                mosProdr_Precio();
+
+                $("#txtIdclienteAtec").val("0");
+                $("#txtDocumentoClienteat").val("");
+                $("#txtNombreClienteat").val("");
+                $("#txtcelu").val("");
+                $("#txtdirecc").val("");
+
+                //swal("Mensaje", response.d.Valor, "success");
+
+                var url = 'frmDocVenta.aspx?id=' + response.d.Valor;
+
+                $("#overlayc").LoadingOverlay("show");
+                var popup = window.open(url, '', 'height=600,width=800,scrollbars=0,location=1,toolbar=0');
+
+                var timer = setInterval(function () {
+                    if (popup.closed) {
+                        clearInterval(timer);
+                        $("#overlayc").LoadingOverlay("hide");
+                        //window.location.reload();
+                    }
+                }, 500);
+
+            } else {
+                swal("Mensaje", response.d.Mensage, "error");
+            }
+        }
+    });
+}
 $('#btnTermiCaja').on('click', function () {
 
     if (ProductosParaVentaC.length < 1) {
@@ -262,23 +472,14 @@ $('#btnTermiCaja').on('click', function () {
         return;
     }
 
+    
+
     if (parseInt($("#txtIdclienteAtec").val()) == 0) {
-        swal("Sin ID Cliente", "Se Registro de manera correcta sin Id", "success")
-        //registerDataGuardarVentaNue();
+        //swal("Sin ID Cliente", "Se Registro de manera correcta sin Id", "success")
+        registerDataGuardarVentaNue();
     } else {
-        swal("Con Cliente", "Se Registro de manera correcta con Id", "warning")
-        //registerConIdClienteVenta();
+        //swal("Con Cliente", "Se Registro de manera correcta con Id", "warning")
+        dataGuardarVentaCliente();
     }
 
 })
-
-$("#switcher").change(function () {
-    // Verificar si el checkbox está marcado
-    if ($(this).is(":checked")) {
-        //swal("Con Cliente", "Se Registro de manera correcta con Id", "warning")
-        $("#cboBuscarCliente").prop("disabled", true);
-    } else {
-        //swal("Sin ID Cliente", "Se Registro de manera correcta sin Id", "success")
-        $("#cboBuscarCliente").prop("disabled", false);
-    }
-});

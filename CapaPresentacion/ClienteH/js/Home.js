@@ -77,6 +77,7 @@ function oBtenerDetalleCliente() {
         $('#txtIdclientev').val(usuarioObj.IdCliente);
         $('#txtNombreCliente').val(usuarioObj.Nombre);
         $('#txtDocumentoCliente').val(usuarioObj.NumeroDocumento);
+        $('#txtcelu').val(usuarioObj.Telefono);
     }
 }
 
@@ -406,6 +407,7 @@ function registerConIdClienteReserva() {
 }
 
 
+
 $('#btnTerminarReserv').on('click', function () {
 
     if (ProductosParaReserva.length < 1) {
@@ -499,7 +501,13 @@ $('#btnTerminarReserv').on('click', function () {
                 actualizarCantidadCarrito();
                 $("#txtcomentario").val("");
 
-                swal("Mensaje", response.d.Valor, "success");
+                $('#mostrarcarrito').hide();
+                $('#mostrarproductoss').show();
+
+                //dataSmsWhat(response.d.Valor);
+
+                swal("Mensaje", "Su reserva fue realizada exitosamente", "success");
+                //swal("Mensaje", response.d.Valor, "success");
 
                 //var url = 'docComprobante.aspx?id=' + response.d.Valor;
                 //window.open(url, '', 'height=600,width=800,scrollbars=0,location=1,toolbar=0');
@@ -512,3 +520,79 @@ $('#btnTerminarReserv').on('click', function () {
 
     //registerConIdClienteReserva();
 })
+
+function dataSmsWhat($IdReserva) {
+
+
+    var request = {
+        IdReserva: $IdReserva
+    };
+
+    $.ajax({
+        type: "POST",
+        url: "frmMisReservas.aspx/DetalleReserva",
+        data: JSON.stringify(request),
+        contentType: 'application/json; charset=utf-8',
+        error: function (xhr, ajaxOptions, thrownError) {
+            console.log(xhr.status + " \n" + xhr.responseText, "\n" + thrownError);
+        },
+        success: function (response) {
+            if (response.d.estado) {
+                // Mostrar u ocultar el botón de cancelar según el estado
+                var totalCosto = response.d.objeto.TotalCosto;
+                var nombre = response.d.objeto.oCliente.Nombre;
+                var codi = response.d.objeto.Codigo;
+                var tot = totalCosto.toFixed(2) + " /Bs.";
+                var comen = response.d.objeto.Comentario;
+                var feres = response.d.objeto.FechaReserva;
+
+                let message = `*Hola, me gustaría realizar una reserva:*\n\n`;
+                message += `*Nombre:* ${nombre}\n`;
+                message += `*Cod Reserva:* ${codi}\n`;
+                message += `*Reserva para el:* ${feres}\n`;
+                message += `*Comentario:* ${comen}\n`;
+                message += `\n*Productos:*\n`;
+
+                let ProductosParaVentaa = [];
+                ProductosParaVentaa = response.d.objeto.oListaDetalleReserva;
+                ProductosParaVentaa.forEach((item) => {
+
+                    message += `- *${item.NombreProducto}*\n  *Cantidad:* ${item.Cantidad}\n  *Precio:* Bs${item.PrecioUnidad} cada uno\n`;
+                })
+
+                message += `\n*Total: ${tot}*`;
+
+                var encodedMessage = encodeURIComponent(message);
+                var whatsappURL = `https://api.whatsapp.com/send?phone=59169568863&text=${encodedMessage}`;
+                window.open(whatsappURL, '_blank');
+
+
+            }
+        }
+    });
+
+}
+
+function sendOrderToWhatsApp() {
+    //$('#txtNombreCliente').val(usuarioObj.Nombre);
+    var nombre = $('#txtNombreCliente').val();
+    var codi = "00003";
+    var tot = $('#txtTotal').val();
+    let message = `*Hola, me gustaría realizar una reserva:*\n\n`;
+    message += `*Nombre:* ${nombre}\n`;
+    message += `*Cod Reserva:* ${codi}\n`;
+    message += `\n*Productos:*\n`;
+
+    ProductosParaReserva.forEach((item) => {
+
+        message += `- *${item.nombreProductoa}*\n  *Cantidad:* ${item.cantidada}\n  *Precio:* Bs${item.precioProductoa} cada uno\n`;
+        //message += `- *${item.nombreProductoa}*\n  *Cantidad:* ${item.cantidada}\n  *Precio:* Bs${item.precioProductoa} cada uno\n`;
+    })
+    message += `\n*Total: Bs${tot}*`;
+
+    var encodedMessage = encodeURIComponent(message);
+    var whatsappURL = `https://api.whatsapp.com/send?phone=59169568863&text=${encodedMessage}`;
+    window.open(whatsappURL, '_blank');
+
+    //console.log(message);
+}

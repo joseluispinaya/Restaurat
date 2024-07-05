@@ -27,6 +27,11 @@ namespace CapaNegocio
         {
             return DVenta.getInstance().RegistrarVentaIdclie(Detalle);
         }
+        //registro con cliente y sus campos
+        public int RegistrarVentaNuev(string Detalle)
+        {
+            return DVenta.getInstance().RegistrarVentaNuev(Detalle);
+        }
 
         public int RegistrarVentaIdclieEstado(string Detalle)
         {

@@ -32,7 +32,7 @@ namespace CapaDatos
         }
         #endregion
 
-        //registro con id cliente
+        //registro con id cliente para caja
         public int RegistrarVentaIdclie(string Detalle)
         {
             int respuesta = 0;
@@ -69,6 +69,44 @@ namespace CapaDatos
             return respuesta;
         }
 
+        //registro con cliente y sus campos
+        public int RegistrarVentaNuev(string Detalle)
+        {
+            int respuesta = 0;
+
+            try
+            {
+                using (SqlConnection con = ConexionBD.getInstance().ConexionDB())
+                {
+                    using (SqlCommand cmd = new SqlCommand("usp_RegistrarVentaCliente", con))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        cmd.Parameters.Add("@Detalle", SqlDbType.Xml).Value = Detalle;
+                        cmd.Parameters.Add("@Resultado", SqlDbType.Int).Direction = ParameterDirection.Output;
+
+                        con.Open();
+                        cmd.ExecuteNonQuery();
+
+                        respuesta = Convert.ToInt32(cmd.Parameters["@Resultado"].Value);
+                    }
+                }
+            }
+            catch (SqlException sqlEx)
+            {
+                respuesta = 0;
+                throw new Exception("Error SQL al registrar la venta", sqlEx);
+            }
+            catch (Exception ex)
+            {
+                respuesta = 0;
+                throw new Exception("Error al registrar venta", ex);
+            }
+
+            return respuesta;
+        }
+
+        //registro con Id Cliente para Atender reservas
         public int RegistrarVentaIdclieEstado(string Detalle)
         {
             int respuesta = 0;

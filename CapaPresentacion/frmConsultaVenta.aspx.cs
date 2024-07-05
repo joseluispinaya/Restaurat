@@ -22,8 +22,8 @@ namespace CapaPresentacion
             DateTime desde = Convert.ToDateTime(fechainicio);
             DateTime hasta = Convert.ToDateTime(fechafin);
 
+
             List<EVenta> listaCompleta = NVenta.getInstance().ObtenerListaVentaa();
-            // Filtra la lista usando LINQ
             List<EVenta> listaFiltrada = listaCompleta
                 .Where(venta => venta.VFechaRegistro >= desde && venta.VFechaRegistro <= hasta)
                 .ToList();
@@ -42,15 +42,17 @@ namespace CapaPresentacion
         {
             try
             {
-                DateTime desde = Convert.ToDateTime(fechainicio);
-                DateTime hasta = Convert.ToDateTime(fechafin);
+                //DateTime desde = Convert.ToDateTime(fechainicio);
+                //DateTime hasta = Convert.ToDateTime(fechafin);
+                DateTime desde = Convert.ToDateTime(fechainicio).Date;
+                DateTime hasta = Convert.ToDateTime(fechafin).Date;
 
                 // Obtén la lista completa de ventas
                 List<EVenta> listaCompleta = NVenta.getInstance().ObtenerListaVentaa();
 
                 // Filtra la lista usando LINQ
                 List<EVenta> listaFiltrada = listaCompleta
-                    .Where(venta => venta.VFechaRegistro >= desde && venta.VFechaRegistro <= hasta)
+                    .Where(venta => venta.VFechaRegistro.Date >= desde && venta.VFechaRegistro.Date <= hasta)
                     .ToList();
 
                 // Retorna la lista filtrada
