@@ -26,6 +26,39 @@ namespace CapaDatos
         }
         #endregion
 
+        public bool RegistrarCategoria(ECategoria producto)
+        {
+            bool respuesta = false;
+
+            try
+            {
+                using (SqlConnection con = ConexionBD.getInstance().ConexionDB())
+                {
+                    using (SqlCommand cmd = new SqlCommand("usp_RegistrarCategoria", con))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        cmd.Parameters.AddWithValue("@Descripcion", producto.Descripcion);
+
+                        SqlParameter outputParam = new SqlParameter("@Resultado", SqlDbType.Bit)
+                        {
+                            Direction = ParameterDirection.Output
+                        };
+                        cmd.Parameters.Add(outputParam);
+
+                        con.Open();
+                        cmd.ExecuteNonQuery();
+                        respuesta = Convert.ToBoolean(outputParam.Value);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al registrar. Intente más tarde.", ex);
+            }
+
+            return respuesta;
+        }
         public List<ECategoria> ObtenerCatego()
         {
             List<ECategoria> rptListaRol = new List<ECategoria>();

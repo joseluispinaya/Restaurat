@@ -390,6 +390,7 @@
     <Content Include="ClienteH\Home.aspx" />
     <Content Include="ClienteH\js\frmDetallesR.js" />
     <Content Include="ClienteH\js\frmMisReservas.js" />
+    <Content Include="ClienteH\js\frmRegistro.js" />
     <Content Include="ClienteH\js\Home.js" />
     <Content Include="ClienteH\js\Login.js" />
     <Content Include="ClienteH\js\menuMaster.js" />

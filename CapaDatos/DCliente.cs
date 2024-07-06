@@ -29,6 +29,52 @@ namespace CapaDatos
         }
         #endregion
 
+
+        public bool RegistrarCliente(ECliente oCliente)
+        {
+            bool respuesta = false;
+
+            try
+            {
+                using (SqlConnection con = ConexionBD.getInstance().ConexionDB())
+                {
+                    using (SqlCommand cmd = new SqlCommand("usp_RegistrarClientec", con))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        cmd.Parameters.AddWithValue("@NumeroDocumento", oCliente.NumeroDocumento);
+                        cmd.Parameters.AddWithValue("@Nombre", oCliente.Nombre);
+                        cmd.Parameters.AddWithValue("@Direccion", oCliente.Direccion);
+                        cmd.Parameters.AddWithValue("@Telefono", oCliente.Telefono);
+                        cmd.Parameters.AddWithValue("@Clave", oCliente.Clave);
+                        cmd.Parameters.AddWithValue("@IdRol", oCliente.IdRol);
+
+                        SqlParameter outputParam = new SqlParameter("@Resultado", SqlDbType.Bit)
+                        {
+                            Direction = ParameterDirection.Output
+                        };
+                        cmd.Parameters.Add(outputParam);
+
+                        con.Open();
+                        cmd.ExecuteNonQuery();
+                        respuesta = Convert.ToBoolean(outputParam.Value);
+                    }
+                }
+            }
+            catch (SqlException sqlEx)
+            {
+                // Manejar excepciones SQL de manera específica
+                throw new Exception("Error SQL al registrar el cliente. Intente más tarde.", sqlEx);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al registrar. Intente más tarde.", ex);
+            }
+
+            return respuesta;
+        }
+
+
         public ECliente Login(string user, string pass)
         {
             ECliente obj = null;

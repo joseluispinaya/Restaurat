@@ -67,6 +67,46 @@ namespace CapaDatos
             return respuesta;
         }
 
+        public bool ActualizarProducto(EProducto producto)
+        {
+            bool respuesta = false;
+
+            try
+            {
+                using (SqlConnection con = ConexionBD.getInstance().ConexionDB())
+                {
+                    using (SqlCommand cmd = new SqlCommand("usp_ModificarProducto", con))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        cmd.Parameters.AddWithValue("@IdProducto", producto.IdProducto);
+                        cmd.Parameters.AddWithValue("@Nombre", producto.Nombre);
+                        cmd.Parameters.AddWithValue("@Descripcion", producto.Descripcion);
+                        cmd.Parameters.AddWithValue("@Foto", producto.Imagen);
+                        cmd.Parameters.AddWithValue("@IdCategoria", producto.IdCategoria);
+                        cmd.Parameters.AddWithValue("@PrecioUnidadVenta", producto.PrecioUnidadVenta);
+                        cmd.Parameters.AddWithValue("@Activo", producto.Activo);
+
+                        SqlParameter outputParam = new SqlParameter("@Resultado", SqlDbType.Bit)
+                        {
+                            Direction = ParameterDirection.Output
+                        };
+                        cmd.Parameters.Add(outputParam);
+
+                        con.Open();
+                        cmd.ExecuteNonQuery();
+                        respuesta = Convert.ToBoolean(outputParam.Value);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al Actualizar. Intente más tarde.", ex);
+            }
+
+            return respuesta;
+        }
+
         public List<EProducto> ObtenerProductos()
         {
             List<EProducto> rptListaUsuario = new List<EProducto>();

@@ -274,6 +274,80 @@ function registerDataAjax() {
     }
 }
 
+function sendDataToServerEdit(request) {
+    $.ajax({
+        type: "POST",
+        url: "frmProductos.aspx/EditarProducto",
+        data: JSON.stringify(request),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        beforeSend: function () {
+            // Mostrar overlay de carga antes de enviar la solicitud modal-content
+            $(".modal-content").LoadingOverlay("show");
+        },
+        success: function (response) {
+            $(".modal-content").LoadingOverlay("hide");
+            if (response.d.Estado) {
+                dtProduc();
+                $('#modalrolp').modal('hide');
+                swal("Mensaje", response.d.Mensage, response.d.Valor);
+            } else {
+                swal("Mensaje", response.d.Mensage, response.d.Valor);
+            }
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+            $(".modal-content").LoadingOverlay("hide");
+            console.log(xhr.status + " \n" + xhr.responseText, "\n" + thrownError);
+        }
+    });
+}
+
+function editarDataAjax() {
+    var fileInput = document.getElementById('txtFotoP');
+    var file = fileInput.files[0];
+
+    const modelo = structuredClone(MODELO_BASE);
+    modelo["IdProducto"] = parseInt($("#txtIdProducto").val());
+    modelo["Nombre"] = $("#txtNombrePr").val();
+    modelo["Descripcion"] = $("#txtDescripcionPr").val();
+    modelo["PrecioUnidadVenta"] = parseFloat($("#txtPrecioPr").val()); // Convertir a float
+    modelo["Activo"] = ($("#cboEstadoPr").val() == "1" ? true : false);
+    modelo["IdCategoria"] = $("#cboCatego").val();
+
+    if (file) {
+
+        var maxSize = 2 * 1024 * 1024; // 2 MB en bytes
+        if (file.size > maxSize) {
+            swal("Mensaje", "La imagen seleccionada es demasiado grande.", "error");
+            return;
+        }
+
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            var arrayBuffer = e.target.result;
+            var bytes = new Uint8Array(arrayBuffer);
+
+            var request = {
+                oProducto: modelo,
+                imageBytes: Array.from(bytes)
+            };
+
+            sendDataToServerEdit(request);
+        };
+
+        reader.readAsArrayBuffer(file);
+    } else {
+        // Si no se selecciona ningún archivo, envía un valor nulo o vacío para imageBytes
+        var request = {
+            oProducto: modelo,
+            imageBytes: null // o cualquier otro valor que indique que no se envió ningún archivo
+        };
+
+        sendDataToServerEdit(request);
+    }
+}
+
 $('#btnGuardarCambiosP').on('click', function () {
 
     const inputs = $("input.model").serializeArray();
@@ -288,11 +362,9 @@ $('#btnGuardarCambiosP').on('click', function () {
 
 
     if (parseInt($("#txtIdProducto").val()) == 0) {
-        //swal("Mensaje", "Guardado.", "success")
-        //registerDataAjax();
         registerDataAjax();
     } else {
-        swal("Mensaje", "Falta para Actualizar personal.", "warning")
-        //editDataAjaxOpc();
+        //swal("Mensaje", "Falta para Actualizar personal.", "warning")
+        editarDataAjax();
     }
 })

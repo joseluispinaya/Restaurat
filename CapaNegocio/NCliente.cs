@@ -23,6 +23,10 @@ namespace CapaNegocio
         }
         #endregion
 
+        public bool RegistrarCliente(ECliente oCliente)
+        {
+            return DCliente.getInstance().RegistrarCliente(oCliente);
+        }
         public ECliente Login(string user, string pass)
         {
             return DCliente.getInstance().Login(user, pass);

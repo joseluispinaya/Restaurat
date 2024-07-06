@@ -88,7 +88,7 @@ function cargarCatego() {
 
     $.ajax({
         type: "POST",
-        url: "../frmProductos.aspx/ObtenerCatego",
+        url: "Home.aspx/ObtenerCatego",
         data: {},
         contentType: 'application/json; charset=utf-8',
         error: function (xhr, ajaxOptions, thrownError) {
@@ -252,7 +252,7 @@ function cargarProductosPorCatego() {
 
     $.ajax({
         type: "POST",
-        url: "../frmCategorias.aspx/ObtenerCategoProdu",
+        url: "Home.aspx/ObtenerCategoProdu",
         data: JSON.stringify(request),
         contentType: 'application/json; charset=utf-8',
         error: function (xhr, ajaxOptions, thrownError) {

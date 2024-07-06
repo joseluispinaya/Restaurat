@@ -96,9 +96,6 @@
             margin: 5px 0;
             justify-content: center;
         }
-        /*table.dataTable.compact thead th, table.dataTable.compact thead td {
-            padding: 2px 5px !important;
-        }*/
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="titulo" runat="server">

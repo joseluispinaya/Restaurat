@@ -75,10 +75,10 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li><a href="Login.aspx" class="dropdown-item">Iniciar sesion</a></li>
+                                    <li><a href="frmRegistro.aspx" class="dropdown-item">Nuevo Registro</a></li>
                                     <li class="dropdown-divider"></li>
                                     <li><a href="../IniciarSesion.aspx" class="dropdown-item">Administrativo</a></li>
-                                    <li><a href="javascript:void(0)" class="dropdown-item"><span class="badge badge-success float-right">5</span> Settings </a></li>
-                                    <li><a href="javascript:void(0)" class="dropdown-item">Lock screen</a></li>
+                                    <%--<li><a href="javascript:void(0)" class="dropdown-item"><span class="badge badge-success float-right">5</span> Settings </a></li>--%>
                                     
                                     <%--<li><a id="closeclisin" class="dropdown-item" style="cursor: pointer;">Salir</a></li>--%>
                                 </ul>
@@ -144,7 +144,7 @@
                                 <a href="frmMisReservas.aspx" class="waves-effect"><i class="mdi mdi-calendar"></i><span> Mis Reservas</span></a>
                             </li>
 
-                            <li class="has_sub">
+                            <%--<li class="has_sub">
                                 <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-opacity"></i><span>Historial </span><span class="float-right"><i class="mdi mdi-plus"></i></span></a>
                                 <ul class="list-unstyled">
                                     <li><a href="#">Usuarios</a></li>
@@ -152,7 +152,7 @@
                                     <li><a href="#">En desarrollo</a></li>
                                     <li><a href="#">En desarrollo</a></li>
                                 </ul>
-                            </li>
+                            </li>--%>
 
                         </ul>
                     </div>

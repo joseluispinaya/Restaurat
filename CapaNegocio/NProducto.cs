@@ -27,7 +27,10 @@ namespace CapaNegocio
         {
             return DProducto.getInstance().RegistrarProducto(producto);
         }
-
+        public bool ActualizarProducto(EProducto producto)
+        {
+            return DProducto.getInstance().ActualizarProducto(producto);
+        }
         public List<EProducto> ObtenerProductos()
         {
             return DProducto.getInstance().ObtenerProductos();

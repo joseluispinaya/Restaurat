@@ -23,6 +23,10 @@ namespace CapaNegocio
         }
         #endregion
 
+        public bool RegistrarCategoria(ECategoria producto)
+        {
+            return DCategoria.getInstance().RegistrarCategoria(producto);
+        }
         public List<ECategoria> ObtenerCatego()
         {
             return DCategoria.getInstance().ObtenerCatego();
