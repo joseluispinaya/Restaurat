@@ -219,7 +219,7 @@ function sendDataToServer(request) {
             if (response.d) {
                 dtUsuarios();
                 $('#modalrol').modal('hide');
-                swal("Mensaje", "Registro Exitoso credenciales enviado a su correo", "success");
+                swal("Mensaje", "Registro Exitoso credenciales enviado al correo Registrado", "success");
             } else {
                 swal("Mensaje", "Error al registrar ingrese otro correo", "warning");
             }
@@ -246,7 +246,7 @@ function registerDataAjax() {
 
         var maxSize = 2 * 1024 * 1024; // 2 MB en bytes
         if (file.size > maxSize) {
-            swal("Error", "La imagen seleccionada es demasiado grande.", "error");
+            swal("Error", "La imagen seleccionada es demasiado grande max 1.5 Mb.", "error");
             return;
         }
 
@@ -276,6 +276,80 @@ function registerDataAjax() {
     }
 }
 
+function sendDataToServerEditU(request) {
+    $.ajax({
+        type: "POST",
+        url: "frmUsuarios.aspx/EditarUsuario",
+        data: JSON.stringify(request),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        beforeSend: function () {
+            // Mostrar overlay de carga antes de enviar la solicitud modal-content
+            $(".modal-content").LoadingOverlay("show");
+        },
+        success: function (response) {
+            $(".modal-content").LoadingOverlay("hide");
+            if (response.d.Estado) {
+                dtUsuarios();
+                $('#modalrol').modal('hide');
+                swal("Mensaje", response.d.Mensage, response.d.Valor);
+            } else {
+                swal("Mensaje", response.d.Mensage, response.d.Valor);
+            }
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+            $(".modal-content").LoadingOverlay("hide");
+            console.log(xhr.status + " \n" + xhr.responseText, "\n" + thrownError);
+        }
+    });
+}
+
+function editarDataAjaxU() {
+    var fileInput = document.getElementById('txtFotoS');
+    var file = fileInput.files[0];
+
+    const modelo = structuredClone(MODELO_BASE);
+    modelo["IdUsuario"] = parseInt($("#txtIdUsuario").val());
+    modelo["Nombres"] = $("#txtNombres").val();
+    modelo["Apellidos"] = $("#txtApellidos").val();
+    modelo["Correo"] = $("#txtCorreo").val();
+    modelo["IdRol"] = $("#cboRol").val();
+    modelo["Estado"] = ($("#cboEstado").val() == "1" ? true : false);
+
+    if (file) {
+
+        var maxSize = 2 * 1024 * 1024; // 2 MB en bytes
+        if (file.size > maxSize) {
+            swal("Error", "La imagen seleccionada es demasiado grande max 1.5 Mb.", "error");
+            return;
+        }
+
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            var arrayBuffer = e.target.result;
+            var bytes = new Uint8Array(arrayBuffer);
+
+            var request = {
+                oUsuario: modelo,
+                imageBytes: Array.from(bytes)
+            };
+
+            sendDataToServerEditU(request);
+        };
+
+        reader.readAsArrayBuffer(file);
+    } else {
+        // Si no se selecciona ningún archivo, envía un valor nulo o vacío para imageBytes
+        var request = {
+            oUsuario: modelo,
+            imageBytes: null // o cualquier otro valor que indique que no se envió ningún archivo
+        };
+
+        sendDataToServerEditU(request);
+    }
+}
+
 $('#btnGuardarCambios').on('click', function () {
 
     const inputs = $("input.model").serializeArray();
@@ -302,7 +376,7 @@ $('#btnGuardarCambios').on('click', function () {
         //registerDataAjax();
         registerDataAjax();
     } else {
-        swal("Mensaje", "Falta para Actualizar personal.", "warning")
-        //editDataAjaxOpc();
+        //swal("Mensaje", "Falta para Actualizar personal.", "warning")
+        editarDataAjaxU();
     }
 })

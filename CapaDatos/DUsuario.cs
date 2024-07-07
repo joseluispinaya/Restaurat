@@ -66,6 +66,46 @@ namespace CapaDatos
             return respuesta;
         }
 
+        public bool ActualizarUsuario(EUsuario oUsuario)
+        {
+            bool respuesta = false;
+
+            try
+            {
+                using (SqlConnection con = ConexionBD.getInstance().ConexionDB())
+                {
+                    using (SqlCommand cmd = new SqlCommand("usp_ModificarUsuario", con))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        cmd.Parameters.AddWithValue("@IdUsuario", oUsuario.IdUsuario);
+                        cmd.Parameters.AddWithValue("@Nombres", oUsuario.Nombres);
+                        cmd.Parameters.AddWithValue("@Apellidos", oUsuario.Apellidos);
+                        cmd.Parameters.AddWithValue("@Correo", oUsuario.Correo);
+                        cmd.Parameters.AddWithValue("@Clave", oUsuario.Clave);
+                        cmd.Parameters.AddWithValue("@Foto", oUsuario.Foto);
+                        cmd.Parameters.AddWithValue("@IdRol", oUsuario.IdRol);
+                        cmd.Parameters.AddWithValue("@Activo", oUsuario.Estado);
+
+                        SqlParameter outputParam = new SqlParameter("@Resultado", SqlDbType.Bit)
+                        {
+                            Direction = ParameterDirection.Output
+                        };
+                        cmd.Parameters.Add(outputParam);
+
+                        con.Open();
+                        cmd.ExecuteNonQuery();
+                        respuesta = Convert.ToBoolean(outputParam.Value);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al Actualizar. Intente más tarde.", ex);
+            }
+
+            return respuesta;
+        }
         public List<EUsuario> ObtenerUsuariosZ()
         {
             List<EUsuario> rptListaUsuario = new List<EUsuario>();

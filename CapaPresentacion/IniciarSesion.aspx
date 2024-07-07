@@ -7,6 +7,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
     <title>Acceso al Sistema</title>
+    <link href="assets/plugins/bootstrap-sweetalert/sweet-alert.css" rel="stylesheet" type="text/css"/>
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     <link href="assets/style.css" rel="stylesheet" />
 </head>
 <body>
@@ -28,8 +30,8 @@
             <div class="register">
                 <div class="form">
                     <label for="chk" aria-hidden="true">Olvido su Clave</label>
-                    <input class="inputs" type="email" name="email" id="cooree" placeholder="Correo"/>
-                    <input class="inputs" type="text" name="txt" placeholder="Num Celular"/>
+                    <input class="inputs" type="email" name="email" id="cooree" placeholder="ingrese su Correo"/>
+                    <input class="inputs" type="text" name="txt" readonly="readonly"/>
                     <br />
                     <h3 class="labeljo">Revice su Correo Electronico</h3>
                     <button type="button" id="btnRecupe">Recuperar</button>
@@ -40,10 +42,11 @@
     
 </div>
     <script src="assets/js/jquery.min.js"></script>
-    <%--<script src="js/IniciarSesion.js" type="text/javascript"></script>--%>
-    <script src="assets/plugins/loadingoverlay/loadingoverlay.js"></script>
-    <link href="assets/plugins/bootstrap-sweetalert/sweet-alert.css" rel="stylesheet" type="text/css"/>
+    <script src="assets/js/bootstrap.min.js"></script>
     <script src="assets/plugins/bootstrap-sweetalert/sweet-alert.min.js"></script>
+    <script src="assets/plugins/loadingoverlay/loadingoverlay.js"></script>
+    <%--<link href="assets/plugins/bootstrap-sweetalert/sweet-alert.css" rel="stylesheet" type="text/css"/>--%>
+    
     <script src="js/IniciarSesion.js" type="text/javascript"></script>
 </body>
 </html>

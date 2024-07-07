@@ -37,7 +37,8 @@ body {
 .form {
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 8px;
+    /*gap: 14px;*/
     padding: 24px;
 }
 

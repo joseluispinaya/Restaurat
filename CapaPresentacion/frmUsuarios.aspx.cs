@@ -19,11 +19,13 @@ namespace CapaPresentacion
         public static Respuesta<List<ERol>> ObtenerRol()
         {
             List<ERol> Lista = NTipos.getInstance().ObtenerRol();
-            //Lista = NTipos.getInstance().ObtenerRol();
 
             if (Lista != null)
             {
-                return new Respuesta<List<ERol>>() { estado = true, objeto = Lista };
+                // Filtrar la lista para excluir los roles con Idrol igual a 2
+                List<ERol> ListaFiltrada = Lista.Where(rol => rol.Idrol != 2).ToList();
+
+                return new Respuesta<List<ERol>>() { estado = true, objeto = ListaFiltrada };
             }
             else
             {
@@ -76,6 +78,67 @@ namespace CapaPresentacion
                 bool ok = Utilidadesj.getInstance().EnviaElCorreod(obj.Correo, clavegenerada, obj.Correo);
             }
             return Respuesta;
+        }
+
+        [WebMethod]
+        public static RespuestaZ<bool> EditarUsuario(EUsuario oUsuario, byte[] imageBytes)
+        {
+            try
+            {
+                var imageUrl = string.Empty;
+                List<EUsuario> Lista = NUsuario.getInstance().ObtenerUsuarios();
+                var item = Lista.FirstOrDefault(x => x.IdUsuario == oUsuario.IdUsuario);
+
+                if (item == null)
+                {
+                    return new RespuestaZ<bool>() { Estado = false, Mensage = "Ocurrio un inconveniente intente mas tarde", Valor = "error" };
+                }
+                if (imageBytes != null && imageBytes.Length > 0)
+                {
+                    var stream = new MemoryStream(imageBytes);
+                    string folder = "/Imagenes/";
+                    imageUrl = Utilidadesj.getInstance().UploadPhotoA(stream, folder);
+
+                    if (!string.IsNullOrEmpty(imageUrl))
+                    {
+                        if (!string.IsNullOrEmpty(item.Foto))
+                        {
+                            File.Delete(HttpContext.Current.Server.MapPath(item.Foto));
+                        }
+                    }
+                    else
+                    {
+                        // Si no se pudo guardar la nueva imagen, mantener la URL de la imagen anterior
+                        imageUrl = item.Foto;
+                    }
+                }
+                else
+                {
+                    imageUrl = item.Foto;
+                }
+
+                item.IdUsuario = oUsuario.IdUsuario;
+                item.Nombres = oUsuario.Nombres;
+                item.Apellidos = oUsuario.Apellidos;
+                item.Correo = oUsuario.Correo;
+                item.Foto = imageUrl;
+                item.IdRol = oUsuario.IdRol;
+                item.Estado = oUsuario.Estado;
+
+                bool Respuesta = NUsuario.getInstance().ActualizarUsuario(item);
+
+                var respuesta = new RespuestaZ<bool>
+                {
+                    Estado = Respuesta,
+                    Mensage = Respuesta ? "Actualizado correctamente" : "Error al actualizar el Correo ya Existe",
+                    Valor = Respuesta ? "success" : "warning"
+                };
+                return respuesta;
+            }
+            catch (Exception ex)
+            {
+                return new RespuestaZ<bool> { Estado = false, Mensage = "Ocurrió un error: " + ex.Message, Valor = "error" };
+            }
         }
     }
 }

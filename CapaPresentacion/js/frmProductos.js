@@ -244,7 +244,7 @@ function registerDataAjax() {
 
         var maxSize = 2 * 1024 * 1024; // 2 MB en bytes
         if (file.size > maxSize) {
-            swal("Error", "La imagen seleccionada es demasiado grande.", "error");
+            swal("Error", "La imagen seleccionada es demasiado grande max 1.5 Mb.", "error");
             return;
         }
 
@@ -318,7 +318,7 @@ function editarDataAjax() {
 
         var maxSize = 2 * 1024 * 1024; // 2 MB en bytes
         if (file.size > maxSize) {
-            swal("Mensaje", "La imagen seleccionada es demasiado grande.", "error");
+            swal("Error", "La imagen seleccionada es demasiado grande max 1.5 Mb.", "error");
             return;
         }
 

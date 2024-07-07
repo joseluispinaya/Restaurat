@@ -106,16 +106,88 @@ namespace CapaPresentacion
                 return rutaa;
             }
         }
+
+        public bool EnviodeCorreo(string toEmailUser, string subjec, string head, string clave)
+        {
+            try
+            {
+                var from = "joseluisdelta1@gmail.com";
+                var name = "Restaurante la J";
+                var smtps = "smtp.gmail.com";
+                var port = 587;
+                var password = "xyipqkdicmyimzor";
+                var correo = new MailMessage();
+
+                correo.From = new MailAddress(from, name);
+                correo.To.Add(toEmailUser);
+                //correo.Subject = "Cuenta Creada";
+                correo.Subject = subjec;
+
+                string cuerposss =
+                    "<div style='width:400px;border-radius:5px; margin:auto;background-color:#dbdbdb;box-shadow:0px 0px 10px  #DEDEDE;padding:20px'>" +
+                    "    <table style='width:100%'>" +
+                    "        <tr>" +
+                    "            <td align='center' colspan='2'>" +
+                    "                <h2 style='color:#004DAF'>Bienvenido Restaurant la Jota</h2>" +
+                    "            </td>" +
+                    "        </tr>" +
+                    "        <tr>" +
+                    "            <td align='left' colspan='2'>" +
+                    $"                <p>{head}.  Los detalles de tu cuenta son:</p>" +
+                    "            </td>" +
+                    "        </tr>" +
+                    "        <tr>" +
+                    "            <td><h4 style='color:#004DAF;margin:2px'>Usuario:</h4></td>" +
+                    $"            <td>{toEmailUser}</td>" +
+                    "        </tr>" +
+                    "        <tr>" +
+                    "            <td><h4 style='color:#004DAF;margin:2px'>Contraseña:</h4></td>" +
+                    $"            <td>{clave}</td>" +
+                    "        </tr>" +
+                    "    </table>" +
+                    "    <div style='background-color:#FFE1CE;padding:15px;margin-top:15px;margin-bottom:15px'>" +
+                    "        <p style='margin:0px;color: #F45E00;'>Le recomendamos cambiar la contraseña una vez inicie sesión.</p>" +
+                    "    </div>" +
+                    "    <table>" +
+                    "        <tr>" +
+                    "            <td>Para iniciar sesión ingrese a la siguiente URL:</td>" +
+                    "        </tr>" +
+                    "    </table>" +
+                    "    <a href='#' >Iniciar Sesión</a>" +
+                    "</div>";
+
+                correo.Body = cuerposss;
+                correo.IsBodyHtml = true;
+                correo.Priority = MailPriority.Normal;
+
+                SmtpClient smtp = new SmtpClient();
+                smtp.Host = smtps;
+                smtp.Port = port;
+                smtp.Credentials = new NetworkCredential(from, password);
+                smtp.EnableSsl = true;
+
+                smtp.Send(correo);
+                return true;
+            }
+            catch (SmtpException)
+            {
+                return false;
+                //throw new Exception("Error al enviar correo.", smtpEx);
+            }
+            catch (Exception)
+            {
+                return false;
+                //throw new Exception("Error general", ex);
+            }
+        }
         public bool EnviaElCorreod(string toEmail, string clave, string usuario)
         {
-            //bool respuesta = true;
             try
             {
                 var from = "joseluisdelta1@gmail.com";
                 var name = "Restaurant la J";
                 var smtps = "smtp.gmail.com";
                 var port = 587;
-                //var password = "xyipqkdicmyimzor";
                 var password = "xyipqkdicmyimzor";
                 var correo = new MailMessage();
 
@@ -168,19 +240,11 @@ namespace CapaPresentacion
 
                 smtp.Send(correo);
                 return true;
-                //respuesta = true;
             }
             catch
             {
                 return false;
             }
-            //catch (Exception ex)
-            //{
-            //    respuesta = false;
-            //    throw ex;
-            //}
-
-            //return respuesta;
         }
     }
 }

@@ -17,9 +17,8 @@ $('#btnRecupe').on('click', function () {
         swal("Mensaje", "Ingrese un Correo", "warning");
         return;
     }
-    //enviaCco();
+    enviarCorreo();
     //swal("Mensaje", "Se registro la compra", "success")
-    swal("oops!", "Falta Implementar Recuperacion de Clave", "warning")
 })
 
 function loginUsuarioLoad() {
@@ -49,11 +48,11 @@ function loginUsuarioLoad() {
     });
 }
 
-function enviaCco() {
+function enviarCorreo() {
 
     $.ajax({
         type: "POST",
-        url: "IniciarSesion.aspx/EnviarCorreoDe",
+        url: "IniciarSesion.aspx/EnviarCorreo",
         data: JSON.stringify({ correo: $("#cooree").val() }),
         dataType: "json",
         contentType: 'application/json; charset=utf-8',
@@ -67,10 +66,10 @@ function enviaCco() {
         },
         success: function (response) {
             $.LoadingOverlay("hide");
-            if (response.d.estado) {
-                swal("Mensaje", "Se envio sms a correo", "success")
+            if (response.d.Estado) {
+                swal("Mensaje", response.d.Mensage, response.d.Valor);
             } else {
-                swal("oops!", "Ocurrio un error intente mas tarde", "warning")
+                swal("Mensaje", response.d.Mensage, response.d.Valor);
             }
         }
     });

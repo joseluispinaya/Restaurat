@@ -417,6 +417,7 @@
     <Content Include="js\frmVentaCaja.js" />
     <Content Include="js\frmVentaReserva.js" />
     <Content Include="js\IniciarSesion.js" />
+    <Content Include="js\Inicio.js" />
     <Content Include="js\menuMasterr.js" />
     <Content Include="js\Redire.js" />
     <Content Include="Web.config" />
