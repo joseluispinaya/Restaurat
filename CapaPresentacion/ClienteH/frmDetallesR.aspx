@@ -15,8 +15,6 @@
         <div class="col-sm-12">
             <div class="card">
                 <div class="card-header justify-content-center">
-                    <%--<h3 class="card-title text-dark m-0"><i class="fas fa-star"></i><strong>  RESERVAS</strong></h3>--%>
-
                     <span>
                         <i class="fas fa-bell"></i> Productos
                         <button type="button" id="btnCancelar" class="btn btn-sm btn-danger float-end" style="margin-left: 30px;">

@@ -162,6 +162,7 @@
     <Content Include="assets\js\jquery.slimscroll.js" />
     <Content Include="assets\js\modernizr.min.js" />
     <Content Include="assets\js\popper.min.js" />
+    <Content Include="assets\js\push.min.js" />
     <Content Include="assets\js\waves.js" />
     <Content Include="assets\js\wow.min.js" />
     <Content Include="assets\pages\calendar-init.js" />
@@ -396,6 +397,7 @@
     <Content Include="ClienteH\js\menuMaster.js" />
     <Content Include="ClienteH\Login.aspx" />
     <Content Include="Default.aspx" />
+    <Content Include="firebase-messaging-sw.js" />
     <Content Include="frmCategorias.aspx" />
     <Content Include="frmConsultaVenta.aspx" />
     <Content Include="frmDocVenta.aspx" />
@@ -405,6 +407,7 @@
     <Content Include="frmVentaCaja.aspx" />
     <Content Include="frmVentaReserva.aspx" />
     <Content Include="ImagenesPro\lock.png" />
+    <Content Include="ImagenesPro\logoJ.jpg" />
     <Content Include="Imagenes\Sinfotop.png" />
     <Content Include="IniciarSesion.aspx" />
     <Content Include="Inicio.aspx" />

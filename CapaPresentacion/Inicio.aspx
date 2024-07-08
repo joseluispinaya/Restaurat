@@ -182,5 +182,52 @@
     </div>
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="footer" runat="server">
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-app.js";
+        import { getMessaging, getToken } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-messaging.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyCd9wLb52UiS3lO2MUtp9tImGObXa57ucw",
+            authDomain: "notiapp-a07a0.firebaseapp.com",
+            projectId: "notiapp-a07a0",
+            storageBucket: "notiapp-a07a0.appspot.com",
+            messagingSenderId: "678165333357",
+            appId: "1:678165333357:web:3d4605a5702f04a8cd4664"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        // Initialize Firebase Cloud Messaging and get a reference to the service
+        const messaging = getMessaging(app);
+
+        getToken(messaging, { vapidKey: 'BHdVp61f4JXAiOBAC0yNqvS07WPLE933cld5erMhbNPO7IGHAtqplA9XZ3xg-d4nX0W0njtKbwGJ_GjPEtnLEVI' }).then((currentToken) => {
+            if (currentToken) {
+                // Send the token to your server and update the UI if necessary
+                // ...
+                console.log('token - ' + currentToken);
+            } else {
+                // Show permission request UI
+                console.log('No registration token available. Request permission to generate one.');
+                // ...
+                requestPermission();
+            }
+        }).catch((err) => {
+            console.log('An error occurred while retrieving token. ', err);
+            // ...
+        });
+
+        function requestPermission() {
+            console.log('Requesting permission...');
+            Notification.requestPermission().then((permission) => {
+                if (permission === 'granted') {
+                    console.log('Notification permission granted.');
+                }
+            });
+        }
+    </script>
     <script src="js/Inicio.js" type="text/javascript"></script>
 </asp:Content>

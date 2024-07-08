@@ -2,8 +2,8 @@
 
 $(document).ready(function () {
 
-    cargarCatego();
-    cargarProductosPorCatego();
+    //cargarCatego();
+    permisosNoti();
 })
 
 function cargarCatego() {
@@ -32,192 +32,31 @@ function cargarCatego() {
     });
 }
 
-function cargarProductosPorCategoee() {
-    $.ajax({
-        type: "POST",
-        url: "frmCategorias.aspx/ObtenerCategoProdu",
-        data: JSON.stringify({}),
-        contentType: 'application/json; charset=utf-8',
-        error: function (xhr, ajaxOptions, thrownError) {
-            console.log(xhr.status + " \n" + xhr.responseText, "\n" + thrownError);
-        },
-        success: function (data) {
-            if (data.d.estado) {
-                const categorias = data.d.objeto;
-                const container = document.querySelector('.food-items-container');
+function permisosNoti() {
+    if (!Push.Permission.GRANTED) {
+        Push.Permission.request();
+    }
+}
 
-                // Limpiar el contenedor antes de llenarlo
-                container.innerHTML = '';
-
-                // Iterar sobre cada categoría
-                categorias.forEach(categoria => {
-                    // Crear un nuevo contenedor para la categoría
-                    const categoriaDiv = document.createElement('div');
-                    categoriaDiv.className = 'biryani-section';
-
-                    // Añadir el nombre de la categoría
-                    const categoryName = document.createElement('p');
-                    categoryName.className = 'category-name';
-                    categoryName.textContent = categoria.Descripcion;
-                    categoriaDiv.appendChild(categoryName);
-
-                    // Iterar sobre los productos de la categoría
-                    categoria.oListaProducto.forEach(producto => {
-                        const itemCard = document.createElement('div');
-                        itemCard.className = 'item-card';
-
-                        const input = document.createElement('input');
-                        input.id = 'txtIdProducto';
-                        input.type = 'hidden';
-                        itemCard.appendChild(input);
-
-                        const cardTop = document.createElement('div');
-                        cardTop.className = 'card-top';
-
-                        const ratingLink = document.createElement('a');
-                        ratingLink.href = '#';
-
-                        const ratingIcon = document.createElement('i');
-                        ratingIcon.className = 'fas fa-shopping-cart rating';
-                        ratingIcon.textContent = ' 4.5';
-                        ratingLink.appendChild(ratingIcon);
-
-                        cardTop.appendChild(ratingLink);
-
-                        const heartIcon = document.createElement('i');
-                        heartIcon.className = 'far fa-heart';
-                        cardTop.appendChild(heartIcon);
-
-                        itemCard.appendChild(cardTop);
-
-                        const img = document.createElement('img');
-                        img.src = producto.Imagen;
-                        itemCard.appendChild(img);
-
-                        const itemName = document.createElement('p');
-                        itemName.className = 'item-name';
-                        itemName.textContent = producto.Nombre;
-                        itemCard.appendChild(itemName);
-
-                        const itemPrice = document.createElement('p');
-                        itemPrice.className = 'item-price';
-                        itemPrice.textContent = `Precio : Bs ${producto.PrecioUnidadVenta}`;
-                        itemCard.appendChild(itemPrice);
-
-                        categoriaDiv.appendChild(itemCard);
-                    });
-
-                    container.appendChild(categoriaDiv);
-                });
-            }
+function mostrarNotifiacion() {
+    Push.create("Restaurante la J", {
+        body: "Nueva Reserva Registrada",
+        icon: "ImagenesPro/logoJ.jpg",
+        timeout: 4000,
+        onClick: function () {
+            window.location = "Inicio.aspx";
+            this.close();
         }
     });
 }
 
+$('#btnNuevoCate').on('click', function () {
 
-// Función para agregar un producto al carrito
-function agregarAlCarrito(idProducto) {
-    // Lógica para agregar el producto al carrito
-    console.log(`Producto con ID ${idProducto} agregado al carrito.`);
-}
+    swal("Mensaje", "Error al registrar ingrese otro correo", "warning");
+})
 
-// Delegar el evento click a los iconos de carrito de compras
-$(document).on('click', '.fa-shopping-cart', function (e) {
-    e.preventDefault();
-    const idProducto = $(this).closest('a').data('id');
-    console.log('ID del Producto:', idProducto);
-    // Aquí puedes realizar alguna acción con el idProducto
-    // Por ejemplo, agregar el producto al carrito de compras
-    agregarAlCarrito(idProducto);
-});
+$('#btnVernoti').on('click', function () {
 
-// Asignar el evento change al select
-$("#cboCategor").change(cargarProductosPorCatego);
-
-function cargarProductosPorCatego() {
-
-    var request = {
-        idcate: $("#cboCategor").val() == null ? "0" : $("#cboCategor").val()
-    };
-
-    $.ajax({
-        type: "POST",
-        url: "frmCategorias.aspx/ObtenerCategoProdu",
-        data: JSON.stringify(request),
-        contentType: 'application/json; charset=utf-8',
-        error: function (xhr, ajaxOptions, thrownError) {
-            console.log(xhr.status + " \n" + xhr.responseText, "\n" + thrownError);
-        },
-        success: function (data) {
-            if (data.d.estado) {
-                const categorias = data.d.objeto;
-                const container = document.querySelector('.food-items-container');
-
-                // Limpiar el contenedor antes de llenarlo
-                container.innerHTML = '';
-
-                // Iterar sobre cada categoría
-                categorias.forEach(categoria => {
-                    // Crear un nuevo contenedor para la categoría
-                    const categoriaDiv = document.createElement('div');
-                    categoriaDiv.className = 'biryani-section';
-
-                    // Añadir el nombre de la categoría
-                    const categoryName = document.createElement('p');
-                    categoryName.className = 'category-name';
-                    categoryName.textContent = categoria.Descripcion;
-                    categoriaDiv.appendChild(categoryName);
-
-                    // Iterar sobre los productos de la categoría
-                    categoria.oListaProducto.forEach(producto => {
-                        const itemCard = document.createElement('div');
-                        itemCard.className = 'item-card';
-
-                        const input = document.createElement('input');
-                        input.id = 'txtIdProducto';
-                        input.type = 'hidden';
-                        itemCard.appendChild(input);
-
-                        const cardTop = document.createElement('div');
-                        cardTop.className = 'card-top';
-
-                        const ratingLink = document.createElement('a');
-                        ratingLink.href = '#';
-                        ratingLink.setAttribute('data-id', producto.IdProducto);
-
-                        const ratingIcon = document.createElement('i');
-                        ratingIcon.className = 'fas fa-shopping-cart rating';
-                        ratingIcon.textContent = ' 4.5';
-                        ratingLink.appendChild(ratingIcon);
-
-                        cardTop.appendChild(ratingLink);
-
-                        const heartIcon = document.createElement('i');
-                        heartIcon.className = 'far fa-heart';
-                        cardTop.appendChild(heartIcon);
-
-                        itemCard.appendChild(cardTop);
-
-                        const img = document.createElement('img');
-                        img.src = producto.Imagen;
-                        itemCard.appendChild(img);
-
-                        const itemName = document.createElement('p');
-                        itemName.className = 'item-name';
-                        itemName.textContent = producto.Nombre;
-                        itemCard.appendChild(itemName);
-
-                        const itemPrice = document.createElement('p');
-                        itemPrice.className = 'item-price';
-                        itemPrice.textContent = `Precio : Bs ${producto.PrecioUnidadVenta}`;
-                        itemCard.appendChild(itemPrice);
-
-                        categoriaDiv.appendChild(itemCard);
-                    });
-
-                    container.appendChild(categoriaDiv);
-                });
-            }
-        }
-    });
-}
+    mostrarNotifiacion();
+    //swal("Mensaje", "Registro Exitoso credenciales enviado al correo Registrado", "success");
+})
