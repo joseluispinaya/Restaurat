@@ -59,6 +59,82 @@ namespace CapaDatos
 
             return respuesta;
         }
+
+        public bool ActualiCategoria(ECategoria producto)
+        {
+            bool respuesta = false;
+
+            try
+            {
+                using (SqlConnection con = ConexionBD.getInstance().ConexionDB())
+                {
+                    using (SqlCommand cmd = new SqlCommand("usp_ModificarCategoria", con))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        cmd.Parameters.AddWithValue("@IdCategoria", producto.IdCategoria);
+                        cmd.Parameters.AddWithValue("@Descripcion", producto.Descripcion);
+                        cmd.Parameters.AddWithValue("@Activo", producto.Activo);
+
+                        SqlParameter outputParam = new SqlParameter("@Resultado", SqlDbType.Bit)
+                        {
+                            Direction = ParameterDirection.Output
+                        };
+                        cmd.Parameters.Add(outputParam);
+
+                        con.Open();
+                        cmd.ExecuteNonQuery();
+                        respuesta = Convert.ToBoolean(outputParam.Value);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al Actualizar. Intente más tarde.", ex);
+            }
+
+            return respuesta;
+        }
+
+        public bool EliminarCategoria(int Idcate)
+        {
+            bool respuesta = false;
+
+            try
+            {
+                using (SqlConnection con = ConexionBD.getInstance().ConexionDB())
+                {
+                    using (SqlCommand cmd = new SqlCommand("usp_EliminarCategoria", con))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        cmd.Parameters.AddWithValue("@IdCategoria", Idcate);
+
+                        SqlParameter outputParam = new SqlParameter("@Resultado", SqlDbType.Bit)
+                        {
+                            Direction = ParameterDirection.Output
+                        };
+                        cmd.Parameters.Add(outputParam);
+
+                        con.Open();
+                        cmd.ExecuteNonQuery();
+                        respuesta = Convert.ToBoolean(outputParam.Value);
+                    }
+                }
+            }
+            catch (SqlException sqlEx)
+            {
+                // Aquí podrías registrar la excepción o manejarla de alguna manera específica
+                throw new Exception("Error de base de datos al eliminar la categoría. Intente más tarde.", sqlEx);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al Eliminar. Intente más tarde.", ex);
+            }
+
+            return respuesta;
+        }
+
         public List<ECategoria> ObtenerCatego()
         {
             List<ECategoria> rptListaRol = new List<ECategoria>();

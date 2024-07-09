@@ -27,6 +27,14 @@ namespace CapaNegocio
         {
             return DCategoria.getInstance().RegistrarCategoria(producto);
         }
+        public bool ActualiCategoria(ECategoria producto)
+        {
+            return DCategoria.getInstance().ActualiCategoria(producto);
+        }
+        public bool EliminarCategoria(int Idcate)
+        {
+            return DCategoria.getInstance().EliminarCategoria(Idcate);
+        }
         public List<ECategoria> ObtenerCatego()
         {
             return DCategoria.getInstance().ObtenerCatego();

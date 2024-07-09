@@ -15,7 +15,82 @@ namespace CapaPresentacion
         {
 
         }
+        [WebMethod]
+        public static Respuesta<List<ECategoria>> ObtenerCatego()
+        {
+            List<ECategoria> Lista = NCategoria.getInstance().ObtenerCategorias();
+            //Lista = NTipos.getInstance().ObtenerRol();
 
+            if (Lista != null)
+            {
+                return new Respuesta<List<ECategoria>>() { estado = true, objeto = Lista };
+            }
+            else
+            {
+                return new Respuesta<List<ECategoria>>() { estado = false, objeto = null };
+            }
+        }
+
+        [WebMethod]
+        public static RespuestaZ<bool> GurdarCatego(ECategoria oCategoria)
+        {
+            try
+            {
+                bool Respuesta = NCategoria.getInstance().RegistrarCategoria(oCategoria);
+                var respuesta = new RespuestaZ<bool>
+                {
+                    Estado = Respuesta,
+                    Mensage = Respuesta ? "Registrado correctamente" : "Ocurrio un error la categoria ya Existe",
+                    Valor = Respuesta ? "success" : "warning"
+                };
+                return respuesta;
+            }
+            catch (Exception ex)
+            {
+                return new RespuestaZ<bool> { Estado = false, Mensage = "Ocurrió un error: " + ex.Message, Valor = "error" };
+            }
+        }
+
+        [WebMethod]
+        public static RespuestaZ<bool> ActualizarCatego(ECategoria oCategoria)
+        {
+            try
+            {
+                bool Respuesta = NCategoria.getInstance().ActualiCategoria(oCategoria);
+                var respuesta = new RespuestaZ<bool>
+                {
+                    Estado = Respuesta,
+                    Mensage = Respuesta ? "Actualizado correctamente" : "Ocurrio un error la categoria ya Existe",
+                    Valor = Respuesta ? "success" : "warning"
+                };
+                return respuesta;
+            }
+            catch (Exception ex)
+            {
+                return new RespuestaZ<bool> { Estado = false, Mensage = "Ocurrió un error: " + ex.Message, Valor = "error" };
+            }
+        }
+        [WebMethod]
+        public static RespuestaZ<bool> Eliminar(int IdCategoria)
+        {            
+            try
+            {
+                bool Respuesta = NCategoria.getInstance().EliminarCategoria(IdCategoria);
+                //bool Respuesta = true;
+                var respuesta = new RespuestaZ<bool>
+                {
+                    Estado = Respuesta,
+                    Mensage = Respuesta ? "Eliminado correctamente" : "No se pudo Eliminar la Categoria tiene una relacion con un Producto",
+                    Valor = Respuesta ? "success" : "warning"
+                };
+                return respuesta;
+            }
+            catch (Exception ex)
+            {
+                return new RespuestaZ<bool> { Estado = false, Mensage = "Ocurrió un error: " + ex.Message, Valor = "error" };
+            }
+        }
+        // codigo auxiliar
         [WebMethod]
         public static Respuesta<List<ECategoria>> ObtenerCategoProdu(int idcate)
         {
