@@ -49,7 +49,68 @@ namespace CapaPresentacion
             };
         }
 
+        [WebMethod]
+        public static RespuestaZ<EUsuario> ObtenerDetalleUsuario()
+        {
+            try
+            {
+                if (Configuracion.oUsuario == null)
+                {
+                    return new RespuestaZ<EUsuario>() { Estado = false, Mensage = "No se ha encontrado un usuario configurado.", Valor = "error" };
+                }
 
+                int IdUsuario = Configuracion.oUsuario.IdUsuario;
+                var listaUsuarios = NUsuario.getInstance().ObtenerUsuarios();
+                var usuario = listaUsuarios.FirstOrDefault(x => x.IdUsuario == IdUsuario);
+
+                if (usuario == null)
+                {
+                    return new RespuestaZ<EUsuario>() { Estado = false, Mensage = "No se encontró el usuario especificado.", Valor = "error" };
+                }
+
+                Configuracion.oUsuario = usuario;
+                return new RespuestaZ<EUsuario>() { Estado = true, Objeto = usuario };
+            }
+            catch (Exception ex)
+            {
+                // Puedes agregar logging aquí para registrar el error
+                return new RespuestaZ<EUsuario> { Estado = false, Mensage = "Ocurrió un error: " + ex.Message, Valor = "error" };
+            }
+        }
+
+
+        [WebMethod]
+        public static RespuestaZ<EUsuario> ObtenerDetalleUsuarioA()
+        {
+            try
+            {
+                if (Configuracion.oUsuario != null)
+                {
+                    int IdUsuario = Configuracion.oUsuario.IdUsuario;
+                    List<EUsuario> Lista = NUsuario.getInstance().ObtenerUsuarios();
+                    var items = Lista.FirstOrDefault(x => x.IdUsuario == IdUsuario);
+
+                    if (items != null)
+                    {
+                        Configuracion.oUsuario = items;
+                        return new RespuestaZ<EUsuario>() { Estado = true, Objeto = items };
+                    }
+                    else
+                    {
+                        return new RespuestaZ<EUsuario>() { Estado = false, Mensage = "Ocurrio un inconveniente intente mas tarde", Valor = "error" };
+                    }
+                }
+                else
+                {
+                    return new RespuestaZ<EUsuario>() { Estado = false, Mensage = "Ocurrio un inconveniente intente mas tarde", Valor = "error" };
+                }
+            }
+            catch (Exception ex)
+            {
+                return new RespuestaZ<EUsuario> { Estado = false, Mensage = "Ocurrió un error: " + ex.Message, Valor = "error" };
+            }
+        }
+        // sin usar
         [WebMethod]
         public static Respuesta<List<EReserva>> ObtenerReserCancelarOr()
         {
@@ -88,11 +149,11 @@ namespace CapaPresentacion
         }
 
         [WebMethod]
-        public static bool CerrarSesion()
+        public static Respuesta<bool> CerrarSesion()
         {
             Configuracion.oUsuario = null;
 
-            return true;
+            return new Respuesta<bool>() { estado = true };
 
         }
     }

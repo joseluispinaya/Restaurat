@@ -11,7 +11,7 @@ namespace CapaPresentacion
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            Response.AppendHeader("Cache-Control", "no-store");
         }
     }
 }

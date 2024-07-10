@@ -39,7 +39,7 @@ function loginUsuarioLoad() {
         },
         success: function (response) {
             $.LoadingOverlay("hide");
-            if (response.d) {
+            if (response.d.estado) {
                 window.location.href = 'Inicio.aspx';
             } else {
                 swal("oops!", "No se encontro el usuario", "warning")

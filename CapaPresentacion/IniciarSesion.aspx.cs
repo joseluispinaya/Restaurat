@@ -11,16 +11,32 @@ namespace CapaPresentacion
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            Response.AppendHeader("Cache-Control", "no-store");
         }
         [WebMethod]
-        public static int Iniciar(string Usuario, string Clave)
+        public static Respuesta<int> Iniciar(string Usuario, string Clave)
         {
-            string ClaveEncri = Utilidadesj.getInstance().ConvertirSha256(Clave);
+            try
+            {
+                var ClaveEncri = Utilidadesj.getInstance().ConvertirSha256(Clave);
 
-            int IdUsuario = NUsuario.getInstance().LoginUsuarioA(Usuario, ClaveEncri);
-            Configuracion.oUsuario = new EUsuario() { IdUsuario = IdUsuario };
-            return IdUsuario;
+                int IdUsuario = NUsuario.getInstance().LoginUsuarioA(Usuario, ClaveEncri);
+                
+                if (IdUsuario != 0)
+                {
+                    Configuracion.oUsuario = new EUsuario() { IdUsuario = IdUsuario };
+                    return new Respuesta<int>() { estado = true, valor = IdUsuario.ToString() };
+                }
+                else
+                {
+                    return new Respuesta<int>() { estado = false };
+                }
+            }
+            catch (Exception ex)
+            {
+                return new Respuesta<int>() { estado = false, valor = "Ocurrió un error: " + ex.Message };
+            }
+            
         }
 
         [WebMethod]
