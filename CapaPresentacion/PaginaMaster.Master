@@ -11,7 +11,7 @@
     <meta content="ThemeDesign" name="author" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-    <link rel="shortcut icon" href="assets/images/favicon.ico">
+    <link rel="shortcut icon" href="assets/images/lajota.ico">
 
     <!-- DataTables -->
     <link href="assets/plugins/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
@@ -45,8 +45,11 @@
                 <!-- LOGO -->
                 <div class="topbar-left">
                     <div class="text-center">
-                        <a href="Inicio.aspx" class="logo"><span>Cabaña</span> La J</a>
-                        <a href="Inicio.aspx" class="logo-sm"><span>J</span></a>
+                        <%--<a href="Inicio.aspx" class="logo"><span>Cabaña</span> La J</a>
+                        <a href="Inicio.aspx" class="logo-sm"><span>J</span></a>--%>
+
+                        <a href="Inicio.aspx" class="logo"><img src="assets/images/logo_white_2z.png" height="28"></a>
+                        <a href="Inicio.aspx" class="logo-sm"><img src="assets/images/logo_smz.png" height="36"></a>
                     </div>
                 </div>
 
@@ -122,6 +125,11 @@
 
 
                     <div id="sidebar-menu">
+
+                        <%--<ul id="menu-list">
+
+                        </ul>--%>
+
                         <ul>
                             <li>
                                 <a href="Inicio.aspx" class="waves-effect"><i class="mdi mdi-home"></i><span>Inicio <span class="badge badge-primary float-right">1</span></span></a>
@@ -149,9 +157,6 @@
                             <li>
                                 <a href="frmCategorias.aspx" class="waves-effect"><i class="mdi mdi-palette-swatch"></i><span> Categorias <span class="badge badge-primary float-right">VER</span></span></a>
                             </li>
-                            <%--<li>
-                                <a href="frmCategorias.aspx" class="waves-effect"><i class="mdi mdi-palette-swatch"></i><span> Menu</span></a>
-                            </li>--%>
 
                             <li class="has_sub">
                                 <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-shopping"></i><span>Productos </span><span class="float-right"><i class="mdi mdi-plus"></i></span></a>
@@ -164,9 +169,6 @@
                             <li>
                                 <a href="frmReservas.aspx" class="waves-effect"><i class="mdi mdi-calendar"></i><span> Reservas <span class="badge badge-primary float-right">VER</span></span></a>
                             </li>
-                            <%--<li>
-                                <a href="frmVentaReserva.aspx" class="waves-effect"><i class="mdi mdi-calendar"></i><span> Venta <span class="badge badge-primary float-right">NEW</span></span></a>
-                            </li>--%>
                             <li class="has_sub">
                                 <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-cart"></i><span>Ventas </span><span class="float-right"><i class="mdi mdi-plus"></i></span></a>
                                 <ul class="list-unstyled">

@@ -10,6 +10,7 @@ var WebAdmin_VARS = {
     BODY: $("body"),
     WRAPPER: $("#wrapper"),
     LEFT_ITEMS: $(".left ul")
+    /*LEFT_ITEMS: $("#menu-list")*/
 };
 
 !function($) {

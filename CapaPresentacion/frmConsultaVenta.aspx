@@ -42,8 +42,8 @@
                                 <thead>
                                     <tr>
                                         <th>Id</th>
-                                        <th>Tipo Documento</th>
-                                        <th>Codigo Venta</th>
+                                        <th>Documento</th>
+                                        <th>Cod. Venta</th>
                                         <th>Fecha</th>
                                         <th>Nro CI Cliente</th>
                                         <th>Cliente</th>

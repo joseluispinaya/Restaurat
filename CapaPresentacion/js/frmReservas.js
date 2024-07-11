@@ -25,7 +25,7 @@ function cargarReser() {
                 $.each(data.d.objeto, function (i, row) {
                     events.push({
                         id: row.IdReserva,
-                        title: 'Reserva ' + row.IdReserva + ' - ' + row.oCliente.Nombre,
+                        title: 'Cod: ' + row.Codigo + ' - ' + row.oCliente.Nombre,
                         start: row.FechaReserva,
                         descripcion: row.Comentario,
                         activo: row.Activo,

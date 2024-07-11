@@ -206,25 +206,25 @@
 
         getToken(messaging, { vapidKey: 'BHdVp61f4JXAiOBAC0yNqvS07WPLE933cld5erMhbNPO7IGHAtqplA9XZ3xg-d4nX0W0njtKbwGJ_GjPEtnLEVI' }).then((currentToken) => {
             if (currentToken) {
-                // Send the token to your server and update the UI if necessary
+                // Envíe el token a su servidor y actualice la interfaz de usuario si es necesario
                 // ...
                 console.log('token - ' + currentToken);
             } else {
-                // Show permission request UI
-                console.log('No registration token available. Request permission to generate one.');
+                // Mostrar interfaz de usuario de solicitud de permiso
+                console.log('No hay token de registro disponible. Solicite permiso para generar uno.');
                 // ...
                 requestPermission();
             }
         }).catch((err) => {
-            console.log('An error occurred while retrieving token. ', err);
+            console.log('Se produjo un error al recuperar el token. ', err);
             // ...
         });
 
         function requestPermission() {
-            console.log('Requesting permission...');
+            console.log('Solicitando permiso...');
             Notification.requestPermission().then((permission) => {
                 if (permission === 'granted') {
-                    console.log('Notification permission granted.');
+                    console.log('Permiso de notificación concedido.');
                 }
             });
         }

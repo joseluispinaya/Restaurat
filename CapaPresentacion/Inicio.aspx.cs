@@ -78,7 +78,21 @@ namespace CapaPresentacion
             }
         }
 
+        [WebMethod]
+        public static Respuesta<List<EMenu>> ObtenerMenu()
+        {
+            List<EMenu> Lista = NMenu.getInstance().ObtenerMenu();
 
+            if (Lista != null)
+            {
+
+                return new Respuesta<List<EMenu>>() { estado = true, objeto = Lista };
+            }
+            else
+            {
+                return new Respuesta<List<EMenu>>() { estado = false, objeto = null };
+            }
+        }
         [WebMethod]
         public static RespuestaZ<EUsuario> ObtenerDetalleUsuarioA()
         {

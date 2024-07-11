@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="NCategoria.cs" />
     <Compile Include="NCliente.cs" />
+    <Compile Include="NMenu.cs" />
     <Compile Include="NProducto.cs" />
     <Compile Include="NReserva.cs" />
     <Compile Include="NTipos.cs" />

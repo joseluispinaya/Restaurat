@@ -119,10 +119,13 @@
     <Content Include="assets\images\favicon.ico" />
     <Content Include="assets\images\Isuces.jpg" />
     <Content Include="assets\images\Laj.png" />
+    <Content Include="assets\images\lajota.ico" />
     <Content Include="assets\images\logoap.png" />
     <Content Include="assets\images\logore.jpeg" />
     <Content Include="assets\images\logo_sm.png" />
+    <Content Include="assets\images\logo_smz.png" />
     <Content Include="assets\images\logo_white_2.png" />
+    <Content Include="assets\images\logo_white_2z.png" />
     <Content Include="assets\images\pacu.jpg" />
     <Content Include="assets\images\restaurant.png" />
     <Content Include="assets\images\uma2.png" />
