@@ -27,5 +27,13 @@ namespace CapaNegocio
         {
             return DTipos.getInstance().ObtenerRol();
         }
+        public List<EToken> ObtenerToken()
+        {
+            return DTipos.getInstance().ObtenerToken();
+        }
+        public bool ActualizarToken(EToken producto)
+        {
+            return DTipos.getInstance().ActualizarToken(producto);
+        }
     }
 }

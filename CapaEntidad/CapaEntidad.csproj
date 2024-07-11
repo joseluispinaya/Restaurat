@@ -50,6 +50,7 @@
     <Compile Include="EReserva.cs" />
     <Compile Include="ERol.cs" />
     <Compile Include="ESubMenu.cs" />
+    <Compile Include="EToken.cs" />
     <Compile Include="EUsuario.cs" />
     <Compile Include="EVenta.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

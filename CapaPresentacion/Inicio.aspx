@@ -204,27 +204,63 @@
         // Initialize Firebase Cloud Messaging and get a reference to the service
         const messaging = getMessaging(app);
 
-        getToken(messaging, { vapidKey: 'BHdVp61f4JXAiOBAC0yNqvS07WPLE933cld5erMhbNPO7IGHAtqplA9XZ3xg-d4nX0W0njtKbwGJ_GjPEtnLEVI' }).then((currentToken) => {
-            if (currentToken) {
-                // Envíe el token a su servidor y actualice la interfaz de usuario si es necesario
-                // ...
-                console.log('token - ' + currentToken);
-            } else {
-                // Mostrar interfaz de usuario de solicitud de permiso
-                console.log('No hay token de registro disponible. Solicite permiso para generar uno.');
-                // ...
-                requestPermission();
-            }
-        }).catch((err) => {
-            console.log('Se produjo un error al recuperar el token. ', err);
-            // ...
-        });
-
+        // Function to request permission and get the token
         function requestPermission() {
             console.log('Solicitando permiso...');
             Notification.requestPermission().then((permission) => {
                 if (permission === 'granted') {
                     console.log('Permiso de notificación concedido.');
+                    // Get the token now that permission is granted
+                    getToken(messaging, { vapidKey: 'BHdVp61f4JXAiOBAC0yNqvS07WPLE933cld5erMhbNPO7IGHAtqplA9XZ3xg-d4nX0W0njtKbwGJ_GjPEtnLEVI' }).then((currentToken) => {
+                        if (currentToken) {
+                            console.log('Token obtenido: ' + currentToken);
+                            registroToken(currentToken);
+                        } else {
+                            console.log('No hay token de registro disponible.');
+                        }
+                    }).catch((err) => {
+                        console.log('Error al recuperar el token: ', err);
+                    });
+                } else {
+                    console.log('Permiso de notificación denegado.');
+                }
+            });
+        }
+
+        // Get the token
+        getToken(messaging, { vapidKey: 'BHdVp61f4JXAiOBAC0yNqvS07WPLE933cld5erMhbNPO7IGHAtqplA9XZ3xg-d4nX0W0njtKbwGJ_GjPEtnLEVI' }).then((currentToken) => {
+            if (currentToken) {
+                console.log('Token obtenido: ' + currentToken);
+                registroToken(currentToken);
+            } else {
+                console.log('No hay token de registro disponible. Solicitando permiso...');
+                requestPermission();
+            }
+        }).catch((err) => {
+            console.log('Error al recuperar el token: ', err);
+        });
+
+        // Function to register the token
+        function registroToken(token) {
+            var request = {
+                Tokenus: token
+            };
+
+            $.ajax({
+                type: "POST",
+                url: "Inicio.aspx/ActualizaroRegiTok",
+                data: JSON.stringify(request),
+                contentType: 'application/json; charset=utf-8',
+                dataType: "json",
+                error: function (xhr, ajaxOptions, thrownError) {
+                    console.log(xhr.status + " \n" + xhr.responseText, "\n" + thrownError);
+                },
+                success: function (data) {
+                    if (data.d.Estado) {
+                        swal("Mensaje", data.d.Mensage, data.d.Valor);
+                    } else {
+                        swal("Mensaje", data.d.Mensage, data.d.Valor);
+                    }
                 }
             });
         }

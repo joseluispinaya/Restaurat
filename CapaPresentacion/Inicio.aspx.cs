@@ -50,6 +50,51 @@ namespace CapaPresentacion
         }
 
         [WebMethod]
+        public static RespuestaZ<bool> ActualizaroRegiTok(string Tokenus)
+        {
+            try
+            {
+                int IdUsuario = Configuracion.oUsuario.IdUsuario;
+                var listaToten = NTipos.getInstance().ObtenerToken();
+                var token = listaToten.FirstOrDefault(x => x.IdUsuario == IdUsuario);
+
+                if (token == null)
+                {
+                    return new RespuestaZ<bool>()
+                    {
+                        Estado = false,
+                        Mensage = "El usuario no existe",
+                        Valor = "error"
+                    };
+                }
+
+                if (token.Tokenus != Tokenus)
+                {
+                    token.Tokenus = Tokenus;
+                    bool Respuesta = NTipos.getInstance().ActualizarToken(token);
+                    return new RespuestaZ<bool>()
+                    {
+                        Estado = Respuesta,
+                        Mensage = Respuesta ? "Token actualizado" : "Ocurrio un error intente mas tarde",
+                        Valor = Respuesta ? "success" : "warning"
+                    };
+
+                }
+
+                return new RespuestaZ<bool>() { Estado = false, Mensage = "Realizo otra accion", Valor ="warning" };
+            }
+            catch (Exception ex)
+            {
+                return new RespuestaZ<bool>
+                {
+                    Estado = false,
+                    Mensage = "Ocurrió un error: " + ex.Message,
+                    Valor = "error"
+                };
+            }
+        }
+
+        [WebMethod]
         public static RespuestaZ<EUsuario> ObtenerDetalleUsuario()
         {
             try
